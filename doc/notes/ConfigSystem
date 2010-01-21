@@ -12,4 +12,3 @@ Notes
 - Makefile includes posk/configure/* ( PRT )
 - Ensure conf dir is not empty ( PRT )
 - Always append to KERNEL_CONFIG make var, Append with += ( PRT )
-
