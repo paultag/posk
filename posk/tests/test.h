@@ -6,3 +6,4 @@ void test() {
 	int (*func)() = &frob;
 	(*func)();
 }
+

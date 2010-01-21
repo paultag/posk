@@ -1,5 +1,6 @@
 #include <posk/posk.h>
 #include <posk/malloc.h>
+#include <posk/posk_stdout.h>
 
 int main ( int argc, char ** argv ) {
 	char * foo = (char *)posk_malloc( sizeof(char) * 8 );
