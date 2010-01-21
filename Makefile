@@ -12,6 +12,5 @@ KERNEL_CONFIG=$(KERNEL_FLAGS)
 include ./posk/config/*
 
 all:
-	clear
 	@echo "$(CC) posk.c --> bin/posk"
 	@$(CC) -o $(BIN)posk $(SRC)posk.c $(KERNEL_CONFIG)
