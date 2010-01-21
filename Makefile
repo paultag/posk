@@ -9,4 +9,6 @@ LIB=./lib
 KERNEL_FLAGS=-I $(INC)
 
 all:
-	$(CC) -o $(BIN)posk $(SRC)posk.c $(KERNEL_FLAGS)
+	clear
+	@echo "$(CC) posk.c --> bin/posk"
+	@$(CC) -o $(BIN)posk $(SRC)posk.c $(KERNEL_FLAGS)
