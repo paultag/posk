@@ -4,5 +4,5 @@ INC=../../include/
 SRC=../../src/
 
 all:
-	$(CC) cherrytree.c -o cherrytree
-	./cherrytree
+	@$(CC) cherrytree.c -o cherrytree
+	@./cherrytree
