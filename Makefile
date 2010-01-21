@@ -8,6 +8,8 @@ LIB=./lib
 
 KERNEL_FLAGS=-I $(INC)
 
+include ./posk/config/*
+
 all:
 	clear
 	@echo "$(CC) posk.c --> bin/posk"
