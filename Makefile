@@ -19,5 +19,6 @@ all:
 	@echo "Ensure this step is complete before proceeding."
 	@echo ""
 	@echo ""
-	@echo "$(CC) posk.c --> bin/posk"
+	@echo -n "$(CC) posk.c --> bin/posk"
 	@$(CC) -o $(BIN)posk $(SRC)posk.c $(KERNEL_CONFIG)
+	@echo "          [ OK ]"
