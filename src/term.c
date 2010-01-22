@@ -7,18 +7,6 @@ void posk_print_char_tl( char c ) {
 	videoram[1] = WHITE_TXT; /* forground, background color. */
 }
 
-/*
-
-0 == 0
-1 == 2
-2 == 4
-3 == 6
-4 == 8
-5 == 10
-6 == 12
-
-*/
-
 void posk_print_char( int x, int y, char c ) {
 	unsigned char * videoram = (unsigned char *) 0xb8000;
 	int offset = x * 2 + ( y * MAX_WIDTH );
