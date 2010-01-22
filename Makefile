@@ -1,4 +1,5 @@
 CC=gcc
+ASM=nasm
 
 INC=./include/
 SRC=./src/
@@ -19,6 +20,18 @@ all:
 	@echo "Ensure this step is complete before proceeding."
 	@echo ""
 	@echo ""
-	@gcc $(SRC)posk.c -o $(BIN)main.o
-	@ld -T $(SRC)link.ld -o $(BIN)kernel.bin $(BIN)boot.o $(BIN)main.o
-
+	@echo -n "Building the ASM"
+	@$(ASM) -f aout $(SRC)kernel_start.asm -o $(BIN)kern_start.o
+	@echo "       [ ok ]"
+	@echo -n "Building the C  "
+	@gcc -c $(SRC)posk.c -o $(BIN)posk.o
+	@echo "       [ ok ]"
+	@echo -n "Building the LNK"
+	@ld -T $(SRC)link.ld -o $(BIN)posk.bin $(BIN)kern_start.o $(BIN)posk.o
+	@echo "       [ ok ]"
+	@echo -n "Cleaning the bin"
+	@rm -f $(BIN)*.o
+	@echo "       [ ok ]"
+	@echo ""
+	@echo "Kernel is now in $(BIN)posk.bin"
+	@echo ""

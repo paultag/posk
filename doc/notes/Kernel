@@ -1,0 +1,17 @@
+Configure System for posk
+=========================
+Paul Tagliamonte <ptagliamonte11@jcu.edu>
+:Author Initials: PRT
+
+This document outlines some notes the primary developers have had
+whilst creating the kernel.
+
+Notes
+-----
+- Modules are going to be a bitch. ( PRT )
+- REMEMBER TO USE sys/types.h! ( PRT )
+- REMEMBER TO USE posk_malloc! ( PRT )
+- Remember to use fragmented conf system! ( PRT )
+- CHAR ARRAYS SUCKS! ( PRT )
+- Testing this will be raw.
+
