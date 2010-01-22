@@ -6,6 +6,12 @@ Paul Tagliamonte <ptagliamonte11@jcu.edu>
 This document outlines some notes the primary developers have had
 whilst creating the kernel.
 
+****
+WARNING:
+THESE COMMENTS ARE VERY VULGAR
+YOU HAVE BEEN WARNED
+***
+
 Notes
 -----
 - Modules are going to be a bitch.
@@ -26,4 +32,7 @@ boot
 - well, it boots!
 - moving terminal stuff over to term.h / c
 - holy christ x86 is fast. never forget that
+- kern can't malloc. we need kmalloc, malloc will be userspace, and swap-able etc
+- off to build kmalloc / kfree. shit. we'll have to allocate from the heap
+- FUCK yes, I don't have to write sizeof
 

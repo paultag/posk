@@ -5,7 +5,7 @@
 
 void posk_start( void * mbd, unsigned int magic ) {
 	posk_clear_screen();
-	// char * c = malloc( sizeof( char ) * 8 );
-
+	int i = sizeof( char );
+	
 }
 
