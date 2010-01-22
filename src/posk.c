@@ -1,11 +1,15 @@
 #include "../include/posk/posk.h"
 
 void posk_start( void * mbd, unsigned int magic ) {
-	// posk_clear_screen();
+	posk_clear_screen();
+	posk_print_char( 'A' );
+}
+
+void posk_print_char( char c ) {
 	/* Print a letter to screen to see everything is working: */
 	unsigned char * videoram = (unsigned char *) 0xb8000;
-	videoram[0] = 65;   /* character 'A' */
-	videoram[1] = 0x07; /* forground, background color. */
+	videoram[0] = c;
+	videoram[1] = WHITE_TXT; /* forground, background color. */
 }
 
 void posk_clear_screen() { // clear the entire text screen
@@ -18,5 +22,4 @@ void posk_clear_screen() { // clear the entire text screen
 		i++;
 	};
 };
-
 
