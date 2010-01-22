@@ -36,3 +36,4 @@ boot
 - off to build kmalloc / kfree. shit. we'll have to allocate from the heap
 - FUCK yes, I don't have to write sizeof
 - #linux on irc.freenode is populated by total dickweeds. avoid it
+- DOH. Remember to include GCC derivs in the makefile. Just spent hours debugging a phantom issue.
