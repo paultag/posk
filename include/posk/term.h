@@ -3,5 +3,5 @@
 #define WHITE_TXT    0x07
 
 void          posk_clear_screen();
-void          posk_print_char( char c );
+void          posk_print_char_tl( char c );
 

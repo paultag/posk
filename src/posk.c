@@ -5,6 +5,6 @@
 
 void posk_start( void * mbd, unsigned int magic ) {
 	posk_clear_screen();
-	posk_print_char( 'A' );
+	posk_print_char_tl( 'A' );
 }
 

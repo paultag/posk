@@ -1,5 +1,5 @@
 
-void posk_print_char( char c ) {
+void posk_print_char_tl( char c ) {
 	/* Print a letter to screen to see everything is working: */
 	unsigned char * videoram = (unsigned char *) 0xb8000;
 	videoram[0] = c;
