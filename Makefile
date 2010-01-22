@@ -18,18 +18,18 @@ all:
 	@echo "Ensure this step is complete before proceeding."
 	@echo ""
 	@echo ""
-	@echo -n "Building the ASM"
+	@echo -n "Translating ASM to Binary Object"
 	@$(ASM) -f aout $(SRC)kernel_start.asm -o $(BIN)kern_start.o
-	@echo "       [ ok ]"
-	@echo -n "Building the C  "
+	@echo "\t\t[ ok ]"
+	@echo -n "Compiling C to Binary Object    "
 	@gcc -c $(SRC)posk.c -o $(BIN)posk.o $(KERNEL_CONFIG)
-	@echo "       [ ok ]"
-	@echo -n "Building the LNK"
+	@echo "\t\t[ ok ]"
+	@echo -n "Linking the C and ASM to posk.bin"
 	@ld -T $(SRC)link.ld -o $(BIN)posk.bin $(BIN)kern_start.o $(BIN)posk.o
-	@echo "       [ ok ]"
-	@echo -n "Cleaning the bin"
+	@echo "\t\t[ ok ]"
+	@echo -n "shitting on the object filez     "
 	@rm -f $(BIN)*.o
-	@echo "       [ ok ]"
+	@echo "\t\t[ ok ]"
 	@echo ""
 	@echo "Kernel is now in $(BIN)posk.bin"
 	@echo ""
