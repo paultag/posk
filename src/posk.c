@@ -1,5 +1,4 @@
-#include "../include/posk/posk.h"
-#include "../include/posk/term.h"
+#include <posk/posk.h>
 
 #include "term.c"
 

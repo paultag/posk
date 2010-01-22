@@ -1,3 +1,4 @@
+#include <posk/term.h>
 
 void posk_print_char_tl( char c ) {
 	/* Print a letter to screen to see everything is working: */
@@ -10,7 +11,7 @@ void posk_print_char( int x, int y, char c ) {
 	unsigned char * videoram = (unsigned char *) 0xb8000;
 	int offset = x + ( y * MAX_WIDTH );
 	videoram[offset] = c;
-	videoram[offset + 1] = WHITE_TXT; /* forground, background color. */	
+	videoram[offset + 1] = WHITE_TXT; /* forground, background color. */
 }
 
 void posk_clear_screen() { // clear the entire text screen

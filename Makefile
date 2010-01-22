@@ -4,13 +4,13 @@ ASM=nasm
 INC=./include/
 SRC=./src/
 BIN=./bin/
-LIB=./lib
+LIB=./lib/
 
 KERNEL_FLAGS=-fno-stack-protector -fno-builtin -nostdinc -O2 -g -I $(INC)
 
 KERNEL_CONFIG=$(KERNEL_FLAGS)
 
-include ./posk/config/*
+# include ./posk/config/*
 
 all:
 	@echo "---- Building posk ----"
@@ -24,7 +24,7 @@ all:
 	@$(ASM) -f aout $(SRC)kernel_start.asm -o $(BIN)kern_start.o
 	@echo "       [ ok ]"
 	@echo -n "Building the C  "
-	@gcc -c $(SRC)posk.c -o $(BIN)posk.o
+	@gcc -c $(SRC)posk.c -o $(BIN)posk.o $(KERNEL_CONFIG)
 	@echo "       [ ok ]"
 	@echo -n "Building the LNK"
 	@ld -T $(SRC)link.ld -o $(BIN)posk.bin $(BIN)kern_start.o $(BIN)posk.o

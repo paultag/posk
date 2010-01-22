@@ -35,4 +35,4 @@ boot
 - kern can't malloc. we need kmalloc, malloc will be userspace, and swap-able etc
 - off to build kmalloc / kfree. shit. we'll have to allocate from the heap
 - FUCK yes, I don't have to write sizeof
-
+- #linux on irc.freenode is populated by total dickweeds. avoid it
