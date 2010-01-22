@@ -5,7 +5,7 @@ SRC=./src/
 BIN=./bin/
 LIB=./lib
 
-KERNEL_FLAGS=-I $(INC)
+KERNEL_FLAGS=-fno-stack-protector -fno-builtin -nostdinc -O2 -g -I $(INC)
 
 KERNEL_CONFIG=$(KERNEL_FLAGS)
 
@@ -19,6 +19,6 @@ all:
 	@echo "Ensure this step is complete before proceeding."
 	@echo ""
 	@echo ""
-	@echo -n "$(CC) posk.c --> bin/posk"
-	@$(CC) -o $(BIN)posk $(SRC)posk.c $(KERNEL_CONFIG)
-	@echo "          [ OK ]"
+	@gcc $(SRC)posk.c -o $(BIN)main.o
+	@ld -T $(SRC)link.ld -o $(BIN)kernel.bin $(BIN)boot.o $(BIN)main.o
+

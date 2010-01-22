@@ -8,7 +8,7 @@ and how it has evolved over time. This is not offical
 and it's only to keep one's self sane.
 
 Notes
-----
+-----
 - Makefile includes posk/configure/* ( PRT )
 - Ensure conf dir is not empty ( PRT )
 - Always append to KERNEL_CONFIG make var, Append with += ( PRT )
