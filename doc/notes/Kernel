@@ -8,10 +8,22 @@ whilst creating the kernel.
 
 Notes
 -----
-- Modules are going to be a bitch. ( PRT )
-- REMEMBER TO USE sys/types.h! ( PRT )
-- REMEMBER TO USE posk_malloc! ( PRT )
-- Remember to use fragmented conf system! ( PRT )
-- CHAR ARRAYS SUCKS! ( PRT )
+- Modules are going to be a bitch.
+- REMEMBER TO USE sys/types.h!
+- REMEMBER TO USE posk_malloc!
+- Remember to use fragmented conf system!
+- CHAR ARRAYS SUCKS!
+- ignore everything above this line
+- fuck nasm
 - Testing this will be raw.
+- NASM sucks fat dick
+- using grub to make a floppy image and use qemu
+- qemu has video render issues. avoid it
+- bochs looks to be cools.
+- to boot kernel in bochs run:
+kernel 200+18
+boot
+- well, it boots!
+- moving terminal stuff over to term.h / c
+- holy christ x86 is fast. never forget that
 
