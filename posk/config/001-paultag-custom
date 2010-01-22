@@ -1,0 +1,3 @@
+paultag:
+	@clear
+	@make all
