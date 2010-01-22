@@ -1,0 +1,19 @@
+#!/bin/bash
+
+dd if=/dev/zero of=pad bs=1 count=750
+
+tar -zxvf grub-0.97-i386-pc.tar.gz
+
+if [ -e "../../bin/posk.bin" ]; then
+        echo "Found kern. using built kern"
+	cat stage1 stage2 pad ../../bin/posk.bin > floppy.img
+	cp grub-0.97-i386-pc/boot/grub/stage1 ./
+	cp grub-0.97-i386-pc/boot/grub/stage2 ./
+	rm -rf grub-0.97-i386-pc/
+	rm pad
+	rm stage1
+	rm stage2
+else
+	echo "can't find kern"
+	echo "build tl first"
+fi
