@@ -1,7 +1,6 @@
 global loader       ; making entry point visible to linker
 extern posk_start   ; posk_start is defined in posk.c
  
-; setting up the Multiboot header - see GRUB docs for details
 MODULEALIGN equ  1<<0                   ; align loaded modules on page boundaries
 MEMINFO     equ  1<<1                   ; provide memory map
 FLAGS       equ  MODULEALIGN | MEMINFO  ; this is the Multiboot 'flag' field
