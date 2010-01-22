@@ -6,7 +6,7 @@ SRC=./src/
 BIN=./bin/
 LIB=./lib/
 
-KERNEL_FLAGS=-fno-stack-protector -fno-builtin -nostdinc -O2 -g -I $(INC)
+KERNEL_FLAGS=-fno-stack-protector -fno-builtin -nostdinc -g -I $(INC)
 
 KERNEL_CONFIG=$(KERNEL_FLAGS)
 
