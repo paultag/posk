@@ -1,12 +1,11 @@
 #include "../include/posk/posk.h"
 
 void posk_start( void * mbd, unsigned int magic ) {
-	if ( magic != 0x2BADB002 ) {
-		/* Something went not according to specs. Print an error */
-	}
-
-	posk_clear_screen();
-	posk_printf("Hello, World!\n", 0);
+	// posk_clear_screen();
+	/* Print a letter to screen to see everything is working: */
+	unsigned char * videoram = (unsigned char *) 0xb8000;
+	videoram[0] = 65;   /* character 'A' */
+	videoram[1] = 0x07; /* forground, background color. */
 }
 
 void posk_clear_screen() { // clear the entire text screen
@@ -18,29 +17,6 @@ void posk_clear_screen() { // clear the entire text screen
 		vidmem[i] = WHITE_TXT;
 		i++;
 	};
-};
-
-unsigned int posk_printf ( char * message, unsigned int line ) { // the message and then the line #
-	char * vidmem = (char *) 0xb8000;
-	unsigned int i = 0;
-
-	i = ( line * 80 * 2 );
-
-	while ( * message != 0 ) {
-		if ( * message == '\n' ) { // check for a new line
-			line++;
-			i = ( line * 80 * 2 );
-			* message++;
-		} else {
-			vidmem[i] = * message;
-			* message++;
-			i++;
-			vidmem[i] = WHITE_TXT;
-			i++;
-		};
-	};
-
-	return(1);
 };
 
 
