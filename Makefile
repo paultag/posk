@@ -6,11 +6,9 @@ SRC=./src/
 BIN=./bin/
 LIB=./lib/
 
-KERNEL_FLAGS=-fno-stack-protector -fno-builtin -nostdinc -g -I $(INC)
+KERNEL_CONFIG=-fno-stack-protector -fno-builtin -nostdinc -g -I $(INC)
 
-KERNEL_CONFIG=$(KERNEL_FLAGS)
-
-# include ./posk/config/*
+include ./posk/config/*
 
 all:
 	@echo "---- Building posk ----"
