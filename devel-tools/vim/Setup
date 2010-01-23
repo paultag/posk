@@ -1,5 +1,7 @@
 all:
-	@cat vim/exrc.template | sed 's/MYNAME/$(MYNAME)/g' | sed 's/MYEMAIL/$(MYEMAIL)/g' > vim/exrc
+	@echo "Creating exrc from DEFAULTS"
+	@cat vim/exrc.template | sed 's/MYNAME/$(MYNAME)/g' | sed 's/MYEMAIL/$(MYEMAIL)/g' | sed 's/MYSHORTNAME/$(MYSHORTNAME)/g' > vim/exrc
 
 install:
+	@echo "Moving exrc to ~/.exrc"
 	@cp vim/exrc ~/.exrc
