@@ -11,6 +11,9 @@ function checkMe() {
         if [ "x$(echo $WORD | grep shit)" != "x" ]; then
                 echo $FILE contains \"shit\"
         fi
+        if [ "x$(echo $WORD | grep sucks)" != "x" ]; then
+                echo $FILE contains \"sucks\"
+        fi
         if [ "x$(echo $WORD | grep ToDo)" != "x" ]; then
                 echo $FILE contains items todo
         fi
