@@ -7,6 +7,9 @@ map q :wq
 map c mx0i// `x
 " prefix a line with //, good for a quick comment
 
+map t :set hlsearch/ToDo:/
+map T :set nohlsearch
+
 ab _mail MYEMAIL
 " my email, normal human format
 ab _email <MYEMAIL>
