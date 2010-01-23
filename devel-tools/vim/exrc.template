@@ -15,6 +15,7 @@ ab _name MYNAME
 " my name
 
 map ? mxA   //ToDo: WTF is this? (MYSHORTNAME)`x
+map ! mxA   //ToDo: Fix This (MYSHORTNAME)`x
 
 map s o// _name _email - :r! datekJ
 map S o# _name _email - :r! datekJ 
