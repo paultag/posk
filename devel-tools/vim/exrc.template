@@ -7,11 +7,11 @@ map q :wq
 map c 0i# 
 " prefix a line with #, good for a quick comment
 
-ab _mail paultag@ubuntu.com
+ab _mail MYEMAIL
 " my email, normal human format
-ab _email <paultag@ubuntu.com>
+ab _email <MYEMAIL>
 " my email, RFC 2822
-ab _name Paul Tagliamonte
+ab _name MYNAME
 " my name
 
 
@@ -19,5 +19,5 @@ map s o// _name _email - :r! datekJ
 map S o# _name _email - :r! datekJ 
 " timestamp
 
-ab _chead /* *  :r! echo %kJo *  Copyright (c) Paul Tagliamonte, GPLv2, :r! date "+\%Y"kJo */int main ( int argc, char ** argv ) {}kki
+ab _chead /* *  :r! echo %kJo *  Copyright (c) MYNAME, GPLv2, :r! date "+\%Y"kJo */int main ( int argc, char ** argv ) {}kki
 " Kickass _chead macro
