@@ -38,3 +38,8 @@ boot
 - #linux on irc.freenode is populated by total dickweeds. avoid it
 - DOH. Remember to include GCC derivs in the makefile. Just spent hours debugging a phantom issue.
 - kmalloc sucks
+- fuck kmalloc.
+- we are starting allocation at 0x10000. don't be an ass.
+- we allocate 4 byte blocks over two pages
+- fuck kmalloc
+- 
