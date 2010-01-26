@@ -1,15 +1,15 @@
-// null
 #include <posk/term.h>
 
-int ksize0f( char * m ) {
-	int i = 0;
-	for ( ; m[i] != '\0'; ++i );
-	return i;
-}
+// First non C programmer to get the below line gets a cookie
+// It's just fantastic looking. Bask in the glory of the next line.
+// Because it is.
+//
+// --Paul Tagliamonte
+//
+int ksize0f(char*m){int i=0;for(;m[i]!='\0';++i);return i;}
 
 void panic ( char * error_code, char * fail_point, char * message ) {
-
-        posk_clear_screen( POSK_ORNG_BG );
+	posk_clear_screen( POSK_ORNG_BG );
 
 	int i = 0;
 
