@@ -15,7 +15,7 @@ void posk_start( void * mbd, unsigned int magic ) {
 // 		posk_print_char( i, 0, bar[i] );
 // 	}
 
-	panic( "Error: EIEIO", "Main Entry Point", "Planned Kernel Failure." );
+	panic( "Error: E1E10", "Main Entry Point", "Planned Kernel Failure." );
 	
 }
 
