@@ -27,7 +27,7 @@ all:
 	@echo -n "Linking the C and ASM to posk.bin"
 	@ld -T $(SRC)link.ld -o $(BIN)posk.bin $(BIN)kern_start.o $(BIN)posk.o
 	@echo "\t\t[ ok ]"
-	@echo -n "shitting on the object filez     "
+	@echo -n "Cleaning up the object files     "
 	@rm -f $(BIN)*.o
 	@echo "\t\t[ ok ]"
 	@echo ""

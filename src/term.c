@@ -9,18 +9,18 @@ void posk_print_char_tl( char c ) {
 
 void posk_print_char( int x, int y, char c ) {
 	unsigned char * videoram = (unsigned char *) 0xb8000;
-	int offset = x * 2 + ( y * MAX_WIDTH );
+	int offset = x * 2 + ( ( y * MAX_WIDTH ) * 2 );
 	videoram[offset] = c;
 	videoram[offset + 1] = POSK_WHITE_TXT; /* forground, background color. */
 }
 
-void posk_clear_screen() { // clear the entire text screen
+void posk_clear_screen( int c ) { // clear the entire text screen
 	char * vidmem = (char *) 0xb8000;
 	unsigned int i = 0;
 	while ( i < ( MAX_WIDTH * MAX_HEIGHT * 2 ) ) {
 		vidmem[i] = ' ';
 		i++;
-		vidmem[i] = POSK_WHITE_TXT;
+		vidmem[i] = c;
 		i++;
 	};
 };

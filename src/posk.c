@@ -4,16 +4,18 @@
 #include "term.c"
 
 void posk_start( void * mbd, unsigned int magic ) {
-	posk_clear_screen();
-	char foo[30];
-	char * bar = (char *)&foo;
-	bar = "Dynamic Text Support!!!! Paul Rules!\0";
+	posk_clear_screen( 0x00 );
+// 	char foo[30];
+// 	char * bar = (char *)&foo;
+// 	bar = "POSK Kernel Loading.\0";
 
-	int i = 0;
+// 	int i = 0;
 
-	for ( ; bar[i] != '\0'; ++i ) {
-		posk_print_char( i, 0, bar[i] );
-	}
+// 	for ( ; bar[i] != '\0'; ++i ) {
+// 		posk_print_char( i, 0, bar[i] );
+// 	}
+
+	panic( "Error: EIEIO", "Main Entry Point", "Planned Kernel Failure." );
 	
 }
 
