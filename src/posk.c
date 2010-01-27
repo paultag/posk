@@ -10,7 +10,7 @@ void posk_start( void * mbd, unsigned int magic ) {
 
 	setup_k_mm();
 
-	// panic( "Error: E1E10", "Planned Kernel Failure." );
+	panic( "Error: E1E10", "Planned Kernel Failure." );
 	
 }
 

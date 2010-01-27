@@ -32,6 +32,9 @@ struct mm_slab_alloc {
 
 int table_magic_number = POSK_MEMORY_MAGIC_START_NUMBER - sizeof(struct mm_slab_alloc) * (POSK_KMEMORY_ALLOC_SIZE / POSK_KMEMORY_BLOCK_SIZE);
 
+struct mm_slab_alloc * KALLOC_HEAD = NIL;
+struct mm_slab_alloc * KALLOC_END = NIL;
+
 void * super_struct_kmalloc() {
 	int ret = table_magic_number;
 	table_magic_number += sizeof(struct mm_slab_alloc);
@@ -44,10 +47,6 @@ void setup_k_mm() {
 	HEAD->next   = NIL;
 	HEAD->c_next = NIL;
 	HEAD->addr   = POSK_MEMORY_MAGIC_START_NUMBER;
-
-
-	struct mm_slab_alloc * KALLOC_HEAD;
-	struct mm_slab_alloc * KALLOC_END;
 
 	KALLOC_HEAD = HEAD;
 	KALLOC_END  = HEAD;
@@ -71,9 +70,9 @@ void setup_k_mm() {
 }
 
 void * kmalloc( int size ) {
-
-
-
+	int ret;
+	int chunk_size = 0;
+	unsigned int starting_addr = 0;
 	return 0;
 }
 
