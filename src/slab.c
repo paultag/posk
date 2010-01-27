@@ -1,5 +1,6 @@
 #include <posk/slab.h>
 #include <posk/kernel.h>
+#include <sys/strings.h>
 
 #define NIL                 0x0
 
@@ -9,34 +10,6 @@
  *
  */
 
-/* reverse:  reverse string s in place */
-void reverse(char s[])
-{
-    int i, j;
-    char c;
-
-    for (i = 0, j = ksize0f(s)-1; i<j; i++, j--) {
-        c = s[i];
-        s[i] = s[j];
-        s[j] = c;
-    }
-}
-
-/* itoa:  convert n to characters in s */
-void itoa ( int n, char s[] ) {
-    int i, sign;
-
-    if ((sign = n) < 0)  /* record sign */
-        n = -n;          /* make n positive */
-    i = 0;
-    do {       /* generate digits in reverse order */
-        s[i++] = n % 10 + '0';   /* get next digit */
-    } while ((n /= 10) > 0);     /* delete it */
-    if (sign < 0)
-        s[i++] = '-';
-    s[i] = '\0';
-    reverse(s);
-} 
 
 struct mm_slab_alloc {
 	struct mm_slab_alloc * next;
@@ -53,7 +26,7 @@ struct mm_slab_alloc {
  *    You're not.
  *
  *
- *    hours_wasted_debugging = 6
+ *    hours_wasted_debugging = 8
  *
  */
 
@@ -81,34 +54,18 @@ void setup_k_mm() {
 
 	int i = POSK_KMEMORY_BLOCK_SIZE;
 
-	char s;
-
-	posk_clear_screen( POSK_GREEN_BG );
-
-	for ( ; i < POSK_KMEMORY_ALLOC_SIZE; i += POSK_KMEMORY_BLOCK_SIZE) {
+	for ( ; i <= POSK_KMEMORY_ALLOC_SIZE; i += POSK_KMEMORY_BLOCK_SIZE) {
 
 		struct mm_slab_alloc * item = (struct mm_slab_alloc *)super_struct_kmalloc();
-
+		
 		item->addr   = i + POSK_MEMORY_MAGIC_START_NUMBER;
 		item->next   = NIL;
 		item->c_next = NIL;
 
 		KALLOC_END->next   = item;
 		KALLOC_END->c_next = item;
-		KALLOC_END         = item;
-
-		itoa(i, &s);
-		posk_print_line( &s );
+		KALLOC_END         = item;	
 		
-	}
-
-	s = ' ';
-	posk_print_line(" starting iteration ");
-	struct mm_slab_alloc * node = HEAD;
-	while( node->next != NIL ) {
-		itoa(node->addr, &s);
-		posk_print_line( &s );
-		node = node->next;
 	}
 
 }
