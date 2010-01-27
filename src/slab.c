@@ -3,6 +3,12 @@
 
 #define NIL                 0x0
 
+/*
+ * Don't use bochs, you twat. I know it's easier.
+ * That accounts for most of our goddamn time.
+ *
+ */
+
 /* reverse:  reverse string s in place */
 void reverse(char s[])
 {
@@ -17,8 +23,7 @@ void reverse(char s[])
 }
 
 /* itoa:  convert n to characters in s */
-void itoa(int n, char s[])
-{
+void itoa ( int n, char s[] ) {
     int i, sign;
 
     if ((sign = n) < 0)  /* record sign */
@@ -40,7 +45,7 @@ struct mm_slab_alloc {
 };
 
 /*
- *  Warning Smartass OS Student:
+ *  Warning Smartass CS Student:
  *    You don't know what's going on below this.
  *    We don't know what's going on below this.
  *    You think you are cool by "optmizing" this
@@ -48,7 +53,7 @@ struct mm_slab_alloc {
  *    Your not.
  *
  *
- *    hours_wasted_debugging = 3
+ *    hours_wasted_debugging = 5
  *
  */
 
@@ -58,6 +63,7 @@ void * super_struct_kmalloc() {
 	int ret = table_magic_number;
 	table_magic_number += sizeof(struct mm_slab_alloc);
 	return (void *)ret;
+//	return 0;
 }
 
 void setup_k_mm() {
@@ -78,6 +84,7 @@ void setup_k_mm() {
 
 	char s;
 
+	posk_clear_screen( POSK_GREEN_BG );
 
 	for ( ; i < POSK_KMEMORY_ALLOC_SIZE; i += POSK_KMEMORY_BLOCK_SIZE) {
 
@@ -92,8 +99,10 @@ void setup_k_mm() {
 		KALLOC_END         = item;
 
 		itoa((int)item, &s);
-		panic("fuck", &s );
+		posk_print_line( &s );
+		
 	}
+
 
 }
 

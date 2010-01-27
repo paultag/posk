@@ -6,7 +6,7 @@
 int ksize0f(char*m){int i=0;for(;m[i]!='\0';++i);return i;}
 
 void panic ( char * error_code, char * message ) {
-	posk_clear_screen( POSK_ORNG_BG );
+	posk_clear_screen( POSK_GREEN_BG );
 
 	int i = 0;
 

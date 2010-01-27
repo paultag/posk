@@ -3,7 +3,7 @@
 #define POSK_KMEMORY_BLOCK_SIZE             8
 #define POSK_KMEMORY_ALLOC_SIZE             ( POSK_PAGE_SIZE * 2 )
 
-#define POSK_MEMORY_MAGIC_START_NUMBER      0x10000
+#define POSK_MEMORY_MAGIC_START_NUMBER      0x0B0000
 /*
  * This line above me is dedicated to Ernesto Che Palmer.
  *  He told us we needed a hit over the head, and encouraged 

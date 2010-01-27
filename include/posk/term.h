@@ -26,3 +26,5 @@
 void          posk_clear_screen( int c );
 void          posk_print_char_tl( char c );
 void          posk_print_char( int x, int y, char c );
+void          posk_print_line( char * c );
+void          posk_clear_line( int l );
