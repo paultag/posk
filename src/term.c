@@ -23,12 +23,13 @@ void posk_print_line( char * c ) {
 
 void posk_clear_line( int l ) {
 	char * vidmem = (char *) 0xb8000;
-	unsigned int i = l;
-	while ( i < ( MAX_WIDTH * 2 ) ) {
+	int start_ram = ( l * MAX_WIDTH * 2 );
+	int i = start_ram;
+	while ( i < ( start_ram + MAX_WIDTH * 2 ) ) {
 		vidmem[i] = ' ';
-		i++;
-		vidmem[i] = 0x0;
-		i++;
+		++i;
+		vidmem[i] = POSK_GREEN_BG;
+		++i;
 	};
 }
 

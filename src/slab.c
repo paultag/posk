@@ -50,10 +50,10 @@ struct mm_slab_alloc {
  *    We don't know what's going on below this.
  *    You think you are cool by "optmizing" this
  *
- *    Your not.
+ *    You're not.
  *
  *
- *    hours_wasted_debugging = 5
+ *    hours_wasted_debugging = 6
  *
  */
 
@@ -63,24 +63,23 @@ void * super_struct_kmalloc() {
 	int ret = table_magic_number;
 	table_magic_number += sizeof(struct mm_slab_alloc);
 	return (void *)ret;
-//	return 0;
 }
 
 void setup_k_mm() {
 
-	struct mm_slab_alloc HEAD;
-	HEAD.next   = NIL;
-	HEAD.c_next = NIL;
-	HEAD.addr   = NIL;
+	struct mm_slab_alloc * HEAD = (struct mm_slab_alloc *)super_struct_kmalloc();
+	HEAD->next   = NIL;
+	HEAD->c_next = NIL;
+	HEAD->addr   = POSK_MEMORY_MAGIC_START_NUMBER;
 
 
 	struct mm_slab_alloc * KALLOC_HEAD;
 	struct mm_slab_alloc * KALLOC_END;
 
-	KALLOC_HEAD = &HEAD;
-	KALLOC_END  = &HEAD;
+	KALLOC_HEAD = HEAD;
+	KALLOC_END  = HEAD;
 
-	int i = 0;
+	int i = POSK_KMEMORY_BLOCK_SIZE;
 
 	char s;
 
@@ -98,11 +97,19 @@ void setup_k_mm() {
 		KALLOC_END->c_next = item;
 		KALLOC_END         = item;
 
-		itoa((int)item, &s);
+		itoa(i, &s);
 		posk_print_line( &s );
 		
 	}
 
+	s = ' ';
+	posk_print_line(" starting iteration ");
+	struct mm_slab_alloc * node = HEAD;
+	while( node->next != NIL ) {
+		itoa(node->addr, &s);
+		posk_print_line( &s );
+		node = node->next;
+	}
 
 }
 
