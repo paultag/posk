@@ -6,11 +6,16 @@
 void posk_start( void * mbd, unsigned int magic ) {
 	posk_clear_screen( 0x0 );
 
-	// panic( "Puke",  "System is crunching the setup" );
-
 	setup_k_mm();
+	
+	char *mychar;
+	mychar = kmalloc(100);
+	
+	char *mychar2;
+	mychar2 = kmalloc(50);
+	
 
-	panic( "Error: E1E10", "Planned Kernel Failure." );
+	posk_print_line("DONE");
 	
 }
 
