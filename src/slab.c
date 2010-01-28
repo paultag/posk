@@ -68,6 +68,7 @@ void setup_k_mm() {
 
 }
 
+/* A simple first-fit method */
 void * kmalloc( int size ) {
 	struct mm_slab_alloc * end_node = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
