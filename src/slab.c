@@ -26,7 +26,7 @@ struct mm_slab_alloc {
  *    You're not.
  *
  *
- *    hours_wasted_debugging = 8
+ *    hours_wasted_debugging = 9
  *
  */
 
@@ -70,41 +70,41 @@ void setup_k_mm() {
 
 /* A simple first-fit method */
 void * kmalloc( int size ) {
-	struct mm_slab_alloc * end_node = KALLOC_HEAD;
+	struct mm_slab_alloc * end_node   = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
+
 	int chunk_size = 0;
 	
-	posk_print_line("kmallocing");
+//	posk_print_line("kmallocing");
 	
 	do {
-		if(end_node->next == end_node->c_next) {
-			posk_print_line(" c1");
+		if ( end_node->next == end_node->c_next ) {
+//			posk_print_line(" c1");
 			end_node = end_node->next;
 			chunk_size += POSK_KMEMORY_BLOCK_SIZE;
 		} else {
-			posk_print_line(" c2");
+//			posk_print_line(" c2");
 			end_node = end_node->next;
 			first_node = end_node;
 			chunk_size = 0;
-		} 
-	} while(chunk_size < size && end_node->next != NIL);
+		}
+	} while ( chunk_size < size && end_node->next != NIL );
 	
-	if( end_node->next == NIL ) {
+	if ( end_node->next == NIL ) {
 		return 0;
 	}
 	
 	struct mm_slab_alloc * current_node = first_node;
 	
-	while(current_node != end_node) {
-		if(current_node == first_node) {
+	while ( current_node != end_node ) {
+		if ( current_node == first_node ) {
 			current_node->next = end_node;
 		} else {
 			current_node->next = NIL;
 		}
 		current_node = current_node->c_next;
 	}
-	
-	
+
 	return (void *)first_node->addr;
 }
 
