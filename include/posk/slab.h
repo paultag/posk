@@ -25,6 +25,6 @@
  *    Pat + Paul
  */
 
-void * kmalloc( int i );
+unsigned char * kmalloc( int i );
 
 

@@ -69,7 +69,7 @@ void setup_k_mm() {
 }
 
 /* A simple first-fit method */
-void * kmalloc( int size ) {
+unsigned char * kmalloc( int size ) {
 	struct mm_slab_alloc * end_node   = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
 
@@ -104,7 +104,13 @@ void * kmalloc( int size ) {
 		}
 		current_node = current_node->c_next;
 	}
+	char mychar = 'a';
+	itoa( (int)first_node->addr, &mychar );
 
-	return (void *)first_node->addr;
+	posk_print_line( "Allocated the address: " );
+	posk_print_line( &mychar );
+
+
+	return (unsigned char * ) first_node->addr;
 }
 
