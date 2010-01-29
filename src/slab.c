@@ -123,7 +123,9 @@ unsigned char * kmalloc( int size ) {
  * Good debugging info below here.
  *    -- Paul
  *
-	char mychar = 'a';
+ */
+
+/*	char mychar = 'a';
 
 	itoa( (int)first_node->addr, &mychar );
 	posk_print_line( "Allocated the address: " );
