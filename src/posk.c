@@ -8,11 +8,15 @@
  * on every computer on the planet.
  * 
  * Although this kernel is aimed to future JCU students, it's a 
- * well documented and clear example of a basic kernel. 
- *
+ * well documented and clear example of a basic kernel. This is a 
+ * logical starting spot for anyone wishing to start learning about
+ * how a kernel works, or developing their own kernel.
+ * 
+ * POSK is maintained and authored by Paul Tagliamonte and Pat McDonnell, 
+ * Copyright (c) 2010
  *
  * See http://www.jcu.edu/ for more information on John Carroll
- * univeristy. 
+ * univeristy.
  *  
  */
 

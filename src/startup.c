@@ -9,6 +9,7 @@
 /**
  * A to start all pre-main loop kernel stuff. Linked lists, the screen, etc.
  * @vorsicht
+ * @see posk.c
  */
 void startup() {
 	posk_print_char_tl( 'L' );

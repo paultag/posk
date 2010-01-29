@@ -50,6 +50,7 @@ struct mm_slab_alloc * KALLOC_END = NIL;
  * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
  * @vorsicht
  * @return address of the block to use.
+ * @see setup_k_mm()
  */
 void * super_struct_kmalloc() {
 	int ret = table_magic_number;
@@ -60,7 +61,7 @@ void * super_struct_kmalloc() {
 /**
  * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
  * @vorsicht
- * @see super_struct_kmalloc();
+ * @see super_struct_kmalloc()
  */
 void setup_k_mm() {
 
