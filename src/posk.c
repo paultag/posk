@@ -20,28 +20,27 @@ void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 
 	struct frobafs * alloc_test_item1 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	struct frobafs * alloc_test_item2 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	struct frobafs * alloc_test_item3 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	struct frobafs * alloc_test_item4 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-
 	int addr1 = (int) alloc_test_item1;
-	int addr2 = (int) alloc_test_item2;
-	int addr3 = (int) alloc_test_item3;
-	int addr4 = (int) alloc_test_item4;
-
 	char * foo1 = "This is larger then the intmax";
-	char * foo2 = "This is larger then the intmax";
-	char * foo3 = "This is larger then the intmax";
-	char * foo4 = "This is larger then the intmax";
-
 	itoa( addr1, foo1 );
-	itoa( addr2, foo2 );
-	itoa( addr3, foo3 );
-	itoa( addr4, foo4 );
-
 	posk_print_line(foo1);
+
+	struct frobafs * alloc_test_item2 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	int addr2 = (int) alloc_test_item2;
+	char * foo2 = "This is larger then the intmax";
+	itoa( addr2, foo2 );
 	posk_print_line(foo2);
+
+	struct frobafs * alloc_test_item3 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	int addr3 = (int) alloc_test_item3;
+	char * foo3 = "This is larger then the intmax";
+	itoa( addr3, foo3 );
 	posk_print_line(foo3);
+
+	struct frobafs * alloc_test_item4 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	int addr4 = (int) alloc_test_item4;
+	char * foo4 = "This is larger then the intmax";
+	itoa( addr4, foo4 );
 	posk_print_line(foo4);
 
 	posk_print_line("DONE");
