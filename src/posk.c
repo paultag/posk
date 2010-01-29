@@ -1,3 +1,8 @@
+/**
+ * Kernel entry point, and main source file.
+ * @file posk.c
+ */
+
 #include <posk/posk.h>
 
 #include "slab.c"

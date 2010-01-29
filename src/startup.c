@@ -1,3 +1,9 @@
+/**
+ * Kernel pre-loop startup code
+ * @file startup.c
+ */
+
+
 #include <posk/posk.h>
 
 /**

@@ -1,3 +1,9 @@
+/**
+ * Terminal I/O Header declarations 
+ * @file term.h
+ */
+
+
 #define MAX_WIDTH    80
 #define MAX_HEIGHT   25
 

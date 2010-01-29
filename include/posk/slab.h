@@ -1,3 +1,8 @@
+/**
+ * Slab kmalloc allocation header decelerations.
+ * @file slab.h
+ */
+
 #define POSK_PAGE_SIZE                      0x2000 /* 8kB per page */
 
 #define POSK_KMEMORY_BLOCK_SIZE             4

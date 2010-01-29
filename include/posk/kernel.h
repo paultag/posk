@@ -1,3 +1,9 @@
+/**
+ * Kernel defines, signals, etc.
+ * @file kernel.h
+ */
+
+
 /* Kernel Log Levels */
 
 /* Yes this is the same as linux. */

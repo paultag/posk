@@ -1,3 +1,8 @@
+/**
+ * Basic string routines 
+ * @file strings.h
+ */
+
 /* reverse:  reverse string s in place */
 void reverse ( char s[] ) {
 	int i, j;

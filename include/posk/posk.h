@@ -1,3 +1,9 @@
+/**
+ * Main POSK kernel loop routines.
+ * @file posk.h
+ */
+
+
 #ifndef POSK_H_
 #define POSK_H_ FOO
 

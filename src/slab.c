@@ -1,3 +1,8 @@
+/**
+ * Slab kmalloc allocation code.
+ * @file slab.c
+ */
+
 #include <posk/slab.h>
 #include <posk/kernel.h>
 #include <sys/strings.h>

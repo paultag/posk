@@ -1,3 +1,8 @@
+/**
+ * Basic terminal I/O routines
+ * @file term.c
+ */
+
 #include <posk/term.h>
 
 #define POSK_TEXT_RAM_LOC    0xb8000
