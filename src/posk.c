@@ -1,6 +1,19 @@
 /**
  * Kernel entry point, and main source file.
  * @file posk.c
+ * @mainpage P.O.S.K.
+ * This is POSK, the teaching kernel. It's written from scratch
+ * in an effort to help educate future students of John Carroll
+ * on the innermost workings of the lowest level program running
+ * on every computer on the planet.
+ * 
+ * Although this kernel is aimed to future JCU students, it's a 
+ * well documented and clear example of a basic kernel. 
+ *
+ *
+ * See http://www.jcu.edu/ for more information on John Carroll
+ * univeristy. 
+ *  
  */
 
 #include <posk/posk.h>
