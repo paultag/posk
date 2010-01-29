@@ -3,6 +3,7 @@
 RS=0
 WORD=0
 FILE=0
+COUNT=0
 
 function checkMe() {
 	if [ "x$(echo $WORD | grep fuck)" != "x" ]; then
@@ -26,10 +27,12 @@ for FILE in $FILES; do
 # 		echo "Looking at non-binary file $FILE"
 		CATSKI=$(cat $FILE)
 		for WORD in $CATSKI; do
-			checkMe;				
+			checkMe;
+			let COUNT=$COUNT+1
 		done;
 	fi
 	fi
 done;
 
+echo "Reviewed $COUNT words."
 

@@ -3,6 +3,8 @@
 #include "slab.c"
 #include "term.c"
 
+#include "startup.c"
+
 struct frobafs {
 	int x;
 	int y;
@@ -15,40 +17,34 @@ struct frobafs {
 };
 
 void posk_start( void * mbd, unsigned int magic ) {
+	startup();
 
-	setup_k_mm();
-	
-	int test_size = sizeof( struct frobafs );
+	struct frobafs * alloc_test_item1 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	struct frobafs * alloc_test_item2 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	struct frobafs * alloc_test_item3 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
+	struct frobafs * alloc_test_item4 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
 
-	posk_clear_screen( 0x0 );
+	int addr1 = (int) alloc_test_item1;
+	int addr2 = (int) alloc_test_item2;
+	int addr3 = (int) alloc_test_item3;
+	int addr4 = (int) alloc_test_item4;
 
-	struct frobafs * mychar;
-	mychar = (struct frobafs * )kmalloc( test_size );
-	
-	struct frobafs * mychar2;
-	mychar2 = (struct frobafs * )kmalloc( test_size );
+	char * foo1 = "This is larger then the intmax";
+	char * foo2 = "This is larger then the intmax";
+	char * foo3 = "This is larger then the intmax";
+	char * foo4 = "This is larger then the intmax";
 
-//	posk_print_line( mychar  );
-//	posk_print_line( mychar2 );
+	itoa( addr1, foo1 );
+	itoa( addr2, foo2 );
+	itoa( addr3, foo3 );
+	itoa( addr4, foo4 );
 
-	int addr1 = 0;
-	int addr2 = 0;
-
-	itoa( addr1, (int) mychar  );
-	itoa( addr2, (int) mychar2 );
-
-	posk_print_line( mychar  );
-	posk_print_line( mychar2 );
-
-	posk_print_line( "Addr Diff: " );
-
-	itoa( addr2 - addr1,  mychar );
-	posk_print_line( mychar );
-
-	itoa( test_size, mychar );
-	posk_print_line( mychar );
+	posk_print_line(foo1);
+	posk_print_line(foo2);
+	posk_print_line(foo3);
+	posk_print_line(foo4);
 
 	posk_print_line("DONE");
-	
+	posk_print_line("DONE");
 }
 

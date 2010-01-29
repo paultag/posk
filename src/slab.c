@@ -104,13 +104,20 @@ unsigned char * kmalloc( int size ) {
 		}
 		current_node = current_node->c_next;
 	}
-	char mychar = 'a';
-	itoa( (int)first_node->addr, &mychar );
 
+	char mychar = 'a';
+
+	itoa( (int)first_node->addr, &mychar );
 	posk_print_line( "Allocated the address: " );
 	posk_print_line( &mychar );
 
+	void * ret = ( unsigned char * ) first_node->addr;
 
-	return (unsigned char * ) first_node->addr;
+	itoa( (int)ret, &mychar );
+	posk_print_line( "Pointer address: " );
+	posk_print_line( &mychar );
+
+
+	return ret;
 }
 

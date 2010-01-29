@@ -42,4 +42,8 @@ boot
 - we are starting allocation at 0x10000. don't be an ass.
 - we allocate 4 byte blocks over two pages
 - fuck kmalloc
-- 
+- allocating memory to allocate memory to allocate memory. shit.
+- creating a linked list. doubly linked for her pleasure.
+- maintaining locality and avlbl. next and c_next
+- What the dick? I have to CREATE NULL?!?!?
+- iterating that list is sucking. I guess I am doing sumthin wrong.

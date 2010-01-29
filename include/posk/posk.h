@@ -1,3 +1,6 @@
+#ifndef POSK_H_
+#define POSK_H_ FOO
+
 #include <posk/term.h>
 
 // First non C programmer to get the below line gets a cookie
@@ -28,3 +31,4 @@ void panic ( char * error_code, char * message ) {
 	}
 }
 
+#endif
