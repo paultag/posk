@@ -14,11 +14,19 @@ struct frobafs {
 	int c;
 	int d;
 	int e;
-};
+}; // CHUNKY STRUCT
 
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 
+/*
+ * OK. This is _fucked_. There is something wrong with how we were using chars or
+ * something. This works, but when you move all the printlines together, it freaking
+ * fails again. Goddamnit, writting a kernel is hard.
+ *    -- Paul 
+ */
+
+/*
 	struct frobafs * alloc_test_item1 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
 	int addr1 = (int) alloc_test_item1;
 	char * foo1 = "This is larger then the intmax";
@@ -42,6 +50,8 @@ void posk_start( void * mbd, unsigned int magic ) {
 	char * foo4 = "This is larger then the intmax";
 	itoa( addr4, foo4 );
 	posk_print_line(foo4);
+
+*/
 
 	posk_print_line("DONE");
 	posk_print_line("DONE");

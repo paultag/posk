@@ -26,7 +26,15 @@ struct mm_slab_alloc {
  *    You're not.
  *
  *
- *    hours_wasted_debugging = 9
+ *    hours_wasted_debugging = 12
+ * 
+ * 
+ *    I'd like to add that most of the errors were
+ *    not in the mysterious code. Check your own
+ *    moves before some of the creepy stuff.
+ *
+ *    It's not the compiler(tm). Unless it is.
+ *    In which case, comment below.
  *
  */
 
@@ -95,7 +103,7 @@ unsigned char * kmalloc( int size ) {
 	}
 	
 	struct mm_slab_alloc * current_node = first_node;
-	
+
 	while ( current_node != end_node ) {
 		if ( current_node == first_node ) {
 			current_node->next = end_node;
@@ -104,19 +112,22 @@ unsigned char * kmalloc( int size ) {
 		}
 		current_node = current_node->c_next;
 	}
+	void * ret = ( unsigned char * ) first_node->addr;
 
+/*
+ * Good debugging info below here.
+ *    -- Paul
+ *
 	char mychar = 'a';
 
 	itoa( (int)first_node->addr, &mychar );
 	posk_print_line( "Allocated the address: " );
 	posk_print_line( &mychar );
 
-	void * ret = ( unsigned char * ) first_node->addr;
-
-	itoa( (int)ret, &mychar );
+	itoa( (int) ret, &mychar );
 	posk_print_line( "Pointer address: " );
 	posk_print_line( &mychar );
-
+*/
 
 	return ret;
 }
