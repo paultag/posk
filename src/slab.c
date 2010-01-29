@@ -36,7 +36,12 @@ struct mm_slab_alloc {
  *
  */
 
-int table_magic_number = POSK_MEMORY_MAGIC_START_NUMBER - sizeof(struct mm_slab_alloc) * (POSK_KMEMORY_ALLOC_SIZE / POSK_KMEMORY_BLOCK_SIZE);
+int table_magic_number =
+		POSK_MEMORY_MAGIC_START_NUMBER - (
+			sizeof(struct mm_slab_alloc) * (
+				POSK_KMEMORY_ALLOC_SIZE / POSK_KMEMORY_BLOCK_SIZE
+			)
+		);
 
 struct mm_slab_alloc * KALLOC_HEAD = NIL;
 struct mm_slab_alloc * KALLOC_END = NIL;
