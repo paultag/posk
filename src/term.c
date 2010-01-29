@@ -1,12 +1,14 @@
 #include <posk/term.h>
 
+#define POSK_TEXT_RAM_LOC    0xb8000
+
 int posk_line = 0;
 
 /*
  *
+ *       Do you mind if I'll always love you?
  *        Do you mind if I'll always love you?
- *        Do you mind if I'll always love you?
- *        Do you mind if I'll always love you?
+ *         Do you mind if I'll always love you?
  *
  *            Heaven's gonna burn your eyes
  *          Now Heaven's gonna burn your eyes
@@ -21,7 +23,7 @@ int posk_line = 0;
  */
 
 
-/* Note
+/* Developer's Note
  *
  * A)
  *
@@ -81,12 +83,20 @@ int posk_line = 0;
  *
  */
 
+/**
+ * A function to display a char in the top left corner of the screen
+ * @param c ASCII char value of the char to print
+ */
 void posk_print_char_tl( char c ) {
-	unsigned char * videoram = (unsigned char *) 0xb8000;
+	unsigned char * videoram = (unsigned char *) POSK_TEXT_RAM_LOC;
 	videoram[0] = c;
 	videoram[1] = POSK_WHITE_TXT;
 }
 
+/**
+ * A function to display a line of text
+ * @param c a char pointer to the string to be printed
+ */
 void posk_print_line( char * c ) {
 	posk_line++;
 	if ( posk_line > MAX_HEIGHT ) {
@@ -99,8 +109,12 @@ void posk_print_line( char * c ) {
 	}
 }
 
+/**
+ * A function to clear a line of the text-mode screen
+ * @param l the int value of the screen. 0 to MAX_HEIGHT, inclusive.
+ */
 void posk_clear_line( int l ) {
-	char * vidmem = (char *) 0xb8000;
+	unsigned char * vidmem = (unsigned char *) POSK_TEXT_RAM_LOC;
 	int start_ram = ( l * MAX_WIDTH * 2 );
 	int i = start_ram;
 	while ( i < ( start_ram + MAX_WIDTH * 2 ) ) {
@@ -111,15 +125,25 @@ void posk_clear_line( int l ) {
 	};
 }
 
+/**
+ * A function to display a char in any position on the screen
+ * @param x the X location, from  0 to MAX_WIDTH, inclusive.
+ * @param y the Y location, from  0 to MAX_HEIGHT, inclusive.
+ * @param c a char array pointer holding the string to be printed, null termintated.
+ */
 void posk_print_char( int x, int y, char c ) {
-	unsigned char * videoram = (unsigned char *) 0xb8000;
+	unsigned char * videoram = (unsigned char *) POSK_TEXT_RAM_LOC;
 	int offset = x * 2 + ( ( y * MAX_WIDTH ) * 2 );
 	videoram[offset] = c;
 	videoram[offset + 1] = POSK_WHITE_TXT; /* forground, background color. */
 }
 
+/**
+ * A function to clear the whole RAM buffer
+ * @param c Color code, as spec'ed out in term.h.
+ */
 void posk_clear_screen( int c ) { // clear the entire text screen
-	char * vidmem = (char *) 0xb8000;
+	char * vidmem = (char *) POSK_TEXT_RAM_LOC;
 	unsigned int i = 0;
 	while ( i < ( ( MAX_WIDTH * MAX_HEIGHT ) * 2 ) ) {
 		vidmem[i] = ' ';

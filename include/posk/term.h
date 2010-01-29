@@ -23,6 +23,9 @@
 #define POSK_CURS_X _POSK_CURS_X
 #define POSK_CURS_Y _POSK_CURS_Y
 
+int _POSK_CURS_X;
+int _POSK_CURS_Y;
+
 void          posk_clear_screen( int c );
 void          posk_print_char_tl( char c );
 void          posk_print_char( int x, int y, char c );

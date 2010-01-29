@@ -4,17 +4,10 @@
 
 #define NIL                 0x0
 
-/*
- * Don't use bochs, you twat. I know it's easier.
- * That accounts for most of our goddamn time.
- *
- */
-
-
 struct mm_slab_alloc {
-	struct mm_slab_alloc * next; // next unallocated node
-	struct mm_slab_alloc * c_next; // next contiguous node
-	int addr;
+	struct mm_slab_alloc * next; /**< next free slab allocation node */  
+	struct mm_slab_alloc * c_next; /**< next contiguous slab allocatio node, free or otherwise */
+	int addr; /**< Address of the start of the memory block this node sets aside. */
 };
 
 /*
@@ -43,12 +36,20 @@ int table_magic_number = POSK_MEMORY_MAGIC_START_NUMBER - sizeof(struct mm_slab_
 struct mm_slab_alloc * KALLOC_HEAD = NIL;
 struct mm_slab_alloc * KALLOC_END = NIL;
 
+/**
+ * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
+ * @return address of the block to use.
+ */
 void * super_struct_kmalloc() {
 	int ret = table_magic_number;
 	table_magic_number += sizeof(struct mm_slab_alloc);
-	return (void *)ret;
+	return (unsigned char *)ret;
 }
 
+/**
+ * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
+ * @see super_struct_kmalloc();
+ */
 void setup_k_mm() {
 
 	struct mm_slab_alloc * HEAD = (struct mm_slab_alloc *)super_struct_kmalloc();
@@ -76,7 +77,11 @@ void setup_k_mm() {
 
 }
 
-/* A simple first-fit method */
+/**
+ * A first fit kalloc method to deal with kernel memory requests
+ * @param size the size ( in bytes ) the kernel task would like to have.
+ * @return address of the block to start using.
+ */
 unsigned char * kmalloc( int size ) {
 	struct mm_slab_alloc * end_node   = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
