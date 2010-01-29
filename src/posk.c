@@ -5,6 +5,7 @@
 
 #include "startup.c"
 
+/*
 struct frobafs {
 	int x;
 	int y;
@@ -15,7 +16,14 @@ struct frobafs {
 	int d;
 	int e;
 }; // CHUNKY STRUCT
+*/
 
+/**
+ * The kernel entry point. Never call this. I'm, not joking.
+ * @vorsicht
+ * @param mbd Bootloader ID
+ * @param magic Magic Kernel ID
+ */
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 

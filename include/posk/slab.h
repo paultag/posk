@@ -25,6 +25,24 @@
  *    Pat + Paul
  */
 
+/**
+ * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
+ * @vorsicht
+ * @return address of the block to use.
+ */
+void * super_struct_kmalloc();
+
+/**
+ * A first fit kalloc method to deal with kernel memory requests
+ * @param size the size ( in bytes ) the kernel task would like to have.
+ * @return address of the block to start using.
+ */
 unsigned char * kmalloc( int i );
 
+/**
+ * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
+ * @vorsicht
+ * @see super_struct_kmalloc();
+ */
+void setup_k_mm();
 

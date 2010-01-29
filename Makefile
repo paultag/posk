@@ -10,6 +10,9 @@ KERNEL_CONFIG=-fno-stack-protector -fno-builtin -nostdinc -g -I $(INC)
 
 include ./posk/config/*
 
+docs:
+	@doxygen doc/DocumentCode
+
 all:
 	@echo "---- Building posk ----"
 	@echo ""

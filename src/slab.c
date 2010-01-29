@@ -38,6 +38,7 @@ struct mm_slab_alloc * KALLOC_END = NIL;
 
 /**
  * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
+ * @vorsicht
  * @return address of the block to use.
  */
 void * super_struct_kmalloc() {
@@ -48,6 +49,7 @@ void * super_struct_kmalloc() {
 
 /**
  * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
+ * @vorsicht
  * @see super_struct_kmalloc();
  */
 void setup_k_mm() {
@@ -88,15 +90,11 @@ unsigned char * kmalloc( int size ) {
 
 	int chunk_size = 0;
 	
-//	posk_print_line("kmallocing");
-	
 	do {
 		if ( end_node->next == end_node->c_next ) {
-//			posk_print_line(" c1");
 			end_node = end_node->next;
 			chunk_size += POSK_KMEMORY_BLOCK_SIZE;
 		} else {
-//			posk_print_line(" c2");
 			end_node = end_node->next;
 			first_node = end_node;
 			chunk_size = 0;
