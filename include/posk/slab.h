@@ -33,25 +33,24 @@
  *    Pat + Paul
  */
 
-/**
- * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
- * @vorsicht
- * @return address of the block to use.
- */
+
+struct mm_slab_alloc {
+	struct mm_slab_alloc * next; /**< next free slab allocation node */  
+	struct mm_slab_alloc * c_next; /**< next contiguous slab allocatio node, free or otherwise */
+	int addr; /**< Address of the start of the memory block this node sets aside. */
+};
+
+struct mm_slab_report {
+	int             exist;  /**< how many memory blocks exist */
+	int             used;   /**< used memory blocks */
+	int             free;   /**< free memory blocks */
+	unsigned char * s_addr; /**< starting slab memory address */
+	unsigned char * e_addr; /**< ending slab memory address */
+};
+
 void * super_struct_kmalloc();
-
-/**
- * A first fit kalloc method to deal with kernel memory requests
- * @param size the size ( in bytes ) the kernel task would like to have.
- * @return address of the block to start using.
- */
 unsigned char * kalloc( int i );
-
-/**
- * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
- * @vorsicht
- * @see super_struct_kmalloc();
- */
 void setup_k_mm();
+struct mm_slab_report * get_kalloc_report();
 
 #endif

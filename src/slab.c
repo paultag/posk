@@ -12,12 +12,6 @@
 
 #define NIL                 0x0
 
-struct mm_slab_alloc {
-	struct mm_slab_alloc * next; /**< next free slab allocation node */  
-	struct mm_slab_alloc * c_next; /**< next contiguous slab allocatio node, free or otherwise */
-	int addr; /**< Address of the start of the memory block this node sets aside. */
-};
-
 /*
  *  Warning Smartass CS Student:
  *    You don't know what's going on below this.
@@ -91,6 +85,41 @@ void setup_k_mm() {
 		KALLOC_END         = item;
 	}
 
+}
+
+/**
+ * a function to get the current kalloc status. This is very time consuming.
+ * @return a struct of type mm_slab_report with the up-to-date info on the memory status
+ *
+ */
+struct mm_slab_report * get_kalloc_report() {
+	struct mm_slab_alloc * HEAD = KALLOC_HEAD;
+
+	int free  = 0;
+	int count = 0;
+
+	while ( HEAD != NIL ) {
+		++count;
+		HEAD = HEAD->c_next;
+	}
+
+	HEAD = KALLOC_HEAD;
+
+	while ( HEAD != NIL ) {
+		++free;
+		HEAD = HEAD->next;
+	}
+
+	struct mm_slab_report * ret = (struct mm_slab_report *) kalloc( sizeof(struct mm_slab_report ));
+	// this could be an issue. revise, if you can.
+
+	ret->exist = count;
+	ret->free  = free;
+	ret->used  = ( count - free );
+	ret->s_addr = (unsigned char * )KALLOC_HEAD;
+	ret->e_addr = (unsigned char * )KALLOC_END;
+
+	return ret;
 }
 
 /**
