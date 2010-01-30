@@ -5,7 +5,7 @@
 
 #include <posk/slab.h>
 #include <posk/kernel.h>
-#include <sys/strings.h>
+#include <string.h>
 
 #define NIL                 0x0
 
