@@ -1,3 +1,9 @@
+/**
+ * port I/O header
+ * @file port.h
+ */
+
+
 #ifndef _PORT_H
 #define _PORT_H
 

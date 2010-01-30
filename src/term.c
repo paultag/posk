@@ -161,10 +161,17 @@ void setup_terminal() {
 	place_cursor( 0, 0 );
 }
 
+/**
+ * get the buffer offset for given x / y
+ * @return int offset for a 1D array
+ */
 int get_posk_tty_offset( int x, int y ) {
 	return (( y * MAX_WIDTH ) + x ) * 2;
 }
 
+/**
+ * shift the TTY buffer up, simple copy byte by byte
+ */
 void shift_tty_up() {
 	unsigned char * rloc = (unsigned char *) POSK_TEXT_RAM_LOC;
 	int ix = 0;
