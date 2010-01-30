@@ -169,9 +169,16 @@ void shift_tty_up() {
 	unsigned char * rloc = (unsigned char *) POSK_TEXT_RAM_LOC;
 	int ix = 0;
 	int iy = 1;
+
+	int orig;
+	int copy2;
+
 	for ( ; iy < MAX_HEIGHT; ++iy ) {
+		ix = 0; // FFFFFFFUUUUUUUUUUUUUUUU
 		for ( ; ix < MAX_WIDTH * 2; ++ix ) {
-			rloc[get_posk_tty_offset(ix, iy - 1)] = rloc[get_posk_tty_offset(ix, iy)]; //lolwut?
+			orig  = ( ( iy + 0 ) * ( MAX_WIDTH * 2 ) ) + ix; // current line
+			copy2 = ( ( iy - 1 ) * ( MAX_WIDTH * 2 ) ) + ix; // one block overhead
+			rloc[copy2] = rloc[orig];
 		}
 	}
 }
@@ -189,8 +196,11 @@ void kprintf( char * c ) {
 		}
 		if ( _POSK_CURS_Y >= MAX_HEIGHT ) {
 			shift_tty_up();
-			_POSK_CURS_Y = MAX_HEIGHT;
+			_POSK_CURS_Y = MAX_HEIGHT - 1;
 		}
+
+		
+
 		if ( c[i] == NEWLINE ) {
 			_POSK_CURS_Y++;
 			_POSK_CURS_X = 0;

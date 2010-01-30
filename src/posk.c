@@ -86,13 +86,13 @@ void posk_start( void * mbd, unsigned int magic ) {
 //	posk_print_line("DONE");
 //	posk_print_line("DONE");
 
-	kprintf( "a\n" );
-	kprintf( "b\n" );
-	kprintf( "c\n" );
-	kprintf( "d\n" );
-	kprintf( "e\n" );
-	kprintf( "f\n" );
-	kprintf( "g\n" );
+	kprintf( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n" );
+	kprintf( "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n" );
+	kprintf( "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\n" );
+	kprintf( "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\n" );
+	kprintf( "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n" );
+	kprintf( "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n" );
+	kprintf( "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg\n" );
 	kprintf( "h\n" );
 	kprintf( "i\n" );
 	kprintf( "j\n" );
@@ -112,9 +112,9 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kprintf( "x\n" );
 	kprintf( "y\n" );
 	kprintf( "z\n" );
-	kprintf( "1\n" );
-	kprintf( "2\n" );
-	kprintf( "3\n" );
+	kprintf( "a\n" );
+	kprintf( "b\n" );
+	kprintf( "c\n" );
 
 }
 
