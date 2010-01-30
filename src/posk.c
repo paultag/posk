@@ -11,12 +11,21 @@
  * well documented and clear example of a basic kernel. This is a 
  * logical starting spot for anyone wishing to start learning about
  * how a kernel works, or developing their own kernel.
+ *
+ * This kernel is intended to be less then streamlined. A lot of 
+ * routines have been written to be clear, and not fast. Most 
+ * good kernel hackers can improve this kernel by a few orders
+ * of magnitudes. Feel free to do so, it is a great exercise. 
+ *
+ * We love POSIX, but this kernel will never be POSIX compliant. We will
+ * try our damnedest to get it working with a GNU userland, but no promises.
  * 
- * POSK is maintained and authored by Paul Tagliamonte and Pat McDonnell, 
- * Copyright (c) 2010
+ * POSK is maintained and authored by Paul Tagliamonte <ptagliamonte11@jcu.edu>
+ * and Pat McDonnell <pmcdonnell10@jcu.edu>, Copyright (c) 2010.
  *
  * See http://www.jcu.edu/ for more information on John Carroll
- * univeristy.
+ * univeristy. Contact <dpalmer@jcu.edu> or <kirsch@jcu.edu> for
+ * more information on the John Carroll Computer Science Department.
  *  
  */
 
@@ -48,43 +57,6 @@ struct frobafs {
  */
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
-
-/*
- * OK. This is _fucked_. There is something wrong with how we were using chars or
- * something. This works, but when you move all the printlines together, it freaking
- * fails again. Goddamnit, writting a kernel is hard.
- *    -- Paul 
- */
-
-/*
-	struct frobafs * alloc_test_item1 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	int addr1 = (int) alloc_test_item1;
-	char * foo1 = "This is larger then the intmax";
-	itoa( addr1, foo1 );
-	posk_print_line(foo1);
-
-	struct frobafs * alloc_test_item2 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	int addr2 = (int) alloc_test_item2;
-	char * foo2 = "This is larger then the intmax";
-	itoa( addr2, foo2 );
-	posk_print_line(foo2);
-
-	struct frobafs * alloc_test_item3 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	int addr3 = (int) alloc_test_item3;
-	char * foo3 = "This is larger then the intmax";
-	itoa( addr3, foo3 );
-	posk_print_line(foo3);
-
-	struct frobafs * alloc_test_item4 = ( struct frobafs * ) kmalloc( sizeof( struct frobafs ) );
-	int addr4 = (int) alloc_test_item4;
-	char * foo4 = "This is larger then the intmax";
-	itoa( addr4, foo4 );
-	posk_print_line(foo4);
-
-*/
-
-//	posk_print_line("DONE");
-//	posk_print_line("DONE");
 
 	kprintf( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n" );
 	kprintf( "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n" );
