@@ -90,7 +90,8 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kprintf( "b\n" );
 	kprintf( "c\n" );
 
-	panic ( "EIEIO", "We bought the farm" );
+	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 
+	// we will never reach here.
 }
 

@@ -81,6 +81,7 @@ void panic ( char * error_code, char * message ) {
 
 	int foreground = POSK_BLACK;
 	int background = POSK_GREEN;
+
 	unsigned short attrib = (background << 4) | (foreground & 0x0F); // C-ism!
 
 	posk_clear_screen( attrib );
@@ -95,7 +96,7 @@ void panic ( char * error_code, char * message ) {
 				foreground,
 				background,
 				offset + i,
-				3
+				5
 			);
 		}
 
@@ -108,7 +109,7 @@ void panic ( char * error_code, char * message ) {
 				foreground,
 				background,
 				offset + i,
-				5
+				3
 			);
 		}
 
