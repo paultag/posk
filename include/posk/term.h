@@ -39,9 +39,17 @@ void              posk_print_char(
 			int x,
 			int y
 );
+void              posk_print_int(
+			int i,
+			unsigned char foreground,
+			unsigned char background,
+			int x,
+			int y
+);
 int               get_posk_tty_offset( int x, int y );
 void              shift_tty_up();
 void              kprintf( char * c );
+void              kprinti( int i );
 void              posk_clear_screen( int c );
 
 

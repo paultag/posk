@@ -37,12 +37,13 @@ void panic ( char * error_code, char * message ) {
 				foreground,
 				background,
 				offset + i,
-				5
+				13
 			);
 		}
 
 		i = 0;
 
+/*
 		struct mm_slab_report * mem = get_kalloc_report();
 
 		char * error = (char *)kalloc( sizeof( char ) * 32 );
@@ -76,6 +77,7 @@ void panic ( char * error_code, char * message ) {
 				10
 			);
 		}
+*/
 
 		i = 0;
 
@@ -86,7 +88,7 @@ void panic ( char * error_code, char * message ) {
 				foreground,
 				background,
 				offset + i,
-				3
+				10
 			);
 		}
 
@@ -96,7 +98,34 @@ void panic ( char * error_code, char * message ) {
 		posk_clear_screen( attrib );
 	}
 
-	place_cursor( MAX_WIDTH - 1, MAX_HEIGHT - 1 );
+	place_cursor( 0, 0 );
+	struct mm_slab_report * mem = get_kalloc_report();
+
+	kprintf( "Free kalloc Blocks:  " );
+	kprinti( mem->free );
+	kprintf( "\n" );
+
+	kprintf( "Total kalloc Blocks: " );
+	kprinti( mem->exist );
+	kprintf( "\n" );
+
+	kprintf( "Free Space:          " );
+	kprinti( ( mem->free / mem->exist ) * 100 );
+	kprintf( "%\n" );
+
+	kprintf( "Used Space:          " );
+	kprinti( ( mem->used / mem->exist ) * 100 );
+	kprintf( "%\n" );
+
+	place_cursor( MAX_HEIGHT - 2, 0 );
+
+	kprintf( "kalloc alloc starts: " );
+	kprinti( (int)mem->s_addr );
+	kprintf( "\n" );
+
+	kprintf( "kalloc alloc ends:   " );
+	kprinti( (int)mem->e_addr );
+	kprintf( "\n" );
 
 	for(;;); // FFFFFFFUUUUUUUUUUUUUUU
 }

@@ -122,6 +122,15 @@ void place_cursor( int x, int y ) {
 	update_cursor();
 }
 
+/**
+ * print an integer to the screen. This will not newline
+ * @param i integer to be printed
+ */
+void kprinti( int i ) {
+	char c[20];
+	itoa( i, c );
+	kprintf( c );
+}
 
 /**
  * print a char to the screen, and place cursor at activity
