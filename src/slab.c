@@ -40,8 +40,9 @@ int table_magic_number =
 			)
 		);
 
-struct mm_slab_alloc * KALLOC_HEAD = NIL;
-struct mm_slab_alloc * KALLOC_END = NIL;
+struct mm_slab_alloc * KALLOC_HEAD   = NIL;
+struct mm_slab_alloc * KALLOC_C_HEAD = NIL;
+struct mm_slab_alloc * KALLOC_END    = NIL;
 
 /**
  * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
@@ -67,8 +68,9 @@ void setup_k_mm() {
 	HEAD->c_next = NIL;
 	HEAD->addr   = POSK_MEMORY_MAGIC_START_NUMBER;
 
-	KALLOC_HEAD = HEAD;
-	KALLOC_END  = HEAD;
+	KALLOC_HEAD   = HEAD;
+	KALLOC_END    = HEAD;
+	KALLOC_C_HEAD = HEAD;
 
 	int i = POSK_KMEMORY_BLOCK_SIZE;
 
@@ -93,7 +95,7 @@ void setup_k_mm() {
  *
  */
 struct mm_slab_report * get_kalloc_report() {
-	struct mm_slab_alloc * HEAD = KALLOC_HEAD;
+	struct mm_slab_alloc * HEAD = KALLOC_C_HEAD;
 
 	int free  = 0;
 	int count = 0;
@@ -111,7 +113,6 @@ struct mm_slab_report * get_kalloc_report() {
 	}
 
 	struct mm_slab_report * ret = (struct mm_slab_report *) kalloc( sizeof(struct mm_slab_report ));
-	// this could be an issue. revise, if you can.
 
 	ret->exist = count;
 	ret->free  = free;
@@ -158,24 +159,8 @@ unsigned char * kalloc( int size ) {
 		}
 		current_node = current_node->c_next;
 	}
+
 	void * ret = ( unsigned char * ) first_node->addr;
-
-/*
- * Good debugging info below here.
- *    -- Paul
- *
- */
-
-/*	char mychar = 'a';
-
-	itoa( (int)first_node->addr, &mychar );
-	posk_print_line( "Allocated the address: " );
-	posk_print_line( &mychar );
-
-	itoa( (int) ret, &mychar );
-	posk_print_line( "Pointer address: " );
-	posk_print_line( &mychar );
-*/
 
 	return ret;
 }

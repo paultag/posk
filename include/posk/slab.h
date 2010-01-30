@@ -33,7 +33,6 @@
  *    Pat + Paul
  */
 
-
 struct mm_slab_alloc {
 	struct mm_slab_alloc * next; /**< next free slab allocation node */  
 	struct mm_slab_alloc * c_next; /**< next contiguous slab allocatio node, free or otherwise */

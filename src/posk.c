@@ -67,10 +67,10 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kprintf( "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n" );
 	kprintf( "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n" );
 	kprintf( "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg\n" );
-	kprintf( "h\n" );
-	kprintf( "i\n" );
-	kprintf( "j\n" );
-	kprintf( "k\n" );
+	kprintf( "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\n" );
+	kprintf( "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii\n" );
+	kprintf( "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\n" );
+	kprintf( "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n" );
 	kprintf( "l\n" );
 	kprintf( "m\n" );
 	kprintf( "n\n" );
@@ -88,7 +88,12 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kprintf( "z\n" );
 	kprintf( "a\n" );
 	kprintf( "b\n" );
-	kprintf( "c\n" );
+	kprintf( "cccccccccccccccccc\n" );
+
+	kalloc( 4 );
+	kalloc( 4 );
+	kalloc( 4 );
+	kalloc( 4 );
 
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 

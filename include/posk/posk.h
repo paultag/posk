@@ -109,14 +109,6 @@ void panic ( char * error_code, char * message ) {
 	kprinti( mem->exist );
 	kprintf( "\n" );
 
-	kprintf( "Free Space:          " );
-	kprinti( ( mem->free / mem->exist ) * 100 );
-	kprintf( "%\n" );
-
-	kprintf( "Used Space:          " );
-	kprinti( ( mem->used / mem->exist ) * 100 );
-	kprintf( "%\n" );
-
 	place_cursor( MAX_HEIGHT - 2, 0 );
 
 	kprintf( "kalloc alloc starts: " );
