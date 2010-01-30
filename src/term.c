@@ -28,6 +28,12 @@
  *     -- Paul
  */
 
+/*
+ *  To learn more, you should look up some VGA specific
+ *  programming documents. A great start to graphics:
+ *  http://www.brackeen.com/home/vga
+ *
+ */
 
 /* Developer's Note
  *
@@ -91,23 +97,14 @@
 /**
  * Update the cursor's location ( to the graphics card )
  * @vorsicht
+ * This sends a command to indicies 14 and 15 in the
+ *  CRT Control Register of the VGA controller. These
+ *  are the high and low bytes of the index that show
+ *  where the hardware cursor is to be 'blinking'.
  */
 void update_cursor() {
     unsigned temp;
-
-    /* The equation for finding the index in a linear
-    *  chunk of memory can be represented by:
-    *  Index = [(y * width) + x] */
     temp = _POSK_CURS_Y * MAX_WIDTH + _POSK_CURS_X;
-
-    /* This sends a command to indicies 14 and 15 in the
-    *  CRT Control Register of the VGA controller. These
-    *  are the high and low bytes of the index that show
-    *  where the hardware cursor is to be 'blinking'. To
-    *  learn more, you should look up some VGA specific
-    *  programming documents. A great start to graphics:
-    *  http://www.brackeen.com/home/vga */
-
     outportb(0x3D4, 14);
     outportb(0x3D5, temp >> 8);
     outportb(0x3D4, 15);
@@ -142,7 +139,7 @@ void posk_print_char(
 	int x,
 	int y
 ) {
-	unsigned short attrib = (background << 4) | (foreground & 0x0F);
+	unsigned short attrib = (background << 4) | (foreground & 0x0F); // C-ism!
 	volatile unsigned char * where;
 	where = (unsigned char *) POSK_TEXT_RAM_LOC;
 
@@ -182,6 +179,7 @@ void shift_tty_up() {
 
 	for ( ; iy < MAX_HEIGHT; ++iy ) {
 		ix = 0; // FFFFFFFUUUUUUUUUUUUUUUU
+		// hours_debugging_above_line = 2
 		for ( ; ix < MAX_WIDTH * 2; ++ix ) {
 			orig  = ( ( iy + 0 ) * ( MAX_WIDTH * 2 ) ) + ix; // current line
 			copy2 = ( ( iy - 1 ) * ( MAX_WIDTH * 2 ) ) + ix; // one block overhead
