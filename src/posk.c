@@ -58,6 +58,8 @@ struct frobafs {
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 
+	// this is a test
+
 	kprintf( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n" );
 	kprintf( "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n" );
 	kprintf( "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\n" );
@@ -87,6 +89,8 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kprintf( "a\n" );
 	kprintf( "b\n" );
 	kprintf( "c\n" );
+
+	panic ( "EIEIO", "We bought the farm" );
 
 }
 

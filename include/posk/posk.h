@@ -78,26 +78,47 @@ int ksize0f(char*m){int i=0;for(;m[i]!='\0';++i);return i;}
  * @return nothing. This will always lock up and block.
  */
 void panic ( char * error_code, char * message ) {
-//	posk_clear_screen( POSK_GREEN_BG );
+
+	int foreground = POSK_BLACK;
+	int background = POSK_GREEN;
+	unsigned short attrib = (background << 4) | (foreground & 0x0F); // C-ism!
+
+	posk_clear_screen( attrib );
 
 	int i = 0;
 
 	if ( MAX_WIDTH > ksize0f( message ) ) {
 		int offset = ( MAX_WIDTH - ksize0f( message ) ) / 2 ;
 		for ( ; i < ksize0f( message ); ++i ) {
-//			posk_print_char( offset + i, 5, message[i] );
+			posk_print_char(
+				message[i],
+				foreground,
+				background,
+				offset + i,
+				3
+			);
 		}
 
 		i = 0;
 
 		offset = ( MAX_WIDTH - ksize0f( error_code ) ) / 2 ;
 		for ( ; i < ksize0f( error_code ); ++i ) {
-//			posk_print_char( offset + i, 3, error_code[i] );
+			posk_print_char(
+				error_code[i],
+				foreground,
+				background,
+				offset + i,
+				5
+			);
 		}
 
 	} else {
-//		posk_clear_screen( POSK_RED_BG );
+		background = POSK_RED;
+		attrib = (background << 4) | (foreground & 0x0F); // C-ism!
+		posk_clear_screen( attrib );
 	}
+
+	for(;;); // FFFFFFFUUUUUUUUUUUUUUU
 }
 
 #endif
