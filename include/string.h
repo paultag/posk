@@ -3,7 +3,12 @@
  * @file strings.h
  */
 
-/* reverse:  reverse string s in place */
+
+/**
+ * A function to reverse the string. This reverses in place.
+ * @param c char array to reverse 
+ * @return a reversed char array
+ */
 void reverse ( char s[] ) {
 	int i, j;
 	char c;
@@ -15,7 +20,11 @@ void reverse ( char s[] ) {
 	}
 }
 
-/* itoa:  convert n to characters in s */
+/**
+ * A function to translate an integer to an ascii string
+ * @param n integer to convert to a string
+ * @param s char array to write to
+ */
 void itoa ( int n, char s[] ) {
 	int i, sign;
 
