@@ -1,6 +1,6 @@
 /**
- * Basic string routines 
- * @file strings.h
+ * Basic string routine 
+ * @file string.h
  */
 
 
