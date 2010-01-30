@@ -3,6 +3,9 @@
  * @file slab.c
  */
 
+#ifndef SLAB_C_
+#define SLAB_C_
+
 #include <posk/slab.h>
 #include <posk/kernel.h>
 #include <string.h>
@@ -95,7 +98,7 @@ void setup_k_mm() {
  * @param size the size ( in bytes ) the kernel task would like to have.
  * @return address of the block to start using.
  */
-unsigned char * kmalloc( int size ) {
+unsigned char * kalloc( int size ) {
 	struct mm_slab_alloc * end_node   = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
 
@@ -148,3 +151,4 @@ unsigned char * kmalloc( int size ) {
 	return ret;
 }
 
+#endif

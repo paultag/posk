@@ -3,7 +3,11 @@
  * @file term.c
  */
 
+#ifndef TERM_C_
+#define TERM_C_
+
 #include <posk/term.h>
+#include "slab.c"
 
 #define POSK_TEXT_RAM_LOC    0xb8000
 
@@ -67,10 +71,9 @@ int posk_line = 0;
  *  I'm using something I learned Freshman Year in a kernel.
  *   Listen to the man.
  * 
- *  Offset = ( X + ( Y * Width )
+ *  Offset = Width Y * X +
  * 
  *  Take the point "5, 5"
- * 
  * 
  *  Offset = 10 5 * 5 +
  *  Offset = 50 5 +
@@ -87,6 +90,41 @@ int posk_line = 0;
  *  -- Paul
  *
  */
+
+/**
+ * A function to setup the terminal bufferes
+ * @vorsicht
+ */
+void setup_term() {
+	_POSK_CURS_X  =  0;
+	_POSK_CURS_Y  =  0;
+	int i = 0;
+
+	struct terminal_line * head;
+	struct terminal_line * tail;
+
+	head = ( struct terminal_line * )kalloc( sizeof( struct terminal_line ) );
+	tail = head;
+
+	struct terminal_line * now;
+
+	for ( ; i < MAX_HEIGHT + 2; ++i ) {
+		now = ( struct terminal_line * )kalloc( sizeof( struct terminal_line ) );
+		now->next = tail;
+		now->content = (char * ) kalloc( sizeof( char ) * MAX_WIDTH );
+	}
+
+	POSK_IO_BUFFER = head;
+
+	posk_print_line( "Allocated Terminal" );
+}
+
+/**
+ * a function to render the IO buffer to the term
+ */
+void render_term() {
+	
+}
 
 /**
  * A function to display a char in the top left corner of the screen
@@ -158,3 +196,4 @@ void posk_clear_screen( int c ) { // clear the entire text screen
 	};
 };
 
+#endif

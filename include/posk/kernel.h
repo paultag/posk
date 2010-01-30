@@ -3,6 +3,8 @@
  * @file kernel.h
  */
 
+#ifndef KERNEL_H_
+#define KERNEL_H_
 
 /* Kernel Log Levels */
 
@@ -16,3 +18,5 @@
 #define KERN_NOTICE          32
 #define KERN_INFO            64
 #define KERN_DEBUG           128
+
+#endif

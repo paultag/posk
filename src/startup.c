@@ -3,7 +3,6 @@
  * @file startup.c
  */
 
-
 #include <posk/posk.h>
 
 /**
@@ -14,5 +13,6 @@
 void startup() {
 	posk_print_char_tl( 'L' );
 	setup_k_mm();
+	setup_term();
 	posk_clear_screen( 0x0 );
 }

@@ -3,6 +3,9 @@
  * @file slab.h
  */
 
+#ifndef SLAB_H_
+#define SLAB_H_
+
 #define POSK_PAGE_SIZE                      0x2000 /* 8kB per page */
 
 #define POSK_KMEMORY_BLOCK_SIZE             4
@@ -42,7 +45,7 @@ void * super_struct_kmalloc();
  * @param size the size ( in bytes ) the kernel task would like to have.
  * @return address of the block to start using.
  */
-unsigned char * kmalloc( int i );
+unsigned char * kalloc( int i );
 
 /**
  * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
@@ -51,3 +54,4 @@ unsigned char * kmalloc( int i );
  */
 void setup_k_mm();
 
+#endif

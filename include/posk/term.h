@@ -3,6 +3,8 @@
  * @file term.h
  */
 
+#ifndef TERM_H_
+#define TERM_H_
 
 #define MAX_WIDTH    80
 #define MAX_HEIGHT   25
@@ -29,11 +31,24 @@
 #define POSK_CURS_X _POSK_CURS_X
 #define POSK_CURS_Y _POSK_CURS_Y
 
+#define POSK_IO_BUFFER  _POSK_IO_HEAD
+
 int _POSK_CURS_X;
 int _POSK_CURS_Y;
+
+struct terminal_line {
+	struct terminal_line * next; /**< line after this. may be null */  
+	char * content; /**< char array of the line contnet */
+};
+
+struct terminal_line * _POSK_IO_HEAD;
 
 void          posk_clear_screen( int c );
 void          posk_print_char_tl( char c );
 void          posk_print_char( int x, int y, char c );
 void          posk_print_line( char * c );
 void          posk_clear_line( int l );
+void          setup_term();
+void          render_term();
+
+#endif
