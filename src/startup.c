@@ -11,8 +11,8 @@
  * @see posk.c
  */
 void startup() {
-	posk_print_char_tl( 'L' );
+//	posk_print_char_tl( 'L' );
 	setup_k_mm();
-	setup_term();
-	posk_clear_screen( 0x0 );
+	setup_terminal();
+//	posk_clear_screen( 0x0 );
 }

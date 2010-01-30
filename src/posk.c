@@ -83,7 +83,38 @@ void posk_start( void * mbd, unsigned int magic ) {
 
 */
 
-	posk_print_line("DONE");
-	posk_print_line("DONE");
+//	posk_print_line("DONE");
+//	posk_print_line("DONE");
+
+	kprintf( "a\n" );
+	kprintf( "b\n" );
+	kprintf( "c\n" );
+	kprintf( "d\n" );
+	kprintf( "e\n" );
+	kprintf( "f\n" );
+	kprintf( "g\n" );
+	kprintf( "h\n" );
+	kprintf( "i\n" );
+	kprintf( "j\n" );
+	kprintf( "k\n" );
+	kprintf( "l\n" );
+	kprintf( "m\n" );
+	kprintf( "n\n" );
+	kprintf( "o\n" );
+	kprintf( "p\n" );
+	kprintf( "q\n" );
+	kprintf( "r\n" );
+	kprintf( "s\n" );
+	kprintf( "t\n" );
+	kprintf( "u\n" );
+	kprintf( "v\n" );
+	kprintf( "w\n" );
+	kprintf( "x\n" );
+	kprintf( "y\n" );
+	kprintf( "z\n" );
+	kprintf( "1\n" );
+	kprintf( "2\n" );
+	kprintf( "3\n" );
+
 }
 

@@ -8,10 +8,7 @@
 
 #include <posk/term.h>
 #include "slab.c"
-
-#define POSK_TEXT_RAM_LOC    0xb8000
-
-int posk_line = 0;
+#include "port.c"
 
 /*
  *
@@ -92,93 +89,116 @@ int posk_line = 0;
  */
 
 /**
- * A function to setup the terminal bufferes
+ * Update the cursor's location ( to the graphics card )
  * @vorsicht
  */
-void setup_term() {
-	_POSK_CURS_X  =  0;
-	_POSK_CURS_Y  =  0;
-	int i = 0;
+void update_cursor() {
+    unsigned temp;
 
-	struct terminal_line * head;
-	struct terminal_line * tail;
+    /* The equation for finding the index in a linear
+    *  chunk of memory can be represented by:
+    *  Index = [(y * width) + x] */
+    temp = _POSK_CURS_Y * MAX_WIDTH + _POSK_CURS_X;
 
-	head = ( struct terminal_line * )kalloc( sizeof( struct terminal_line ) );
-	tail = head;
+    /* This sends a command to indicies 14 and 15 in the
+    *  CRT Control Register of the VGA controller. These
+    *  are the high and low bytes of the index that show
+    *  where the hardware cursor is to be 'blinking'. To
+    *  learn more, you should look up some VGA specific
+    *  programming documents. A great start to graphics:
+    *  http://www.brackeen.com/home/vga */
 
-	struct terminal_line * now;
+    outportb(0x3D4, 14);
+    outportb(0x3D5, temp >> 8);
+    outportb(0x3D4, 15);
+    outportb(0x3D5, temp);
+}
 
-	for ( ; i < MAX_HEIGHT + 2; ++i ) {
-		now = ( struct terminal_line * )kalloc( sizeof( struct terminal_line ) );
-		now->next = tail;
-		now->content = (char * ) kalloc( sizeof( char ) * MAX_WIDTH );
+/**
+ * place the cursor at an arbitrary location on the screen
+ * @param x x location of the cursor
+ * @param y y location of the cursor
+ */
+void place_cursor( int x, int y ) {
+	_POSK_CURS_Y = x;
+	_POSK_CURS_X = y;
+	update_cursor();
+}
+
+
+/**
+ * print a char to the screen, and place cursor at activity
+ * @vorsicht
+ * @param c char to be printed
+ * @param foreground foreground color 
+ * @param background background color
+ * @param x x location of the char
+ * @param y y location of the char
+ */
+void posk_print_char(
+	unsigned char c,
+	unsigned char foreground,
+	unsigned char background,
+	int x,
+	int y
+) {
+	unsigned short attrib = (background << 4) | (foreground & 0x0F);
+	volatile unsigned char * where;
+	where = (unsigned char *) POSK_TEXT_RAM_LOC;
+
+	where[get_posk_tty_offset(x, y)] = c;
+	where[get_posk_tty_offset(x, y) + 1] = attrib;
+
+	update_cursor();
+}
+
+/**
+ * Startup the terminal hacks.
+ * @vorsicht
+ */
+void setup_terminal() {
+	posk_clear_screen( 0x00 ); // black
+	place_cursor( 0, 0 );
+}
+
+int get_posk_tty_offset( int x, int y ) {
+	return (( y * MAX_WIDTH ) + x ) * 2;
+}
+
+void shift_tty_up() {
+	unsigned char * rloc = (unsigned char *) POSK_TEXT_RAM_LOC;
+	int ix = 0;
+	int iy = 1;
+	for ( ; iy < MAX_HEIGHT; ++iy ) {
+		for ( ; ix < MAX_WIDTH * 2; ++ix ) {
+			rloc[get_posk_tty_offset(ix, iy - 1)] = rloc[get_posk_tty_offset(ix, iy)]; //lolwut?
+		}
 	}
-
-	POSK_IO_BUFFER = head;
-
-	posk_print_line( "Allocated Terminal" );
 }
 
 /**
- * a function to render the IO buffer to the term
+ * kernel print to the screen.
+ * @param c char array to be printed
  */
-void render_term() {
-	
-}
-
-/**
- * A function to display a char in the top left corner of the screen
- * @param c ASCII char value of the char to print
- */
-void posk_print_char_tl( char c ) {
-	unsigned char * videoram = (unsigned char *) POSK_TEXT_RAM_LOC;
-	videoram[0] = c;
-	videoram[1] = POSK_WHITE_TXT;
-}
-
-/**
- * A function to display a line of text
- * @param c a char pointer to the string to be printed
- */
-void posk_print_line( char * c ) {
-	posk_line++;
-	if ( posk_line > MAX_HEIGHT ) {
-		posk_line = 0;
-	}
+void kprintf( char * c ) {
 	int i = 0;
-	posk_clear_line( posk_line );
 	for ( ; i < ksize0f( c ); ++i ) {
-		posk_print_char( i, posk_line, c[i] );
+		if ( _POSK_CURS_X > MAX_WIDTH ) {
+			_POSK_CURS_Y++;
+			_POSK_CURS_X = 0;
+		}
+		if ( _POSK_CURS_Y >= MAX_HEIGHT ) {
+			shift_tty_up();
+			_POSK_CURS_Y = MAX_HEIGHT;
+		}
+		if ( c[i] == NEWLINE ) {
+			_POSK_CURS_Y++;
+			_POSK_CURS_X = 0;
+		} else {
+			posk_print_char( c[i], POSK_GREEN, POSK_BLACK, _POSK_CURS_X, _POSK_CURS_Y );
+			POSK_CURS_X++;
+		}
 	}
-}
-
-/**
- * A function to clear a line of the text-mode screen
- * @param l the int value of the screen. 0 to MAX_HEIGHT, inclusive.
- */
-void posk_clear_line( int l ) {
-	unsigned char * vidmem = (unsigned char *) POSK_TEXT_RAM_LOC;
-	int start_ram = ( l * MAX_WIDTH * 2 );
-	int i = start_ram;
-	while ( i < ( start_ram + MAX_WIDTH * 2 ) ) {
-		vidmem[i] = ' ';
-		++i;
-		vidmem[i] = POSK_GREEN_BG;
-		++i;
-	};
-}
-
-/**
- * A function to display a char in any position on the screen
- * @param x the X location, from  0 to MAX_WIDTH, inclusive.
- * @param y the Y location, from  0 to MAX_HEIGHT, inclusive.
- * @param c a char array pointer holding the string to be printed, null termintated.
- */
-void posk_print_char( int x, int y, char c ) {
-	unsigned char * videoram = (unsigned char *) POSK_TEXT_RAM_LOC;
-	int offset = x * 2 + ( ( y * MAX_WIDTH ) * 2 );
-	videoram[offset] = c;
-	videoram[offset + 1] = POSK_WHITE_TXT; /* forground, background color. */
 }
 
 /**
