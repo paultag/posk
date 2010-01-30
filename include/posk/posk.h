@@ -119,6 +119,8 @@ void panic ( char * error_code, char * message ) {
 		posk_clear_screen( attrib );
 	}
 
+	place_cursor( MAX_WIDTH - 1, MAX_HEIGHT - 1 );
+
 	for(;;); // FFFFFFFUUUUUUUUUUUUUUU
 }
 
