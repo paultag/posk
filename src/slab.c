@@ -168,12 +168,21 @@ unsigned char * kalloc( int size ) {
 	
 	struct mm_slab_alloc * current_node = first_node;
 
+	if ( first_node == end_node ) {
+		kprintf( "  FFFFFFFUUUUUUUUUUUUUUUUUU\n"  );
+	}
+
 	while ( current_node != end_node ) {
 		if ( current_node == first_node ) {
 			current_node->next = end_node;
+			kprintf( "  Delinked Head Node\n"  );
 		} else {
 			current_node->next = NIL;
+			kprintf( "  NIL'ing out current node\n"  );
 		}
+		kprintf( " * " );
+		kprinti( current_node->addr );
+		kprintf( "\n" );
 		current_node = current_node->c_next;
 	}
 
