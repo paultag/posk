@@ -33,21 +33,7 @@
 
 #include "slab.c"
 #include "term.c"
-
 #include "startup.c"
-
-/*
-struct frobafs {
-	int x;
-	int y;
-	int z;
-	int a;
-	int b;
-	int c;
-	int d;
-	int e;
-}; // CHUNKY STRUCT
-*/
 
 /**
  * The kernel entry point. Never call this. I'm, not joking.
@@ -58,39 +44,6 @@ struct frobafs {
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 
-	// this is a test
-/*
-	kprintf( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n" );
-	kprintf( "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n" );
-	kprintf( "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\n" );
-	kprintf( "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\n" );
-	kprintf( "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n" );
-	kprintf( "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n" );
-	kprintf( "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg\n" );
-	kprintf( "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\n" );
-	kprintf( "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii\n" );
-	kprintf( "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\n" );
-	kprintf( "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n" );
-	kprintf( "l\n" );
-	kprintf( "m\n" );
-	kprintf( "n\n" );
-	kprintf( "o\n" );
-	kprintf( "p\n" );
-	kprintf( "q\n" );
-	kprintf( "r\n" );
-	kprintf( "s\n" );
-	kprintf( "t\n" );
-	kprintf( "u\n" );
-	kprintf( "v\n" );
-	kprintf( "w\n" );
-	kprintf( "x\n" );
-	kprintf( "y\n" );
-	kprintf( "z\n" );
-	kprintf( "a\n" );
-	kprintf( "b\n" );
-	kprintf( "cccccccccccccccccc\n" );
-*/
-
 	kalloc( 4  );
 	kalloc( 4  );
 	kalloc( 4  );
@@ -100,7 +53,5 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kalloc( 16 );
 
 //	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
-
-	// we will never reach here.
 }
 
