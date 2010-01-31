@@ -41,7 +41,6 @@ int table_magic_number =
 		);
 
 struct mm_slab_alloc * KALLOC_HEAD   = NIL;
-struct mm_slab_alloc * KALLOC_C_HEAD = NIL;
 struct mm_slab_alloc * KALLOC_END    = NIL;
 
 /**
@@ -70,7 +69,6 @@ void setup_k_mm() {
 
 	KALLOC_HEAD   = HEAD;
 	KALLOC_END    = HEAD;
-	KALLOC_C_HEAD = HEAD;
 
 	int i = POSK_KMEMORY_BLOCK_SIZE;
 
@@ -95,7 +93,7 @@ void setup_k_mm() {
  *
  */
 struct mm_slab_report * get_kalloc_report() {
-	struct mm_slab_alloc * HEAD = KALLOC_C_HEAD;
+	struct mm_slab_alloc * HEAD = KALLOC_HEAD;
 
 	int free  = 0;
 	int count = 0;
@@ -117,8 +115,8 @@ struct mm_slab_report * get_kalloc_report() {
 	ret->exist = count;
 	ret->free  = free;
 	ret->used  = ( count - free );
-	ret->s_addr = (unsigned char * )KALLOC_HEAD;
-	ret->e_addr = (unsigned char * )KALLOC_END;
+	ret->s_addr = (unsigned char * ) KALLOC_HEAD;
+	ret->e_addr = (unsigned char * ) KALLOC_END;
 
 	return ret;
 }
@@ -132,6 +130,10 @@ unsigned char * kalloc( int size ) {
 	struct mm_slab_alloc * end_node   = KALLOC_HEAD;
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
 
+	kprintf( "Request for " );
+	kprinti( size );
+	kprintf( ". " );
+
 	int chunk_size = 0;
 
 	do {
@@ -144,7 +146,22 @@ unsigned char * kalloc( int size ) {
 			chunk_size = 0;
 		}
 	} while ( chunk_size < size && end_node->next != NIL );
-	
+
+	kprintf( "Start Loc @ "  );
+	kprinti( first_node->addr );
+	kprintf( ". " );
+
+	kprintf( "End Loc @ "  );
+	kprinti( end_node->addr );
+	kprintf( ". " );
+
+	int diff = end_node->addr - first_node->addr;
+
+	kprintf( "Bits: "  );
+	kprinti( (int)diff );
+	kprintf( ".\n" );
+
+
 	if ( end_node->next == NIL ) {
 		return 0;
 	}

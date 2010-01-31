@@ -287,7 +287,6 @@ void display_bar( int x, int y, int w, int h, int cnt, int fg, int bg ) {
 	for ( ; i < cnt; ++i ) {
 		posk_print_char( POSK_BLOCK, fg, bg, i, y + 1 );
 	}
-
 }
 
 #endif
