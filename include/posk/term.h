@@ -52,5 +52,7 @@ void              kprintf( char * c );
 void              kprinti( int i );
 void              posk_clear_screen( int c );
 
+void display_bar( int x, int y, int w, int h, int cnt, int fg, int bg );
+
 
 #endif

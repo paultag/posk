@@ -31,12 +31,18 @@
  *    We were forced to write it.
  *
  *    Pat + Paul
+ *
+ * Sidenote:
+ *   This move accounts for a good 5 hours of debugging.
+ *   Don't pick a low number, as noted two comments above.
+ *
+ *
  */
 
 struct mm_slab_alloc {
-	struct mm_slab_alloc * next; /**< next free slab allocation node */  
-	struct mm_slab_alloc * c_next; /**< next contiguous slab allocatio node, free or otherwise */
-	int addr; /**< Address of the start of the memory block this node sets aside. */
+	struct mm_slab_alloc * next;    /**< next free slab allocation node */  
+	struct mm_slab_alloc * c_next;  /**< next contiguous slab allocatio node, free or otherwise */
+	int addr;                       /**< Address of the start of the memory block this node sets aside. */
 };
 
 struct mm_slab_report {
@@ -47,9 +53,9 @@ struct mm_slab_report {
 	unsigned char * e_addr; /**< ending slab memory address */
 };
 
-void * super_struct_kmalloc();
-unsigned char * kalloc( int i );
-void setup_k_mm();
-struct mm_slab_report * get_kalloc_report();
+void *                   super_struct_kmalloc();
+unsigned char *          kalloc( int i );
+void                     setup_k_mm();
+struct mm_slab_report *  get_kalloc_report();
 
 #endif

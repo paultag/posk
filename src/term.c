@@ -240,4 +240,54 @@ void posk_clear_screen( int c ) { // clear the entire text screen
 	};
 };
 
+#define POSK_TOP_LEFT     201
+#define POSK_TOP_RIGHT    187
+
+#define POSK_BOTTOM_LEFT  200
+#define POSK_BOTTOM_RIGHT 188
+
+#define POSK_SIDE         186
+#define POSK_TOP          205
+
+#define POSK_BLOCK        219
+
+/**
+ * a function to show a percent of something. not sure how it's useful yet. Putting in bad stuff will do bad things.
+ * @param x top left of the graph ( x )
+ * @param y top left of the graph ( y )
+ * @param w width of the bar graph
+ * @param h height of the bar graph
+ * @param cnt count of blocks to fill in
+ * @param fg foreground color
+ * @param bg background color
+ */
+void display_bar( int x, int y, int w, int h, int cnt, int fg, int bg ) {
+
+	posk_print_char( POSK_TOP_LEFT,     fg, bg, x,     y     );
+	posk_print_char( POSK_TOP_RIGHT,    fg, bg, x + w, y     );
+	posk_print_char( POSK_BOTTOM_LEFT,  fg, bg, x,     y + h );
+	posk_print_char( POSK_BOTTOM_RIGHT, fg, bg, x + w, y + h );
+
+	int i = x + 1;
+
+	for ( ; i < x + w; ++i ) {
+		posk_print_char( POSK_TOP, fg, bg, i, y     );
+		posk_print_char( POSK_TOP, fg, bg, i, y + h );
+	}
+
+	i = y + 1;
+
+	for ( ; i < y + h; ++i ) {
+		posk_print_char( POSK_SIDE, fg, bg, x, i );
+		posk_print_char( POSK_SIDE, fg, bg, x + w, i );
+	}
+
+	i = x + 1;
+
+	for ( ; i < cnt; ++i ) {
+		posk_print_char( POSK_BLOCK, fg, bg, i, y + 1 );
+	}
+
+}
+
 #endif

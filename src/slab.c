@@ -133,7 +133,7 @@ unsigned char * kalloc( int size ) {
 	struct mm_slab_alloc * first_node = KALLOC_HEAD;
 
 	int chunk_size = 0;
-	
+
 	do {
 		if ( end_node->next == end_node->c_next ) {
 			end_node = end_node->next;

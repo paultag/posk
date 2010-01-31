@@ -119,6 +119,9 @@ void panic ( char * error_code, char * message ) {
 	kprinti( (int)mem->e_addr );
 	kprintf( "\n" );
 
+//	int count = 70;
+//	display_bar( 2, MAX_HEIGHT - 8, MAX_WIDTH - 4, 2, count, POSK_BLACK, POSK_GREEN );
+
 	for(;;); // FFFFFFFUUUUUUUUUUUUUUU
 }
 
