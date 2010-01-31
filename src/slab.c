@@ -22,8 +22,8 @@
  *
  *
  *    hours_wasted_debugging = 12
- * 
- * 
+ *
+ *
  *    I'd like to add that most of the errors were
  *    not in the mysterious code. Check your own
  *    moves before some of the creepy stuff.
@@ -75,7 +75,7 @@ void setup_k_mm() {
 	for ( ; i <= POSK_KMEMORY_ALLOC_SIZE; i += POSK_KMEMORY_BLOCK_SIZE) {
 
 		struct mm_slab_alloc * item = (struct mm_slab_alloc *)super_struct_kmalloc();
-		
+
 		item->addr   = i + POSK_MEMORY_MAGIC_START_NUMBER;
 		item->next   = NIL;
 		item->c_next = NIL;
@@ -165,7 +165,7 @@ unsigned char * kalloc( int size ) {
 	if ( end_node->next == NIL ) {
 		return 0;
 	}
-	
+
 	struct mm_slab_alloc * current_node = first_node;
 
 	while ( current_node != end_node ) {
@@ -187,6 +187,10 @@ unsigned char * kalloc( int size ) {
 	void * ret = ( unsigned char * ) first_node->addr;
 
 	return ret;
+}
+
+void kfree(void *ptr) {
+        return;
 }
 
 #endif
