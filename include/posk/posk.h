@@ -109,6 +109,14 @@ void panic ( char * error_code, char * message ) {
 	kprinti( mem->exist );
 	kprintf( "\n" );
 
+	float f = (float)((float)mem->used / (float)mem->exist);
+
+	int f1 = f * 100;
+
+	kprintf( "Used Kernel Memory:  " );
+	kprinti( f1 );
+	kprintf( "%\n" );
+
 	place_cursor( MAX_HEIGHT - 2, 0 );
 
 	kprintf( "kalloc alloc starts: " );

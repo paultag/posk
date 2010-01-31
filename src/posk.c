@@ -50,6 +50,7 @@ void posk_start( void * mbd, unsigned int magic ) {
 	kalloc( 4  );
 	kalloc( 8  );
 	kalloc( 7  );
+	kalloc( 2000 );
 
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 }
