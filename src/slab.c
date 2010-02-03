@@ -190,7 +190,14 @@ unsigned char * kalloc( int size ) {
 }
 
 void kfree(void *ptr) {
-        return;
+        struct mm_slab_alloc * current_node = KALLOC_HEAD;
+	while(current_node->addr != (int)ptr) {
+		current_node = current_node->next;
+	}
+	while(current_node->next != current_node->c_next) {
+		current_node->next = current_node->c_next;
+		current_node = current_node->c_next;
+	}
 }
 
 #endif
