@@ -189,6 +189,12 @@ unsigned char * kalloc( int size ) {
 	return ret;
 }
 
+
+/**
+ * A function to free memory allocated by kalloc
+ * @vorsicht
+ * @see kalloc()
+ */
 void kfree(void *ptr) {
         struct mm_slab_alloc * current_node = KALLOC_HEAD;
 	while(current_node->addr != (int)ptr) {
