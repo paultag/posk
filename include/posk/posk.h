@@ -11,6 +11,8 @@
 #include <posk/slab.h>
 #include <string.h>
 
+#include <posk/keyboard.h>
+
 /**
  * A function to lock up the machine, if we reach an unsafe state
  * @param error_code a char array of the error code.
