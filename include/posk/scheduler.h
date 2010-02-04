@@ -1,17 +1,36 @@
-struct ia32_registers {
-    // General Purpose Registers
-    long eax, ebx, ecx, edx;
-    long esp, ebp, esi, edi;
+struct tss_struct {
+    long link; // 16-31 0
+    long esp0;
+    long ss0; // 16-31 0
+    long esp1;
+    long ss1; // 16-31 0
+    long esp2;
+    long ss2; // 16-31 0
+    
+    long cr3;
+    
     long eip;
     
-    // segment registers
-    long cs, ss, ds, es, fs, gs;
-    
-    // eflags register
     long eflags;
     
-    // control registers
-    long cr3;
+    long eax;
+    long ecx;
+    long edx;
+    long ebx;
+    long esp;
+    long ebp;
+    long esi;
+    long edi;
+    
+    long es; // 16-31 0
+    long cs; // 16-31 0
+    long ss; // 16-31 0
+    long ds; // 16-31 0
+    long fs; // 16-31 0
+    long gs; // 16-31 0
+    
+    long ldtr; // 16-31 0
+    long iopb_offset // 0-15 0
 }
 
 struct task_struct {
