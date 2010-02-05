@@ -36,6 +36,7 @@
 #include "startup.c"
 #include "ia32.c"
 #include "isr.c"
+#include "timer.c"
 
 /**
  * The kernel entry point. Never call this. I'm, not joking.
@@ -45,18 +46,9 @@
  */
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
-
-	kalloc( 4  );
-	kalloc( 4  );
-	kalloc( 4  );
-	kalloc( 4  );
-	kalloc( 8  );
-	kalloc( 7  );
-	unsigned char * twothousand = kalloc( 2000 );
 	
-	kfree(twothousand);
-	
-	init_descriptor_tables();
+	//init_descriptor_tables();
+	//init_timer(100);
 
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 }
