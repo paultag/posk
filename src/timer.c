@@ -2,7 +2,7 @@
 
 static void timer_callback(ia32_registers_t regs) {
     // for now, do nothing
-    return;
+    kprintf("tick");
 }
 
 void init_timer(unsigned int freq) {

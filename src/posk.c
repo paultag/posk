@@ -33,10 +33,11 @@
 
 #include "slab.c"
 #include "term.c"
-#include "startup.c"
-#include "ia32.c"
 #include "isr.c"
+#include "ia32.c"
 #include "timer.c"
+#include "startup.c"
+
 
 /**
  * The kernel entry point. Never call this. I'm, not joking.
@@ -47,8 +48,8 @@
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 	
-	//init_descriptor_tables();
-	//init_timer(100);
+	asm volatile("sti");
+	init_timer(100);
 
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 }

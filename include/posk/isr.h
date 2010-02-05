@@ -1,4 +1,3 @@
-
 #define IRQ0 32
 #define IRQ1 33
 #define IRQ2 34
@@ -16,8 +15,7 @@
 #define IRQ14 46
 #define IRQ15 47
 
-typedef struct ia32_registers
-{
+typedef struct ia32_registers {
     unsigned int ds;                  // Data segment selector
     unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax; // Pushed by pusha.
     unsigned int int_no, err_code;    // Interrupt number and error code (if applicable)

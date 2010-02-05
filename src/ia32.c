@@ -15,13 +15,16 @@ static void init_idt();
 static void idt_set_gate(unsigned char, unsigned int, unsigned short, unsigned char);
 
 gdt_entry_t gdt_entries[5];
-gdt_ptr_t gdt_ptr;
+gdt_ptr_t   gdt_ptr;
 idt_entry_t idt_entries[256];
-idt_ptr_t idt_ptr;
+idt_ptr_t   idt_ptr;
+
+extern isr_t interrupt_handlers[];
 
 void init_descriptor_tables() {
     init_gdt();
     init_idt();
+    memset((unsigned char *)&interrupt_handlers, 0, sizeof(isr_t)*256);
 }
 
 static void init_gdt() {
