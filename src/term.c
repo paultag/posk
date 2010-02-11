@@ -213,8 +213,6 @@ void kprintf( char * c ) {
 			_POSK_CURS_Y = MAX_HEIGHT - 1;
 		}
 
-		
-
 		if ( c[i] == NEWLINE ) {
 			_POSK_CURS_Y++;
 			_POSK_CURS_X = 0;
