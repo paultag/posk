@@ -33,9 +33,6 @@
 
 #include "slab.c"
 #include "term.c"
-#include "isr.c"
-#include "ia32.c"
-#include "timer.c"
 #include "startup.c"
 
 
@@ -48,8 +45,8 @@
 void posk_start( void * mbd, unsigned int magic ) {
 	startup();
 	
-	asm volatile("sti");
-	init_timer(100);
+	//asm volatile("sti");
+	//init_timer(100);
 
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 }

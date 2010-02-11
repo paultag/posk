@@ -13,7 +13,7 @@
 void startup() {
 //	posk_print_char_tl( 'L' );
 	setup_k_mm();
-	init_descriptor_tables();
+	//init_descriptor_tables();
 	setup_terminal();
 //	posk_clear_screen( 0x0 );
 }
