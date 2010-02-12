@@ -43,10 +43,10 @@ void fpanic() {
 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 219, 219, 219, 219, 219, 219, 32, 32, 32, 32, 219, 219, 219, 219, 219, 219, 10, 0
 		};
 
-	
+
 	place_cursor( 5, 40 );
 	kprintf( "Your kernel is teh suck!\n" );
-	
+
 	place_cursor( 3, 0 );
 
 	char * dump = (char *)kalloc( sizeof(char) * MAX_WIDTH * MAX_HEIGHT );
