@@ -21,7 +21,6 @@ all:
 	@echo "Ensure this step is complete before proceeding."
 	@echo ""
 	@echo ""
-	@./gen-splash.sh
 	@echo -n "Translating ASM to Binary Object ( boot ) "
 	@$(ASM) -f aout $(SRC)kernel_start.asm -o $(BIN)kern_start.o
 	@echo "\t\t[ ok ]"
