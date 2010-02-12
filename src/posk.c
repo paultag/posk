@@ -48,7 +48,7 @@ void posk_start( void * mbd, unsigned int magic ) {
 	//asm volatile("sti");
 	//init_timer(100);
 
-//	fpanic();
+	fpanic();
 	
 	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
 }
