@@ -3,7 +3,9 @@
  * @file startup.c
  */
 
-#include <posk/posk.h>
+#include <posk/startup.h>
+#include <posk/slab.h>
+#include <posk/term.h>
 
 /**
  * A to start all pre-main loop kernel stuff. Linked lists, the screen, etc.
@@ -13,7 +15,6 @@
 void startup() {
 //	posk_print_char_tl( 'L' );
 	setup_k_mm();
-	//init_descriptor_tables();
 	setup_terminal();
 //	posk_clear_screen( 0x0 );
 }

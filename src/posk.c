@@ -30,8 +30,11 @@
  */
 
 #include <posk/posk.h>
-
+#include "port.c"
+#include "gdt.c"
+#include "idt.c"
 #include "slab.c"
+#include "string.c"
 #include "term.c"
 #include "startup.c"
 
@@ -43,13 +46,14 @@
  * @param magic Magic Kernel ID
  */
 void posk_start( void * mbd, unsigned int magic ) {
+	
+	gdt_install();
+	idt_install();
+	
 	startup();
 	
-	//asm volatile("sti");
-	//init_timer(100);
-
 	fpanic();
-	
-	panic ( "Error POSK Main, #E1E10", "We bought the farm here. Not very fun. This is, however, planned." );
+
+	for(;;);
 }
 

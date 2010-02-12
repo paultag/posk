@@ -4,7 +4,7 @@
  */
 
 #ifndef TERM_H_
-#define TERM_H_
+#define TERM_H_ FOO
 
 #define MAX_WIDTH    80
 #define MAX_HEIGHT   25

@@ -16,7 +16,7 @@
  * FOR THE NEXT 7 YEARS.  Seriously.  This number needs to be higher
  * than reserved areas of memory, or strange things will happen.
  */
-#define POSK_MEMORY_MAGIC_START_NUMBER      0xD0000
+#define POSK_MEMORY_MAGIC_START_NUMBER      0xFD0000
 /*
  * Just trust me.
  *   --Pat

@@ -7,8 +7,6 @@
 #define SLAB_C_
 
 #include <posk/slab.h>
-#include <posk/kernel.h>
-#include <string.h>
 
 #define NIL                 0x0
 

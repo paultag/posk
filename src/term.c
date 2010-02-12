@@ -7,8 +7,7 @@
 #define TERM_C_
 
 #include <posk/term.h>
-#include "slab.c"
-#include "port.c"
+#include <posk/port.h>
 
 /*
  *
