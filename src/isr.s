@@ -24,227 +24,254 @@ global isr22
 global isr23
 global isr24
 global isr25
+global isr26
 global isr27
 global isr28
 global isr29
 global isr30
 global isr31
-global isr32
 
-; isr0: Divide By Zero Exception
+;  0: Divide By Zero Exception
 isr0:
-  cli
-  push byte 0
-  push byte 0
-  jmp isr_common_stub
-  
-; isr1: Debug Exception
+    cli
+    push byte 0
+    push byte 0
+    jmp isr_common_stub
+
+;  1: Debug Exception
 isr1:
-  cli
-  push byte 0
-  push byte 1
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 1
+    jmp isr_common_stub
 
-; isr2: Non-Maskable Interrupt Exception
+;  2: Non Maskable Interrupt Exception
 isr2:
-  cli
-  push byte 0
-  push byte 2
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 2
+    jmp isr_common_stub
 
-; isr3: Breakpoint Exception
+;  3: Int 3 Exception
 isr3:
-  cli
-  push byte 0
-  push byte 3
-  jmp isr_common_stub
-  
-; isr4: Detected Overflow Exception
+    cli
+    push byte 0
+    push byte 3
+    jmp isr_common_stub
+
+;  4: INTO Exception
 isr4:
-  cli
-  push byte 0
-  push byte 4
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 4
+    jmp isr_common_stub
 
-; isr5: Out of Bounds Exception
+;  5: Out of Bounds Exception
 isr5:
-  cli
-  push byte 0
-  push byte 5
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 5
+    jmp isr_common_stub
 
-; isr6: Invalid Opcode Exception
+;  6: Invalid Opcode Exception
 isr6:
-  cli
-  push byte 0
-  push byte 6
-  jmp isr_common_stub
-  
-; isr7: No Coprocessor Exception
+    cli
+    push byte 0
+    push byte 6
+    jmp isr_common_stub
+
+;  7: Coprocessor Not Available Exception
 isr7:
-  cli
-  push byte 0
-  push byte 7
-  jmp isr_common_stub
-  
-; isr8: Double Fault Exception -- w/ Error Code
+    cli
+    push byte 0
+    push byte 7
+    jmp isr_common_stub
+
+;  8: Double Fault Exception (With Error Code!)
 isr8:
-  cli
-  push byte 8
-  jmp isr_common_stub
+    cli
+    push byte 8
+    jmp isr_common_stub
 
-; isr9: Coprocessor Segment Overrun Exception
+;  9: Coprocessor Segment Overrun Exception
 isr9:
-  cli
-  push byte 0
-  push byte 9
-  jmp isr_common_stub
-  
-; isr10: Bad TSS Exception -- w/ Error Code
+    cli
+    push byte 0
+    push byte 9
+    jmp isr_common_stub
+
+; 10: Bad TSS Exception (With Error Code!)
 isr10:
-  cli
-  push byte 10
-  jmp isr_common_stub
+    cli
+    push byte 10
+    jmp isr_common_stub
 
-; isr11: Segment Not Present Exception -- w/ Error Code
+; 11: Segment Not Present Exception (With Error Code!)
 isr11:
-  cli
-  push byte 11
-  jmp isr_common_stub
+    cli
+    push byte 11
+    jmp isr_common_stub
 
-; isr12: Stack Fault Exception -- w/ Error Code
+; 12: Stack Fault Exception (With Error Code!)
 isr12:
-  cli
-  push byte 12
-  jmp isr_common_stub
+    cli
+    push byte 12
+    jmp isr_common_stub
 
-; isr13: General Protection Fault -- w/ Error Code
+; 13: General Protection Fault Exception (With Error Code!)
 isr13:
-  cli
-  push byte 13
-  jmp isr_common_stub
+    cli
+    push byte 13
+    jmp isr_common_stub
 
-; isr14: Page Fault -- w/ Error Code
+; 14: Page Fault Exception (With Error Code!)
 isr14:
-  cli
-  push byte 14
-  jmp isr_common_stub
+    cli
+    push byte 14
+    jmp isr_common_stub
 
-; isr15: Unknown Interrupt Exception
+; 15: Reserved Exception
 isr15:
-  cli
-  push byte 0
-  push byte 15
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 15
+    jmp isr_common_stub
 
-; isr16: Coprocessor Fault
+; 16: Floating Point Exception
 isr16:
-  cli
-  push byte 0
-  push byte 16
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 16
+    jmp isr_common_stub
 
-; isr17: Alignment Check Exception
+; 17: Alignment Check Exception
 isr17:
-  cli
-  push byte 0
-  push byte 17
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 17
+    jmp isr_common_stub
 
-; isr18: Machine Check Exception
+; 18: Machine Check Exception
 isr18:
-  cli
-  push byte 0
-  push byte 18
-  jmp isr_common_stub
-  
-; isr19: Reserved
+    cli
+    push byte 0
+    push byte 18
+    jmp isr_common_stub
+
+; 19: Reserved
 isr19:
-  cli
-  push byte 0
-  push byte 19
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 19
+    jmp isr_common_stub
 
-; isr20: Reserved
+; 20: Reserved
 isr20:
-  cli
-  push byte 0
-  push byte 20
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 20
+    jmp isr_common_stub
 
-; isr21: Reserved
+; 21: Reserved
 isr21:
-  cli
-  push byte 0
-  push byte 21
-  jmp isr_common_stub
-  
-; isr22: Reserved
-isr22:
-  cli
-  push byte 0
-  push byte 22
-  jmp isr_common_stub
-  
-; isr23: Reserved
-isr23:
-  cli
-  push byte 0
-  push byte 23
-  jmp isr_common_stub
-  
-; isr24: Reserved
-isr24:
-  cli
-  push byte 0
-  push byte 24
-  jmp isr_common_stub
-  
-; isr25: Reserved
-isr25:
-  cli
-  push byte 0
-  push byte 25
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 21
+    jmp isr_common_stub
 
-; isr26: Reserved
+; 22: Reserved
+isr22:
+    cli
+    push byte 0
+    push byte 22
+    jmp isr_common_stub
+
+; 23: Reserved
+isr23:
+    cli
+    push byte 0
+    push byte 23
+    jmp isr_common_stub
+
+; 24: Reserved
+isr24:
+    cli
+    push byte 0
+    push byte 24
+    jmp isr_common_stub
+
+; 25: Reserved
+isr25:
+    cli
+    push byte 0
+    push byte 25
+    jmp isr_common_stub
+
+; 26: Reserved
 isr26:
-  cli
-  push byte 0
-  push byte 26
-  jmp isr_common_stub
-  
-; isr27: Reserved
+    cli
+    push byte 0
+    push byte 26
+    jmp isr_common_stub
+
+; 27: Reserved
 isr27:
-  cli
-  push byte 0
-  push byte 27
-  jmp isr_common_stub
-  
-; isr28: Reserved
+    cli
+    push byte 0
+    push byte 27
+    jmp isr_common_stub
+
+; 28: Reserved
 isr28:
-  cli
-  push byte 0
-  push byte 28
-  jmp isr_common_stub
-  
-; isr29: Reserved
+    cli
+    push byte 0
+    push byte 28
+    jmp isr_common_stub
+
+; 29: Reserved
 isr29:
-  cli
-  push byte 0
-  push byte 29
-  jmp isr_common_stub
-  
-; isr30: Reserved
+    cli
+    push byte 0
+    push byte 29
+    jmp isr_common_stub
+
+; 30: Reserved
 isr30:
-  cli
-  push byte 0
-  push byte 30
-  jmp isr_common_stub
-  
-; isr31: Reserved
+    cli
+    push byte 0
+    push byte 30
+    jmp isr_common_stub
+
+; 31: Reserved
 isr31:
-  cli
-  push byte 0
-  push byte 31
-  jmp isr_common_stub
+    cli
+    push byte 0
+    push byte 31
+    jmp isr_common_stub
+
+
+extern fault_handler
+
+isr_common_stub:
+    pusha
+    push ds
+    push es
+    push fs
+    push gs
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov eax, esp
+    push eax
+    mov eax, fault_handler
+    call eax
+    pop eax
+    pop gs
+    pop fs
+    pop es
+    pop ds
+    popa
+    add esp, 8
+    iret

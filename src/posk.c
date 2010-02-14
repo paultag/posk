@@ -33,6 +33,8 @@
 #include "port.c"
 #include "gdt.c"
 #include "idt.c"
+#include "isr.c"
+#include "irq.c"
 #include "slab.c"
 #include "string.c"
 #include "term.c"
@@ -49,6 +51,10 @@ void posk_start( void * mbd, unsigned int magic ) {
 	
 	gdt_install();
 	idt_install();
+	isrs_install();
+	irq_install();
+	
+	__asm__ __volatile__("sti");
 	
 	startup();
 	
