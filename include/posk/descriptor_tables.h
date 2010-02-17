@@ -5,7 +5,7 @@
 //                       Rewritten for JamesM's kernel development tutorials.
 //
 
-#include <posk/common.h>
+#include "common.h"
 
 // Initialisation function is publicly accessible.
 void init_descriptor_tables();
@@ -14,13 +14,14 @@ void init_descriptor_tables();
 // This structure contains the value of one GDT entry.
 // We use the attribute 'packed' to tell GCC not to change
 // any of the alignment in the structure.
-struct gdt_entry_struct {
-    uint16_t limit_low;           // The lower 16 bits of the limit.
-    uint16_t base_low;            // The lower 16 bits of the base.
-    uint8_t  base_middle;         // The next 8 bits of the base.
-    uint8_t  access;              // Access flags, determine what ring this segment can be used in.
-    uint8_t  granularity;
-    uint8_t  base_high;           // The last 8 bits of the base.
+struct gdt_entry_struct
+{
+    u16int limit_low;           // The lower 16 bits of the limit.
+    u16int base_low;            // The lower 16 bits of the base.
+    u8int  base_middle;         // The next 8 bits of the base.
+    u8int  access;              // Access flags, determine what ring this segment can be used in.
+    u8int  granularity;
+    u8int  base_high;           // The last 8 bits of the base.
 } __attribute__((packed));
 
 typedef struct gdt_entry_struct gdt_entry_t;
@@ -30,8 +31,8 @@ typedef struct gdt_entry_struct gdt_entry_t;
 // lgdt instruction.
 struct gdt_ptr_struct
 {
-    uint16_t limit;               // The upper 16 bits of all selector limits.
-    uint32_t base;                // The address of the first gdt_entry_t struct.
+    u16int limit;               // The upper 16 bits of all selector limits.
+    u32int base;                // The address of the first gdt_entry_t struct.
 } __attribute__((packed));
 
 typedef struct gdt_ptr_struct gdt_ptr_t;
@@ -39,11 +40,11 @@ typedef struct gdt_ptr_struct gdt_ptr_t;
 // A struct describing an interrupt gate.
 struct idt_entry_struct
 {
-    uint16_t base_lo;             // The lower 16 bits of the address to jump to when this interrupt fires.
-    uint16_t sel;                 // Kernel segment selector.
-    uint8_t  always0;             // This must always be zero.
-    uint8_t  flags;               // More flags. See documentation.
-    uint16_t base_hi;             // The upper 16 bits of the address to jump to.
+    u16int base_lo;             // The lower 16 bits of the address to jump to when this interrupt fires.
+    u16int sel;                 // Kernel segment selector.
+    u8int  always0;             // This must always be zero.
+    u8int  flags;               // More flags. See documentation.
+    u16int base_hi;             // The upper 16 bits of the address to jump to.
 } __attribute__((packed));
 
 typedef struct idt_entry_struct idt_entry_t;
@@ -52,8 +53,8 @@ typedef struct idt_entry_struct idt_entry_t;
 // This is in a format suitable for giving to 'lidt'.
 struct idt_ptr_struct
 {
-    uint16_t limit;
-    uint32_t base;                // The address of the first element in our idt_entry_t array.
+    u16int limit;
+    u32int base;                // The address of the first element in our idt_entry_t array.
 } __attribute__((packed));
 
 typedef struct idt_ptr_struct idt_ptr_t;

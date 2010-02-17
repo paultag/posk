@@ -6,8 +6,10 @@
 
 #include <posk/common.h>
 #include <posk/isr.h>
+#include <posk/term.h>
 
 // This gets called from our ASM interrupt handler stub.
 void isr_handler(registers_t regs) {
-    return;
+    kprintf("recieved interrupt: ");
+    kprinti(regs.int_no);
 }

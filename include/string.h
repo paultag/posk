@@ -9,6 +9,5 @@
 int ksize0f(char*m);
 void reverse ( char s[] );
 void itoa ( int n, char s[] );
-char * strcat ( char *dest, const char *src );
 
 #endif

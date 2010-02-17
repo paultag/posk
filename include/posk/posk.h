@@ -7,13 +7,7 @@
 #ifndef POSK_H_
 #define POSK_H_ FOO
 
-#include <string.h>
-
 #include <posk/term.h>
-#include <posk/slab.h>
-#include <posk/startup.h>
-
-#include <posk/keyboard.h>
 
 
 void fpanic() {
