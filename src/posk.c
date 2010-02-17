@@ -30,31 +30,24 @@
  */
 
 #include <posk/posk.h>
+#include <posk/common.h>
 #include "port.c"
-#include "gdt.c"
-#include "idt.c"
+#include "descriptor_tables.c"
 #include "isr.c"
-#include "irq.c"
 #include "slab.c"
 #include "string.c"
 #include "term.c"
 #include "startup.c"
 
+struct multiboot {};
 
 /**
  * The kernel entry point. Never call this. I'm, not joking.
  * @vorsicht
- * @param mbd Bootloader ID
- * @param magic Magic Kernel ID
  */
-void posk_start( void * mbd, unsigned int magic ) {
+int posk_start( struct multiboot * mboot_ptr ) {
 	
-	gdt_install();
-	idt_install();
-	isrs_install();
-	irq_install();
-	
-	__asm__ __volatile__("sti");
+	init_descriptor_tables();
 	
 	startup();
 	

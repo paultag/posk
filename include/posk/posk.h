@@ -11,8 +11,6 @@
 
 #include <posk/term.h>
 #include <posk/slab.h>
-#include <posk/gdt.h>
-#include <posk/idt.h>
 #include <posk/startup.h>
 
 #include <posk/keyboard.h>
