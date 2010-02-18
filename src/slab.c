@@ -4,7 +4,7 @@
    */
 
   #ifndef SLAB_C_
-  #define SLAB_C_
+  #define SLAB_C_ FOO
 
   #include <posk/slab.h>
 

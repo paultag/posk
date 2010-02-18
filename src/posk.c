@@ -31,14 +31,17 @@
 
 #include <posk/term.h>
 #include <posk/descriptor_tables.h>
+#include <posk/slab.h>
+#include <posk/posk.h>
 
 int main(struct multiboot *mboot_ptr)
 {
 
     init_descriptor_tables();
+    
+    //setup_k_mm();
 
     setup_terminal();
-    
     
     return 0;
 }
