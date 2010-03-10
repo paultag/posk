@@ -29,9 +29,8 @@
    *  
    */
 
-#include <posk/term.h>
+#include <posk/monitor.h>
 #include <posk/descriptor_tables.h>
-#include <posk/slab.h>
 #include <posk/posk.h>
 
 int main(struct multiboot *mboot_ptr)
@@ -39,9 +38,12 @@ int main(struct multiboot *mboot_ptr)
 
     init_descriptor_tables();
     
-    //setup_k_mm();
-
-    setup_terminal();
+    monitor_clear();
+    monitor_write("hello world\n");
+    
+    asm volatile("sti");
+    
+    init_timer(50);
     
     return 0;
 }

@@ -7,6 +7,7 @@
 
 #include <posk/common.h>
 #include <posk/descriptor_tables.h>
+#include <posk/isr.h>
 
 // Lets us access our ASM functions from our C code.
 extern void gdt_flush(u32int);
@@ -23,20 +24,21 @@ gdt_ptr_t   gdt_ptr;
 idt_entry_t idt_entries[256];
 idt_ptr_t   idt_ptr;
 
+extern isr_t interrupt_handlers[];
+
 // Initialisation routine - zeroes all the interrupt service routines,
 // initialises the GDT and IDT.
-void init_descriptor_tables()
-{
+void init_descriptor_tables() {
 
     // Initialise the global descriptor table.
     init_gdt();
     // Initialise the interrupt descriptor table.
     init_idt();
-
+    
+    memset(&interrupt_handlers, 0, sizeof(isr_t) * 256);
 }
 
-static void init_gdt()
-{
+static void init_gdt() {
     gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
     gdt_ptr.base  = (u32int)&gdt_entries;
 
@@ -50,8 +52,7 @@ static void init_gdt()
 }
 
 // Set the value of one GDT entry.
-static void gdt_set_gate(s32int num, u32int base, u32int limit, u8int access, u8int gran)
-{
+static void gdt_set_gate(s32int num, u32int base, u32int limit, u8int access, u8int gran) {
     gdt_entries[num].base_low    = (base & 0xFFFF);
     gdt_entries[num].base_middle = (base >> 16) & 0xFF;
     gdt_entries[num].base_high   = (base >> 24) & 0xFF;
@@ -63,12 +64,22 @@ static void gdt_set_gate(s32int num, u32int base, u32int limit, u8int access, u8
     gdt_entries[num].access      = access;
 }
 
-static void init_idt()
-{
+static void init_idt() {
     idt_ptr.limit = sizeof(idt_entry_t) * 256 -1;
     idt_ptr.base  = (u32int)&idt_entries;
 
     memset(&idt_entries, 0, sizeof(idt_entry_t)*256);
+    
+    outb(0x20, 0x11);
+    outb(0xA0, 0x11);
+    outb(0x21, 0x20);
+    outb(0xA1, 0x28);
+    outb(0x21, 0x04);
+    outb(0xA1, 0x02);
+    outb(0x21, 0x01);
+    outb(0xA1, 0x01);
+    outb(0x21, 0x0);
+    outb(0xA1, 0x0);
 
     idt_set_gate( 0, (u32int)isr0 , 0x08, 0x8E);
     idt_set_gate( 1, (u32int)isr1 , 0x08, 0x8E);
@@ -102,7 +113,23 @@ static void init_idt()
     idt_set_gate(29, (u32int)isr29, 0x08, 0x8E);
     idt_set_gate(30, (u32int)isr30, 0x08, 0x8E);
     idt_set_gate(31, (u32int)isr31, 0x08, 0x8E);
-
+    idt_set_gate(32, (u32int)irq0, 0x08, 0x8E);
+    idt_set_gate(33, (u32int)irq1, 0x08, 0x8E);
+    idt_set_gate(34, (u32int)irq2, 0x08, 0x8E);
+    idt_set_gate(35, (u32int)irq3, 0x08, 0x8E);
+    idt_set_gate(36, (u32int)irq4, 0x08, 0x8E);
+    idt_set_gate(37, (u32int)irq5, 0x08, 0x8E);
+    idt_set_gate(38, (u32int)irq6, 0x08, 0x8E);
+    idt_set_gate(39, (u32int)irq7, 0x08, 0x8E);
+    idt_set_gate(40, (u32int)irq8, 0x08, 0x8E);
+    idt_set_gate(41, (u32int)irq9, 0x08, 0x8E);
+    idt_set_gate(42, (u32int)irq10, 0x08, 0x8E);
+    idt_set_gate(43, (u32int)irq11, 0x08, 0x8E);
+    idt_set_gate(44, (u32int)irq12, 0x08, 0x8E);
+    idt_set_gate(45, (u32int)irq13, 0x08, 0x8E);
+    idt_set_gate(46, (u32int)irq14, 0x08, 0x8E);
+    idt_set_gate(47, (u32int)irq15, 0x08, 0x8E);
+    
     idt_flush((u32int)&idt_ptr);
 }
 
@@ -115,5 +142,5 @@ static void idt_set_gate(u8int num, u32int base, u16int sel, u8int flags)
     idt_entries[num].always0 = 0;
     // We must uncomment the OR below when we get to using user-mode.
     // It sets the interrupt gate's privilege level to 3.
-    idt_entries[num].flags   = flags /* | 0x60 */;
+    idt_entries[num].flags   = flags;  /*| 0x60; */
 }
