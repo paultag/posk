@@ -19,7 +19,7 @@ static void init_idt();
 static void gdt_set_gate(s32int,u32int,u32int,u8int,u8int);
 static void idt_set_gate(u8int,u32int,u16int,u8int);
 
-gdt_entry_t gdt_entries[5];
+gdt_entry_t gdt_entries[3];
 gdt_ptr_t   gdt_ptr;
 idt_entry_t idt_entries[256];
 idt_ptr_t   idt_ptr;
@@ -39,14 +39,14 @@ void init_descriptor_tables() {
 }
 
 static void init_gdt() {
-    gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
+    gdt_ptr.limit = (sizeof(gdt_entry_t) * 3) - 1;
     gdt_ptr.base  = (u32int)&gdt_entries;
 
     gdt_set_gate(0, 0, 0, 0, 0);                // Null segment
     gdt_set_gate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF); // Code segment
     gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF); // Data segment
-    gdt_set_gate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF); // User mode code segment
-    gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF); // User mode data segment
+  //  gdt_set_gate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF); // User mode code segment
+  //  gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF); // User mode data segment
 
     gdt_flush((u32int)&gdt_ptr);
 }
@@ -131,6 +131,7 @@ static void init_idt() {
     idt_set_gate(47, (u32int)irq15, 0x08, 0x8E);
     
     idt_flush((u32int)&idt_ptr);
+    
 }
 
 static void idt_set_gate(u8int num, u32int base, u16int sel, u8int flags)
@@ -140,7 +141,5 @@ static void idt_set_gate(u8int num, u32int base, u16int sel, u8int flags)
 
     idt_entries[num].sel     = sel;
     idt_entries[num].always0 = 0;
-    // We must uncomment the OR below when we get to using user-mode.
-    // It sets the interrupt gate's privilege level to 3.
     idt_entries[num].flags   = flags;  /*| 0x60; */
 }
