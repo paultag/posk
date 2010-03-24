@@ -10,7 +10,7 @@
 #include <posk/term.h>
 
 
-void fpanic() {
+/* void fpanic() {
 	int foreground = POSK_RED;
 	int background = POSK_BLACK;
 	unsigned short attrib = (background << 4) | (foreground & 0x0F); // C-ism!
@@ -60,7 +60,8 @@ void fpanic() {
  * @param message the fatal error's description
  * @return nothing. This will always lock up and block.
  */
-void panic ( char * error_code, char * message ) {
+
+/* void panic ( char * error_code, char * message ) {
 
 	int foreground = POSK_BLACK;
 	int background = POSK_GREEN;
@@ -132,6 +133,6 @@ void panic ( char * error_code, char * message ) {
 	kprintf( "\n" );
 
 	for(;;); // FFFFFFFUUUUUUUUUUUUUUU
-}
+} */
 
 #endif

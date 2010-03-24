@@ -1,2 +1,2 @@
 #!/bin/bash
-bochs
+/usr/local/bin/bochs

@@ -1,7 +1,7 @@
 INC=../include/
 BIN=../bin/
 
-SOURCES=boot.o posk.o common.o descriptor_tables.o isr.o interrupt.o gdt.o string.o timer.o monitor.o slab.o
+SOURCES=boot.o posk.o common.o descriptor_tables.o isr.o interrupt.o gdt.o string.o timer.o monitor.o mm.o
 
 CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -I$(INC)
 LDFLAGS=-Tlink.ld

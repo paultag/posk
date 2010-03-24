@@ -31,17 +31,14 @@
 
 #include <posk/monitor.h>
 #include <posk/descriptor_tables.h>
+#include <posk/mm.h>
 #include <posk/posk.h>
 
-int main(struct multiboot *mboot_ptr)
-{
+int main(struct multiboot *mboot_ptr) {
 
     init_descriptor_tables();
     
-    monitor_clear();
-    monitor_write("hello world\n");
-    
-    asm volatile("sti");
+    initialize_paging();
     
     init_timer(50);
     

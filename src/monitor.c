@@ -52,8 +52,7 @@ static void scroll()
 }
 
 // Writes a single character out to the screen.
-void monitor_put(char c)
-{
+void monitor_put(char c) {
     // The background colour is black (0), the foreground is white (15).
     u8int backColour = 0;
     u8int foreColour = 15;
@@ -67,33 +66,28 @@ void monitor_put(char c)
     u16int *location;
 
     // Handle a backspace, by moving the cursor back one space
-    if (c == 0x08 && cursor_x)
-    {
+    if (c == 0x08 && cursor_x) {
         cursor_x--;
     }
 
     // Handle a tab by increasing the cursor's X, but only to a point
     // where it is divisible by 8.
-    else if (c == 0x09)
-    {
+    else if (c == 0x09) {
         cursor_x = (cursor_x+8) & ~(8-1);
     }
 
     // Handle carriage return
-    else if (c == '\r')
-    {
+    else if (c == '\r') {
         cursor_x = 0;
     }
 
     // Handle newline by moving cursor back to left and increasing the row
-    else if (c == '\n')
-    {
+    else if (c == '\n') {
         cursor_x = 0;
         cursor_y++;
     }
     // Handle any other printable character.
-    else if(c >= ' ')
-    {
+    else if(c >= ' ') {
         location = video_memory + (cursor_y*80 + cursor_x);
         *location = c | attribute;
         cursor_x++;
@@ -101,8 +95,7 @@ void monitor_put(char c)
 
     // Check if we need to insert a new line because we have reached the end
     // of the screen.
-    if (cursor_x >= 80)
-    {
+    if (cursor_x >= 80) {
         cursor_x = 0;
         cursor_y ++;
     }
