@@ -15,4 +15,7 @@ void monitor_clear();
 // Output a null-terminated ASCII string to the monitor.
 void monitor_write(char *c);
 
+void printk (const char *fmt, ...);
+
+
 #endif // MONITOR_H

@@ -1,20 +1,23 @@
 // common.h -- Defines typedefs and some global functions.
 //             From JamesM's kernel development tutorials.
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef COMMON_H_
+#define COMMON_H_ FOOBAR
 
 // Some nice typedefs, to standardise sizes across platforms.
 // These typedefs are written for 32-bit X86.
-typedef unsigned int   u32int;
-typedef          int   s32int;
-typedef unsigned short u16int;
-typedef          short s16int;
-typedef unsigned char  u8int;
-typedef          char  s8int;
+typedef unsigned int   uint32_t;
+typedef          int   int32_t;
+typedef unsigned short uint16_t;
+typedef          short int16_t;
+typedef unsigned char  uint8_t;
+typedef          char  int8_t;
 
-void outb(u16int port, u8int value);
-u8int inb(u16int port);
-u16int inw(u16int port);
+
+void outb(uint16_t port, uint8_t value);
+uint8_t inb(uint16_t port);
+uint16_t inw(uint16_t port);
+
+#define DEBUG asm volatile("xchg %bx,%bx");
 
 #endif // COMMON_H

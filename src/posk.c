@@ -29,18 +29,23 @@
    *  
    */
 
+#include <posk/multiboot.h>
+#include <posk/common.h>
 #include <posk/monitor.h>
-#include <posk/descriptor_tables.h>
-#include <posk/mm.h>
-#include <posk/posk.h>
+#include <posk/gdt.h>
+#include <posk/idt.h>
+#include <posk/timer.h>
 
 int main(struct multiboot *mboot_ptr) {
+    
+    monitor_clear();
+    init_gdt();
+    init_idt();
+    init_timer(20);
+    
+    panic("panicing");
 
-    init_descriptor_tables();
+    for(;;);
     
-    initialize_paging();
-    
-    init_timer(50);
-    
-    return 0;
+    return 0xBABABEEF;
 }
