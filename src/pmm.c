@@ -12,11 +12,19 @@ uint32_t pmm_stack_max = PMM_STACK_ADDR;
 uint32_t pmm_location;
 char pmm_paging_active = 0;
 
+/** 
+ * Init the physical memory management
+ * @param start starting address
+ */
 void init_pmm (uint32_t start) {
   // Ensure the initial page allocation location is page-aligned.
   pmm_location = (start + 0x1000) & PAGE_MASK;
 }
 
+/** 
+ * Get a page for some work
+ * @return address of the new block of ram
+ */
 uint32_t pmm_alloc_page () {
   if (pmm_paging_active) {
     
@@ -35,6 +43,10 @@ uint32_t pmm_alloc_page () {
   }
 }
 
+/** 
+ * Free a physical memory page
+ * @param p page to free
+ */
 void pmm_free_page (uint32_t p) {
   // Ignore any page under "location", as it may contain important data initialised
   // at boot (like paging structures!)

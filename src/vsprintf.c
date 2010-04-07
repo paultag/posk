@@ -3,18 +3,16 @@
  * @file vsprintf.c
  */
 
-/*
- * vsprintf.c -- Lars Wirzenius & Linus Torvalds.
- * Wirzenius wrote this portably, Torvalds fucked it up :-)
- */
-
 #include <stdarg.h>
 
 /* we use this so that we can do without the ctype library */
 #define is_digit(c)	((c) >= '0' && (c) <= '9')
 
-static int skip_atoi(const char **s)
-{
+/**
+ * Skip ATOI
+ * @param s string to be processed
+ */
+static int skip_atoi(const char **s) {
 	int i=0;
 
 	while (is_digit(**s))
@@ -22,24 +20,39 @@ static int skip_atoi(const char **s)
 	return i;
 }
 
-#define ZEROPAD	1		/* pad with zero */
-#define SIGN	  2   /* unsigned/signed long */
-#define PLUS    4	  /* show plus */
-#define SPACE	  8   /* space if plus */
-#define LEFT	  16  /* left justified */
-#define SPECIAL	32  /* 0x */
-#define SMALL	  64  /* use 'abcdef' instead of 'ABCDEF' */
+#define ZEROPAD   1   /* pad with zero */
+#define SIGN      2   /* unsigned/signed long */
+#define PLUS      4   /* show plus */
+#define SPACE     8   /* space if plus */
+#define LEFT      16  /* left justified */
+#define SPECIAL   32  /* 0x */
+#define SMALL     64  /* use 'abcdef' instead of 'ABCDEF' */
 
 #define do_div(n,base) ({ \
 int __res; \
 __asm__("divl %4":"=a" (n),"=d" (__res):"0" (n),"1" (0),"r" (base)); \
 __res; })
 
-static char * number(char * str, int num, int base, int size, int precision
-	,int type)
-{
+/**
+ * Get the number string from the number
+ * @param str String to be dumpped to
+ * @param num Number to be processed
+ * @param base base number system to work with
+ * @param size not entirely sure
+ * @param percision how accurate you need
+ * @param type what you do on a keyboard
+ * @return string that is the rep of the input number
+ */
+static char * number(
+	char * str,
+	int num,
+	int base,
+	int size,
+	int precision,
+	int type
+) {
 	char c,sign,tmp[36];
-	const char *digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const char * digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	int i;
 
 	if (type&SMALL) digits="0123456789abcdefghijklmnopqrstuvwxyz";
@@ -87,8 +100,14 @@ static char * number(char * str, int num, int base, int size, int precision
 	return str;
 }
 
-int vsprintf(char *buf, const char *fmt, va_list args)
-{
+/**
+ * Give the int value of a string
+ * @param buf buffer
+ * @param fmt format
+ * @param args arguments
+ * @return Integer
+ */
+int vsprintf ( char *buf, const char *fmt, va_list args ) {
 	int len;
 	int i;
 	char * str;

@@ -12,9 +12,10 @@ uint16_t *video_memory = (uint16_t *)0xB8000;
 uint8_t cursor_x = 0;
 uint8_t cursor_y = 0;
 
-// Updates the hardware cursor.
-static void move_cursor()
-{
+/** 
+ * update the cursor
+ */
+static void move_cursor() {
     // The screen is 80 characters wide...
     uint16_t cursorLocation = cursor_y * 80 + cursor_x;
     outb(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
@@ -23,29 +24,27 @@ static void move_cursor()
     outb(0x3D5, cursorLocation);      // Send the low cursor byte.
 }
 
-// Scrolls the text on the screen up by one line.
-static void scroll()
-{
+/** 
+ * Move the text up a line
+ */
+static void scroll() {
 
     // Get a space character with the default colour attributes.
     uint8_t attributeByte = (0 /*black*/ << 4) | (15 /*white*/ & 0x0F);
     uint16_t blank = 0x20 /* space */ | (attributeByte << 8);
 
     // Row 25 is the end, this means we need to scroll up
-    if(cursor_y >= 25)
-    {
+    if(cursor_y >= 25) {
         // Move the current text chunk that makes up the screen
         // back in the buffer by a line
         int i;
-        for (i = 0*80; i < 24*80; i++)
-        {
+        for (i = 0*80; i < 24*80; i++) {
             video_memory[i] = video_memory[i+80];
         }
 
         // The last line should now be blank. Do this by writing
         // 80 spaces to it.
-        for (i = 24*80; i < 25*80; i++)
-        {
+        for (i = 24*80; i < 25*80; i++) {
             video_memory[i] = blank;
         }
         // The cursor should now be on the last line.
@@ -53,7 +52,10 @@ static void scroll()
     }
 }
 
-// Writes a single character out to the screen.
+/** 
+ * Put a char on the screen
+ * @param c char to print
+ */
 void monitor_put(char c) {
     // The background colour is black (0), the foreground is white (15).
     uint8_t backColour = 0;
@@ -109,16 +111,16 @@ void monitor_put(char c) {
 
 }
 
-// Clears the screen, by copying lots of spaces to the framebuffer.
-void monitor_clear()
-{
+/** 
+ * Clear the screen.
+ */
+void monitor_clear() {
     // Make an attribute byte for the default colours
     uint8_t attributeByte = (0 /*black*/ << 4) | (15 /*white*/ & 0x0F);
     uint16_t blank = 0x20 /* space */ | (attributeByte << 8);
 
     int i;
-    for (i = 0; i < 80*25; i++)
-    {
+    for (i = 0; i < 80*25; i++) {
         video_memory[i] = blank;
     }
 
@@ -128,18 +130,22 @@ void monitor_clear()
     move_cursor();
 }
 
-// Outputs a null-terminated ASCII string to the monitor.
-void monitor_write(char *c)
-{
+/** 
+ * Outputs a null terminated ASCII string to the monitor
+ * @param c char string to print
+ */
+void monitor_write(char *c) {
     int i = 0;
-    while (c[i])
-    {
+    while (c[i]) {
         monitor_put(c[i++]);
     }
 }
 
-void monitor_write_hex(uint32_t n)
-{
+/** 
+ * Write hex to the screen
+ * @param n number to print
+ */
+void monitor_write_hex(uint32_t n) {
     int32_t tmp;
 
     monitor_write("0x");
@@ -147,43 +153,37 @@ void monitor_write_hex(uint32_t n)
     char noZeroes = 1;
 
     int i;
-    for (i = 28; i > 0; i -= 4)
-    {
+    for (i = 28; i > 0; i -= 4) {
         tmp = (n >> i) & 0xF;
-        if (tmp == 0 && noZeroes != 0)
-        {
+        if (tmp == 0 && noZeroes != 0) {
             continue;
         }
     
-        if (tmp >= 0xA)
-        {
+        if (tmp >= 0xA) {
             noZeroes = 0;
             monitor_put (tmp-0xA+'a' );
-        }
-        else
-        {
+        } else {
             noZeroes = 0;
             monitor_put( tmp+'0' );
         }
     }
   
     tmp = n & 0xF;
-    if (tmp >= 0xA)
-    {
+    if (tmp >= 0xA) {
         monitor_put (tmp-0xA+'a');
-    }
-    else
-    {
+    } else {
         monitor_put (tmp+'0');
     }
 
 }
 
-void monitor_write_dec(uint32_t n)
-{
+/** 
+ * Write decimal to the screen
+ * @param n number to write to the screen
+ */
+void monitor_write_dec(uint32_t n) {
 
-    if (n == 0)
-    {
+    if (n == 0) {
         monitor_put('0');
         return;
     }
@@ -191,8 +191,7 @@ void monitor_write_dec(uint32_t n)
     int32_t acc = n;
     char c[32];
     int i = 0;
-    while (acc > 0)
-    {
+    while (acc > 0) {
         c[i] = '0' + acc%10;
         acc /= 10;
         i++;
@@ -202,14 +201,16 @@ void monitor_write_dec(uint32_t n)
     char c2[32];
     c2[i--] = 0;
     int j = 0;
-    while(i >= 0)
-    {
+    while(i >= 0) {
         c2[i--] = c[j++];
     }
     monitor_write(c2);
-
 }
 
+/** 
+ * Print a string to the screen, kernel style
+ * @param fmt format 
+ */
 void printk (const char * fmt, ...) {
     static char buf [1024];
     va_list args;

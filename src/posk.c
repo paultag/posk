@@ -39,6 +39,12 @@
 #include <posk/vmm.h>
 #include <posk/slab.h>
 
+/**
+ * Main method of the kernel, totally sweet.
+ * @param mboot_ptr multiboot params
+ * @return return value
+ * @vorsicht
+ */
 int main(multiboot_t *mboot_ptr) {
     
     monitor_clear();

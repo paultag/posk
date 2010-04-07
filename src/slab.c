@@ -145,21 +145,6 @@
                   }
           } while ( chunk_size < size && end_node->next != NIL );
 
-  //      kprintf( "Start Loc @ "  );
-  //      kprinti( first_node->addr );
-  //      kprintf( ". " );
-
-  //      kprintf( "End Loc @ "  );
-  //      kprinti( end_node->addr );
-  //      kprintf( ". " );
-
-  //      int diff = end_node->addr - first_node->addr;
-
-  //      kprintf( "Bits: "  );
-  //      kprinti( (int)diff );
-  //      kprintf( ".\n" );
-
-
           if ( end_node->next == NIL ) {
                   return 0;
           }
@@ -169,15 +154,9 @@
           while ( current_node != end_node ) {
                   if ( current_node == first_node ) {
                           current_node->next = end_node->next;
-  //                      kprintf( "  Delinked Head Node\n"  );
                   } else {
                           current_node->next = NIL;
-  //                      kprintf( "  NIL'ing out current node\n"  );
                   }
-
-  //              kprintf( " * " );
-  //              kprinti( current_node->addr );
-  //              kprintf( " <-- \n" );
 
                   current_node = current_node->c_next;
           }
