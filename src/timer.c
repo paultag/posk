@@ -1,3 +1,8 @@
+/**
+ * Timer code for setting up internal tick
+ * @file timer.c
+ */
+
 #include <posk/timer.h>
 #include <posk/idt.h>
 #include <posk/common.h>

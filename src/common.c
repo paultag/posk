@@ -1,5 +1,7 @@
-// common.c -- Defines some global functions.
-//             From JamesM's kernel development tutorials.
+/**
+ * Common kernel code, global fuctions etc.
+ * @file common.c
+ */
 
 #include <posk/common.h>
 
@@ -46,63 +48,76 @@ void memcpy(uint8_t *dest, const uint8_t *src, uint32_t len) {
 }
 
 // Write len copies of val into dest.
+/**
+ * Write copies of val into dest of len length
+ * @param dest where to write to
+ * @param val where to write from
+ * @param len length to write
+ */
 void memset(uint8_t *dest, uint8_t val, uint32_t len) {
     uint8_t *temp = (uint8_t *)dest;
     for ( ; len != 0; len--) *temp++ = val;
 }
 
-// Compare two strings. Should return -1 if 
-// str1 < str2, 0 if they are equal or 1 otherwise.
-int strcmp(char *str1, char *str2)
-{
+
+/**
+ * compare two strings.
+ * @param str1 first string
+ * @param str2 second string
+ * @ret str1 < str2, 0 if they are equal or 1 otherwise.
+ */
+int strcmp(char *str1, char *str2) {
       int i = 0;
       int failed = 0;
-      while(str1[i] != '\0' && str2[i] != '\0')
-      {
-          if(str1[i] != str2[i])
-          {
+      while ( str1[i] != '\0' && str2[i] != '\0' ) {
+          if ( str1[i] != str2[i] ) {
               failed = 1;
               break;
           }
           i++;
       }
-      // why did the loop exit?
       if( (str1[i] == '\0' && str2[i] != '\0') || (str1[i] != '\0' && str2[i] == '\0') )
           failed = 1;
-  
+
       return failed;
 }
 
-// Copy the NULL-terminated string src into dest, and
-// return dest.
-char *strcpy(char *dest, const char *src)
-{
-    do
-    {
+/**
+ * Copy the NULL-terminated string src into dest
+ * @param dest where to copy to
+ * @param src where to copy from 
+ * @ret dest
+ */
+char * strcpy ( char *dest, const char *src ) {
+    do {
       *dest++ = *src++;
-    }
-    while (*src != 0);
+    } while (*src != 0);
 }
 
-// Concatenate the NULL-terminated string src onto
-// the end of dest, and return dest.
-char *strcat(char *dest, const char *src)
-{
-    while (*dest != 0)
-    {
-        *dest = *dest++;
+/**
+ * Concatenate the NULL-terminated string src onto the end of dest
+ * @param dest where to copy to
+ * @param src where to copy from 
+ * @ret dest
+ */
+char * strcat ( char *dest, const char *src ) {
+    while (*dest != 0) {
+        *dest   = *dest++;
     }
 
-    do
-    {
+    do {
         *dest++ = *src++;
-    }
-    while (*src != 0);
+    } while (*src != 0);
+
     return dest;
 }
 
-int strlen(char *src)
-{
+/**
+ * work out the length of a string
+ * @param src string to measure
+ * @ret length of the string
+ */
+int strlen ( char *src ) {
   int i = 0;
   while (*src++)
     i++;

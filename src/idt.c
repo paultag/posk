@@ -1,3 +1,8 @@
+/**
+ * Interrupt descriptor table
+ * @file idt.c
+ */
+
 #include <posk/common.h>
 #include <posk/idt.h>
 

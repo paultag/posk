@@ -1,3 +1,7 @@
+/**
+ * Terminal stuff
+ * @file monitor.c
+ */
 
 #include <posk/monitor.h>
 #include <stdarg.h>

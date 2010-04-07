@@ -1,3 +1,8 @@
+/**
+ * memory management
+ * @file mm.c
+ */
+
 #include <posk/mm.h>
 #include <posk/kheap.h>
 #include <posk/common.h>

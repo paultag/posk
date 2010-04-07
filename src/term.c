@@ -1,7 +1,7 @@
 /**
-   * Basic terminal I/O routines
-   * @file term.c
-   */
+ * Basic terminal I/O routines
+ * @file term.c
+ */
 
   #ifndef TERM_C_
   #define TERM_C_

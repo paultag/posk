@@ -1,3 +1,8 @@
+/**
+ * GDT ( Global Descriptor Table ) 
+ * @file gdt.c
+ */
+
 #include <posk/common.h>
 #include <posk/gdt.h>
 

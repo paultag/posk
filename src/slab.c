@@ -1,7 +1,7 @@
 /**
-   * Slab kmalloc allocation code.
-   * @file slab.c
-   */
+ * Slab kmalloc allocation code.
+ * @file slab.c
+ */
 
   #ifndef SLAB_C_
   #define SLAB_C_ FOO

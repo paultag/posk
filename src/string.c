@@ -1,3 +1,8 @@
+/**
+ * String stuff
+ * @file string.c
+ */
+
 #include <string.h>
 
   /**

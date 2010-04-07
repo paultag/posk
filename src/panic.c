@@ -1,3 +1,8 @@
+/**
+ * OMGWTFBBQ
+ * @file panic.c
+ */
+
 #include <posk/panic.h>
 #include <posk/common.h>
 

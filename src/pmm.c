@@ -1,3 +1,7 @@
+/**
+ * Physical Memory Management
+ * @file pmm.c
+ */
 
 #include <posk/pmm.h>
 #include <posk/vmm.h>
