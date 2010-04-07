@@ -2,6 +2,7 @@
 #include <posk/common.h>
 
 void panic (const char *msg) {
+  asm volatile("cli");
   printk("*** SYSTEM PANIC ***\n");
   printk("%s\n", msg);
   printk("********************\n");

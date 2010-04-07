@@ -3,37 +3,50 @@
 
 #include <posk/common.h>
 
-// Write a byte out to the specified port.
-void outb(uint16_t port, uint8_t value)
-{
+/**
+ * Write a byte to the port given
+ * @param port the port to write ti
+ * @param value the value to write to the port
+ */
+void outb(uint16_t port, uint8_t value) {
     asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
 }
 
-uint8_t inb(uint16_t port)
-{
+/**
+ * Read input from a given port
+ * @param port Port to read 
+ */
+uint8_t inb(uint16_t port) {
     uint8_t ret;
     asm volatile("inb %1, %0" : "=a" (ret) : "dN" (port));
     return ret;
 }
 
-uint16_t inw(uint16_t port)
-{
+/**
+ * read a 16 bit short word from a 16 bit I/O port. 
+ * @param port port to read from
+ */
+uint16_t inw(uint16_t port) {
     uint16_t ret;
     asm volatile ("inw %1, %0" : "=a" (ret) : "dN" (port));
     return ret;
 }
 
 // Copy len bytes from src to dest.
-void memcpy(uint8_t *dest, const uint8_t *src, uint32_t len)
-{
+/**
+ * Copy bytes from src to dest
+ * @param dest where to copy data to
+ * @param src  where to copy data from
+ * @param len  length of data to copy
+ */
+void memcpy(uint8_t *dest, const uint8_t *src, uint32_t len) {
     const uint8_t *sp = (const uint8_t *)src;
     uint8_t *dp = (uint8_t *)dest;
     for(; len != 0; len--) *dp++ = *sp++;
 }
 
 // Write len copies of val into dest.
-void memset(uint8_t *dest, uint8_t val, uint32_t len)
-{
+void memset(uint8_t *dest, uint8_t val, uint32_t len) {
     uint8_t *temp = (uint8_t *)dest;
     for ( ; len != 0; len--) *temp++ = val;
 }

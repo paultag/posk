@@ -86,11 +86,11 @@
   }
 
   /**
-   * a function to get the current kalloc status. This is very time consuming.
+   * a function to get the current kmalloc status. This is very time consuming.
    * @return a struct of type mm_slab_report with the up-to-date info on the memory status
    *
    */
-  struct mm_slab_report * get_kalloc_report() {
+  struct mm_slab_report * get_kmalloc_report() {
           struct mm_slab_alloc * HEAD = KALLOC_HEAD;
 
           int free  = 0;
@@ -108,7 +108,7 @@
                   HEAD = HEAD->next;
           }
 
-          struct mm_slab_report * ret = (struct mm_slab_report *) kalloc( sizeof(struct mm_slab_report ));
+          struct mm_slab_report * ret = (struct mm_slab_report *) kmalloc( sizeof(struct mm_slab_report ));
 
           ret->exist = count;
           ret->free  = free;
@@ -120,11 +120,11 @@
   }
 
   /**
-   * A first fit kalloc method to deal with kernel memory requests
+   * A first fit kmalloc method to deal with kernel memory requests
    * @param size the size ( in bytes ) the kernel task would like to have.
    * @return address of the block to start using.
    */
-  unsigned char * kalloc( int size ) {
+  unsigned char * kmalloc( int size ) {
           struct mm_slab_alloc * end_node   = KALLOC_HEAD;
           struct mm_slab_alloc * first_node = KALLOC_HEAD;
 
@@ -189,9 +189,9 @@
 
 
   /**
-   * A function to free memory allocated by kalloc
+   * A function to free memory allocated by kmalloc
    * @vorsicht
-   * @see kalloc()
+   * @see kmalloc()
    */
   void kfree(void *ptr) {
           struct mm_slab_alloc * current_node = KALLOC_HEAD;
