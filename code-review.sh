@@ -20,7 +20,7 @@ function checkMe() {
         fi
 }
 
-FILES=$(find . -type f | grep -v .svn | grep -v devel-tools )
+FILES=$(find . -type f | grep -v .svn | grep -v devel-tools | grep -v docs)
 for FILE in $FILES; do
 	if [ "x$(file $FILE | grep text)" != "x" ]; then
 	if [ "x$FILE" != "x$0" ]; then
