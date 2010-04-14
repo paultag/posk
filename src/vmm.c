@@ -116,6 +116,6 @@ void page_fault (registers_t *regs) {
 
   printk ("Page fault at 0x%x, faulting address 0x%x\n", regs->eip, cr2);
   printk ("Error code: %x\n", regs->err_code);
-  panic ("");
+  panic ("PAGE FAULT");
   for (;;) ;
 }

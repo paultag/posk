@@ -38,6 +38,7 @@
 #include <posk/pmm.h>
 #include <posk/vmm.h>
 #include <posk/slab.h>
+#include <posk/task.h>
 
 /**
  * Main method of the kernel, totally sweet.
@@ -53,6 +54,7 @@ int main(multiboot_t *mboot_ptr) {
     init_timer(50);
     init_pmm(mboot_ptr->mem_upper);
     init_vmm();
+    init_heap();
     
       // Find all the usable areas of memory and inform the physical memory manager about them.
   uint32_t i = mboot_ptr->mmap_addr;
@@ -75,12 +77,22 @@ int main(multiboot_t *mboot_ptr) {
 
     
     asm volatile("sti");
-   
-    panic("panicing");
     
-    kmalloc(0x2000);
+    init_scheduler(init_threading());
+    
+    uint32_t * stack = kmalloc (0x100) + 0xF0;
+    task_t * t = create_dumb_task(10, stack);
+    task_is_ready(t);
+    
+/*    uint32_t * stack1 = kmalloc (0x100) + 0xF0;
+    task_t * t1 = create_dumb_task(8, stack1);
+    task_is_ready(t1); */
+    
+    
+    panic("panic");
+    
 
     for(;;);
     
-    return 0xBADBEEF;
+    return 0xBADD00D;
 }

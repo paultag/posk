@@ -1,186 +1,127 @@
-/**
- * Slab kmalloc allocation code.
- * @file slab.c
- */
+#include <posk/slab.h>
+#include <posk/pmm.h>
+#include <posk/vmm.h>
 
-  #ifndef SLAB_C_
-  #define SLAB_C_ FOO
+static void alloc_chunk (uint32_t start, uint32_t len);
+static void free_chunk (header_t *chunk);
+static void split_chunk (header_t *chunk, uint32_t len);
+static void glue_chunk (header_t *chunk);
 
-  #include <posk/slab.h>
+uint32_t heap_max = HEAP_START;
+header_t *heap_first = 0;
 
-  #define NIL                 0x0
+void init_heap ()
+{
+}
 
-  /*
-   *  Warning Smartass CS Student:
-   *    You don't know what's going on below this.
-   *    We don't know what's going on below this.
-   *    You think you are cool by "optmizing" this
-   *
-   *    You're not.
-   *
-   *
-   *    hours_wasted_debugging = 12
-   *
-   *
-   *    I'd like to add that most of the errors were
-   *    not in the mysterious code. Check your own
-   *    moves before some of the creepy stuff.
-   *
-   *    It's not the compiler(tm). Unless it is.
-   *    In which case, comment below.
-   *
-   */
+void *kmalloc (uint32_t l)
+{
+  l += sizeof (header_t);
 
-  int table_magic_number =
-                  POSK_MEMORY_MAGIC_START_NUMBER - (
-                          sizeof(struct mm_slab_alloc) * (
-                                  POSK_KMEMORY_ALLOC_SIZE / POSK_KMEMORY_BLOCK_SIZE
-                          )
-                  );
-
-  struct mm_slab_alloc * KALLOC_HEAD   = NIL;
-  struct mm_slab_alloc * KALLOC_END    = NIL;
-
-  /**
-   * A hard-coded method for doling out linked list items. Don't call this directly under penelty of death.
-   * @vorsicht
-   * @return address of the block to use.
-   * @see setup_k_mm()
-   */
-  void * super_struct_kmalloc() {
-          int ret = table_magic_number;
-          table_magic_number += sizeof(struct mm_slab_alloc);
-          return (unsigned char *)ret;
+  header_t *cur_header = heap_first, *prev_header = 0;
+  while (cur_header)
+  {
+    if (cur_header->allocated == 0 && cur_header->length >= l)
+    {
+      split_chunk (cur_header, l);
+      cur_header->allocated = 1;
+      return (void*) ((uint32_t)cur_header + sizeof (header_t));
+    }
+    prev_header = cur_header;
+    cur_header = cur_header->next;
   }
 
-  /**
-   * A function to set up the kmalloc linked list items. This calls super_struct_kmalloc();
-   * @vorsicht
-   * @see super_struct_kmalloc()
-   */
-  void setup_k_mm() {
-
-          struct mm_slab_alloc * HEAD = (struct mm_slab_alloc *)super_struct_kmalloc();
-          HEAD->next   = NIL;
-          HEAD->c_next = NIL;
-          HEAD->addr   = POSK_MEMORY_MAGIC_START_NUMBER;
-
-          KALLOC_HEAD   = HEAD;
-          KALLOC_END    = HEAD;
-
-          int i = POSK_KMEMORY_BLOCK_SIZE;
-
-          for ( ; i <= POSK_KMEMORY_ALLOC_SIZE; i += POSK_KMEMORY_BLOCK_SIZE) {
-
-                  struct mm_slab_alloc * item = (struct mm_slab_alloc *)super_struct_kmalloc();
-
-                  item->addr   = i + POSK_MEMORY_MAGIC_START_NUMBER;
-                  item->next   = NIL;
-                  item->c_next = NIL;
-
-                  KALLOC_END->next   = item;
-                  KALLOC_END->c_next = item;
-                  KALLOC_END         = item;
-          }
-
+  uint32_t chunk_start;
+  if (prev_header)
+    chunk_start = (uint32_t)prev_header + prev_header->length;
+  else
+  {
+    chunk_start = HEAP_START;
+    heap_first = (header_t *)chunk_start;
   }
 
-  /**
-   * a function to get the current kmalloc status. This is very time consuming.
-   * @return a struct of type mm_slab_report with the up-to-date info on the memory status
-   *
-   */
-  struct mm_slab_report * get_kmalloc_report() {
-          struct mm_slab_alloc * HEAD = KALLOC_HEAD;
+  alloc_chunk (chunk_start, l);
+  cur_header = (header_t *)chunk_start;
+  cur_header->prev = prev_header;
+  cur_header->next = 0;
+  cur_header->allocated = 1;
+  cur_header->length = l;
 
-          int free  = 0;
-          int count = 0;
+  prev_header->next = cur_header;
 
-          while ( HEAD != NIL ) {
-                  ++count;
-                  HEAD = HEAD->c_next;
-          }
+  return (void*) (chunk_start + sizeof (header_t));
+}
 
-          HEAD = KALLOC_HEAD;
+void kfree (void *p)
+{
+  header_t *header = (header_t*)((uint32_t)p - sizeof(header_t));
+  header->allocated = 0;
 
-          while ( HEAD != NIL ) {
-                  ++free;
-                  HEAD = HEAD->next;
-          }
+  glue_chunk (header);
+}
 
-          struct mm_slab_report * ret = (struct mm_slab_report *) kmalloc( sizeof(struct mm_slab_report ));
+void alloc_chunk (uint32_t start, uint32_t len)
+{
+  while (start + len > heap_max)
+  {
+    uint32_t page = pmm_alloc_page ();
+    map (heap_max, page, PAGE_PRESENT | PAGE_WRITE);
+    heap_max += 0x1000;
+  }
+}
 
-          ret->exist = count;
-          ret->free  = free;
-          ret->used  = ( count - free );
-          ret->s_addr = (unsigned char * ) KALLOC_HEAD;
-          ret->e_addr = (unsigned char * ) KALLOC_END;
+void free_chunk (header_t *chunk)
+{
+  chunk->prev->next = 0;
 
-          return ret;
+  if (chunk->prev == 0)
+  heap_first = 0;
+
+  // While the heap max can contract by a page and still be greater than the chunk address...
+  while ( (heap_max-0x1000) >= (uint32_t)chunk )
+  {
+    heap_max -= 0x1000;
+    uint32_t page;
+    get_mapping (heap_max, &page);
+    pmm_free_page (page);
+    unmap (heap_max);
+  }
+}
+
+void split_chunk (header_t *chunk, uint32_t len)
+{
+  // In order to split a chunk, once we split we need to know that there will be enough
+  // space in the new chunk to store the chunk header, otherwise it just isn't worthwhile.
+  if (chunk->length - len > sizeof (header_t))
+  {
+    header_t *newchunk = (header_t *) ((uint32_t)chunk + chunk->length);
+    newchunk->prev = chunk;
+    newchunk->next = 0;
+    newchunk->allocated = 0;
+    newchunk->length = chunk->length - len;
+
+    chunk->next = newchunk;
+    chunk->length = len;
+  }
+}
+
+void glue_chunk (header_t *chunk)
+{
+  if (chunk->next && chunk->next->allocated == 0)
+  {
+    chunk->length = chunk->length + chunk->next->length;
+    chunk->next->next->prev = chunk;
+    chunk->next = chunk->next->next;
   }
 
-  /**
-   * A first fit kmalloc method to deal with kernel memory requests
-   * @param size the size ( in bytes ) the kernel task would like to have.
-   * @return address of the block to start using.
-   */
-  unsigned char * kmalloc( int size ) {
-          struct mm_slab_alloc * end_node   = KALLOC_HEAD;
-          struct mm_slab_alloc * first_node = KALLOC_HEAD;
-
-  //      kprintf( "Request for " );
-  //      kprinti( size );
-  //      kprintf( ". " );
-
-          int chunk_size = 0;
-
-          do {
-                  if ( end_node->next == end_node->c_next ) {
-                          end_node = end_node->next;
-                          chunk_size += POSK_KMEMORY_BLOCK_SIZE;
-                  } else {
-                          end_node = end_node->next;
-                          first_node = end_node;
-                          chunk_size = 0;
-                  }
-          } while ( chunk_size < size && end_node->next != NIL );
-
-          if ( end_node->next == NIL ) {
-                  return 0;
-          }
-
-          struct mm_slab_alloc * current_node = first_node;
-
-          while ( current_node != end_node ) {
-                  if ( current_node == first_node ) {
-                          current_node->next = end_node->next;
-                  } else {
-                          current_node->next = NIL;
-                  }
-
-                  current_node = current_node->c_next;
-          }
-
-          void * ret = ( unsigned char * ) first_node->addr;
-
-          return ret;
+  if (chunk->prev && chunk->prev->allocated == 0)
+  {
+    chunk->prev->length = chunk->prev->length + chunk->length;
+    chunk->prev->next = chunk->next;
+    chunk->next->prev = chunk->prev;
+    chunk = chunk->prev;
   }
 
-
-  /**
-   * A function to free memory allocated by kmalloc
-   * @vorsicht
-   * @see kmalloc()
-   */
-  void kfree(void *ptr) {
-          struct mm_slab_alloc * current_node = KALLOC_HEAD;
-          while(current_node->addr != (int)ptr) {
-                  current_node = current_node->next;
-          }
-          while(current_node->next != current_node->c_next) {
-                  current_node->next = current_node->c_next;
-                  current_node = current_node->c_next;
-          }
-  }
-
-  #endif
+  if (chunk->next == 0)
+    free_chunk (chunk);
+}

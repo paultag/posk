@@ -11,7 +11,7 @@
  * @param message to panic to the user
  */
 void panic (const char *msg) {
-  asm volatile("cli");
+  //asm volatile("cli"); <-- this fucking broke everything
   printk("*** SYSTEM PANIC ***\n");
   printk("%s\n", msg);
   printk("********************\n");
