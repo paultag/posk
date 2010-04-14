@@ -1,8 +1,8 @@
 #!/bin/bash
 
-dd if=/dev/zero of=pad bs=1 count=750
+dd if=/dev/zero of=pad bs=1 count=750 &>/dev/null
 
-tar -zxvf grub-0.97-i386-pc.tar.gz
+tar -zxvf grub-0.97-i386-pc.tar.gz &>/dev/null
 
 if [ -e "../../bin/posk.bin" ]; then
         echo "Found kern. using built kern"
@@ -14,6 +14,5 @@ if [ -e "../../bin/posk.bin" ]; then
 	rm stage1
 	rm stage2
 else
-	echo "can't find kern"
-	echo "build tl first"
+	echo "[31mCRITICAL: can't find kern[0m"
 fi
