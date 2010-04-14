@@ -61,5 +61,5 @@ void task_exit () {
     register uint32_t val asm ("eax");
     
     printk("thread exited with value %d\n", val);
-    return;
+    for(;;);
 }
