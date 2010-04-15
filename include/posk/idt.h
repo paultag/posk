@@ -30,25 +30,25 @@ void init_idt ();
 
 // This structure describes one interrupt gate.
 typedef struct {
-  uint16_t base_lo;        // The lower 16 bits of the address to jump to.
-  uint16_t sel;            // Kernel segment selector.
-  uint8_t  always0;        // This must always be zero.
-  uint8_t  flags;          // More flags. See documentation.
-  uint16_t base_hi;        // The upper 16 bits of the address to jump to.
+  uint16_t base_lo;   /**< Lower 16 bits of the addr to jump to.  */
+  uint16_t sel;       /**< Kernel Segment Selector  */
+  uint8_t  always0;   /**< This must always be 0. Fucking stupid */
+  uint8_t  flags;     /**< More flags. Don't ask  */
+  uint16_t base_hi;   /**< Upper 16 bits of the addr to jump to. It's an address sandwich. */
 } __attribute__((packed)) idt_entry_t;
 
 // A pointer structure used for informing the CPU about our IDT.
 typedef struct {
-  uint16_t limit;
-  uint32_t base;           // The address of the first element in our idt_entry_t array.
+  uint16_t limit;  /**< Limit or something  */  
+  uint32_t base;   /**< The address of the first element in our idt_entry_t array. */
 } __attribute__((packed)) idt_ptr_t;
 
 // Structure containing register values when the CPU was interrupted.
 typedef struct {
-  uint32_t ds;             // Data segment selector.
-  uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax; // Pushed by pusha.
-  uint32_t int_no, err_code; // Interrupt number and error code (if applicable).
-  uint32_t eip, cs, eflags, useresp, ss; // Pushed by the processor automatically.
+  uint32_t ds; /**< Data segment selector */
+  uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax; /**< Pushed by pusha.*/
+  uint32_t int_no, err_code; /**< Interrupt number and error code (if applicable). */
+  uint32_t eip, cs, eflags, useresp, ss; /**< Pushed by the processor automatically. */
 } registers_t;
 
 typedef void (*interrupt_handler_t)(registers_t *);
