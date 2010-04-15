@@ -9,6 +9,9 @@
 #include "common.h"
 #include "task.h"
 
+/**
+ * The task linked list object.
+ */
 typedef struct task_list {
   task_t *task;             /**< Composed Bie-otch process. */
   struct task_list *next;   /**< The next goddamn task. Google "Linked List" */

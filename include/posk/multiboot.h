@@ -27,6 +27,9 @@
 #define MULTIBOOT_FLAG_VBE     0x400
 
 
+/**
+ * Multiboot struct that gets pushed to the kernel as one big happy glob
+ */
 typedef struct {
   uint32_t flags;         /**< RTFM */
   uint32_t mem_lower;     /**< RTFM */
@@ -54,6 +57,9 @@ typedef struct {
   uint32_t vbe_interface_len; /**< RTFM */
 } __attribute__((packed)) multiboot_t;
 
+/**
+ * The memory map that gets shoved down our kernel's throat.
+ */
 typedef struct {
   uint32_t size;           /**< RTFM */
   uint32_t base_addr_low;  /**< RTFM */

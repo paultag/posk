@@ -28,7 +28,9 @@
 // IDT initialisation function.
 void init_idt ();
 
-// This structure describes one interrupt gate.
+/**
+ * This structure describes one interrupt gate.
+ */
 typedef struct {
   uint16_t base_lo;   /**< Lower 16 bits of the addr to jump to.  */
   uint16_t sel;       /**< Kernel Segment Selector  */
@@ -37,13 +39,18 @@ typedef struct {
   uint16_t base_hi;   /**< Upper 16 bits of the addr to jump to. It's an address sandwich. */
 } __attribute__((packed)) idt_entry_t;
 
-// A pointer structure used for informing the CPU about our IDT.
+
+/**
+ * A pointer structure used for informing the CPU about our IDT.
+ */
 typedef struct {
   uint16_t limit;  /**< Limit or something  */  
   uint32_t base;   /**< The address of the first element in our idt_entry_t array. */
 } __attribute__((packed)) idt_ptr_t;
 
-// Structure containing register values when the CPU was interrupted.
+/**
+ * Structure containing register values when the CPU was interrupted.
+ */
 typedef struct {
   uint32_t ds; /**< Data segment selector */
   uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax; /**< Pushed by pusha.*/
