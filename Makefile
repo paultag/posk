@@ -5,3 +5,6 @@ all:
 
 docs:
 	@doxygen doc/DocumentCode
+
+run:
+	@cd ./boot/ && bochs -f bochsrc.txt -q
