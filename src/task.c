@@ -6,7 +6,7 @@ uint32_t next_tid = 0;
 static void task_exit();
 
 task_t * init_threading() {
-  task_t * task = kmalloc( sizeof(task_t) );
+  task_t * task = (task_t*)kmalloc( sizeof(task_t) );
   task->tid = next_tid++;
   
   current_task = task;
@@ -25,14 +25,14 @@ int dummy_func(uint32_t iter, uint32_t tid) {
 
 
 task_t * create_dumb_task(uint32_t time, uint32_t * stack) {
-   task_t * task = kmalloc( sizeof(task_t) );
+   task_t * task = (task_t*)kmalloc( sizeof(task_t) );
    memset(task, 0, sizeof(task_t));
    task->tid = next_tid++;
    
    *--stack = task->tid;
    *--stack = time;
    *--stack = (uint32_t)&task_exit;
-   *--stack = &dummy_func;
+   *--stack = (uint32_t)&dummy_func;
    *--stack = 0;
    task->ebp = (uint32_t)stack;
    task->esp = (uint32_t)stack;

@@ -81,7 +81,7 @@ int main(multiboot_t *mboot_ptr) {
     init_scheduler(init_threading());
     
     uint32_t * stack = kmalloc (0x100) + 0xF0;
-    task_t * t = create_dumb_task(10, stack);
+    task_t * t = (task_t*)create_dumb_task(10, stack);
     task_is_ready(t);
     
 /*    uint32_t * stack1 = kmalloc (0x100) + 0xF0;
