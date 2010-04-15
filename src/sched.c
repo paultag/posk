@@ -4,6 +4,7 @@ task_list_t *ready_queue = 0;
 task_list_t *current_task = 0;
 
 void newTask( int time ) {
+    printk("Creating new process for %d length\n", time );
     uint32_t * stack = (uint32_t*) kmalloc (0x100) + 0xF0;
     task_t * t = (task_t*)create_dumb_task(time, stack);
     task_is_ready(t);
