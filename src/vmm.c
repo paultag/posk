@@ -113,9 +113,8 @@ char get_mapping (uint32_t va, uint32_t *pa) {
 void page_fault (registers_t *regs) {
   uint32_t cr2;
   asm volatile ("mov %%cr2, %0" : "=r" (cr2));
-
   printk ("Page fault at 0x%x, faulting address 0x%x\n", regs->eip, cr2);
   printk ("Error code: %x\n", regs->err_code);
-  panic ("PAGE FAULT");
+  panic ("Page Fault! We don't know how to handle this yet.");
   for (;;) ;
 }

@@ -4,11 +4,11 @@
 #include "common.h"
 
 typedef struct {
-    uint32_t state;
-    uint32_t resources;
-    uint32_t esp,ebp,ebx,esi,edi;
-    uint32_t tid;                 // task ID
-    uint8_t  prior;               // priority
+    uint32_t state;   /**< State of the running process ( bitmask ) */  
+    uint32_t resources;  /**< What resources this task needs ( bitmask ) */  
+    uint32_t esp,ebp,ebx,esi,edi;  /**< CPU State */  
+    uint32_t tid; /**< Task ID */  
+    uint8_t  prior;  /**< Priority */  
 } task_t;
 
 #endif

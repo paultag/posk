@@ -16,8 +16,7 @@ static void timer_callback(registers_t * regs) {
     schedule();
 }
 
-void init_timer(uint32_t freq)
-{
+void init_timer(uint32_t freq) {
     // Firstly, register our timer callback.
     register_interrupt_handler(IRQ0, &timer_callback);
 

@@ -80,7 +80,7 @@ int main(multiboot_t *mboot_ptr) {
     
     init_scheduler(init_threading());
 
-    panic("FUUUUUU");
+    panic("Let's not start the kernel just yet.");
     
     uint32_t * stack = kmalloc (0x100) + 0xF0;
     task_t * t = (task_t*)create_dumb_task(200, stack);
