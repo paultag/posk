@@ -8,3 +8,6 @@ docs:
 
 run:
 	@cd ./boot/ && bochs -f bochsrc.txt -q
+
+clean:
+	@cd src && make clean

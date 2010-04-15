@@ -23,5 +23,5 @@ link:
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 .s.o:
-	@echo "[33m $< [0m"
+	@echo "[33m Building: $< [0m"
 	@$(ASM) $(ASFLAGS) $<
