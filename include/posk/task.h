@@ -3,6 +3,9 @@
 
 #include "common.h"
 
+/**
+ * Holds task data about things, and stuff.
+ */
 typedef struct {
     uint32_t state;      /**< State of the running process ( bitmask ) */  
     uint32_t resources;  /**< What resources this task needs ( bitmask ) */  
