@@ -1,3 +1,5 @@
+CC=gcc
+ASM=nasm
 INC=../include/
 BIN=../bin/
 
@@ -13,10 +15,13 @@ clean:
 	@-rm *.o $(BIN)posk.bin
 
 link:
-	@echo -n "Linking..."
+	@echo "[33mLinking to posk.bin[0m"
 	@ld $(LDFLAGS) -o $(BIN)posk.bin $(SOURCES)
-	@echo "   [ OK! ]"
+
+.c.o:
+	@echo "[33m Building: $< ( $@ ) [0m"
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 .s.o:
-	@nasm $(ASFLAGS) $<
-
+	@echo "[33m $< [0m"
+	@$(ASM) $(ASFLAGS) $<

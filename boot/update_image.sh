@@ -5,3 +5,6 @@ sudo mount /dev/loop0 /mnt
 sudo cp ../bin/posk.bin /mnt/kernel
 sudo umount /dev/loop0
 sudo /sbin/losetup -d /dev/loop0
+
+echo "[33mFloppy image built[0m"
+
