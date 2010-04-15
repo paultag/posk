@@ -1,3 +1,5 @@
-boot: floppy
-floppya: 1_44="floppy.img", status=inserted
+floppya: 1_44=floppy.img, status=inserted
+boot: a
+log: bochsout.txt
+mouse: enabled=0
 magic_break: enabled=1
