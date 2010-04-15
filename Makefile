@@ -1,4 +1,5 @@
 all:
+	@cd cherrytree && make
 	@cd src && make clean
 	@cd src && make
 	@cd boot && make
@@ -11,3 +12,4 @@ run:
 
 clean:
 	@cd src && make clean
+	@cd cherrytree && make clean

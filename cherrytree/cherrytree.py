@@ -7,6 +7,9 @@ try:
 except:
 	import simplejson as json
 
+def createProcess( name, time ):
+	print "newTask( " + time + " );"
+
 def readConfig( path ):
 	try:
 		file = open( path, 'r')
@@ -21,4 +24,4 @@ for f in os.listdir(dirname):
 	active = dirname + "/" + f
 	if os.path.isfile( active ):
 		data = readConfig( active )
-		print "Using process `" + data['name'] + "` ( expected run of " + data['time'] + " units )"
+		createProcess( data['name'], data['time'] )

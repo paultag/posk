@@ -40,6 +40,12 @@
 #include <posk/slab.h>
 #include <posk/task.h>
 
+
+void init_processes() {
+    #include "../cherrytree/posk-c-process-init.c"
+}
+
+
 /**
  * Main method of the kernel, totally sweet.
  * @param mboot_ptr multiboot params
@@ -79,13 +85,11 @@ int main(multiboot_t *mboot_ptr) {
     asm volatile("sti");
     
     init_scheduler(init_threading());
+    init_processes();
+
 
     panic("Let's not start the kernel just yet.");
-    
-    uint32_t * stack = kmalloc (0x100) + 0xF0;
-    task_t * t = (task_t*)create_dumb_task(200, stack);
-    task_is_ready(t);
-    
+
     /*
      * uint32_t * stack1 = kmalloc (0x100) + 0xF0;
      * task_t * t1 = create_dumb_task(8, stack1);
