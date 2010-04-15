@@ -1,3 +1,8 @@
+/**
+ * Sets up the POSK McDonnell-Tagliamonte algorithm. 
+ * @file slab.h
+ */
+
 #ifndef HEAP_H
 #define HEAP_H
 

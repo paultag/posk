@@ -1,3 +1,8 @@
+/**
+ * Sets up the multiboot spec to make our kenrel bootable
+ * @file multiboot.h
+ */
+
 #ifndef MULTIBOOT_H_
 #define MULTIBOOT_H_ MAYBE
 

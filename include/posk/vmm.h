@@ -1,7 +1,8 @@
-//
-// vmm.h -- Defines the interface for and structures relating to paging and virtual memory management.
-//          Written for JamesM's kernel development tutorials.
-//
+/**
+ * Defines the interface for and structures relating to paging and virtual memory management.
+ * From JamesM's Kernel
+ * @file vmm.h
+ */
 
 #ifndef VMM_H_
 #define VMM_H_ WORD

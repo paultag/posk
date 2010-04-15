@@ -1,5 +1,8 @@
-// common.h -- Defines typedefs and some global functions.
-//             From JamesM's kernel development tutorials.
+/**
+ * Defines typedefs and some global functions
+ * This is from JamesM's Kernel. 
+ * @file common.h
+ */
 
 #ifndef COMMON_H_
 #define COMMON_H_ FOOBAR

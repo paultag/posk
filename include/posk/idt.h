@@ -1,3 +1,8 @@
+/**
+ * The header that specs out idt.c. This is bad.
+ * @file idt.h
+ */
+
 #ifndef IDT_H_
 #define IDT_H_ YES
 

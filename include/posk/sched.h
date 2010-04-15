@@ -1,3 +1,8 @@
+/**
+ * Kernel schedule stuff
+ * @file sched.h
+ */
+
 #ifndef SCHED_H_
 #define SCHED_H_
 

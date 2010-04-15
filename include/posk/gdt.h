@@ -1,12 +1,14 @@
+/**
+ * Sets up the global descriptor table
+ * @file gdt.h
+ */
+
 #ifndef GDT_H_
 #define GDT_H_ YUP
-
-
 
 #include "common.h"
 
 void init_gdt();
-
 
 // This structure contains the value of one GDT entry.
 // We use the attribute 'packed' to tell GCC not to change

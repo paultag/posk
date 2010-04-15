@@ -79,18 +79,18 @@ int main(multiboot_t *mboot_ptr) {
     asm volatile("sti");
     
     init_scheduler(init_threading());
+
+    panic("FUUUUUU");
     
     uint32_t * stack = kmalloc (0x100) + 0xF0;
-    task_t * t = (task_t*)create_dumb_task(10, stack);
+    task_t * t = (task_t*)create_dumb_task(200, stack);
     task_is_ready(t);
     
-/*    uint32_t * stack1 = kmalloc (0x100) + 0xF0;
-    task_t * t1 = create_dumb_task(8, stack1);
-    task_is_ready(t1); */
-    
-    
-    panic("panic");
-    
+    /*
+     * uint32_t * stack1 = kmalloc (0x100) + 0xF0;
+     * task_t * t1 = create_dumb_task(8, stack1);
+     * task_is_ready(t1);
+     */
 
     for(;;);
     

@@ -1,5 +1,8 @@
-// monitor.h -- Defines the interface for monitor.h
-//              From JamesM's kernel development tutorials.
+/**
+ * Defines the interface for monitor stuff.
+ * This is from JamesM's Kernel
+ * @file monitor.h
+ */
 
 #ifndef MONITOR_H
 #define MONITOR_H

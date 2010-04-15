@@ -1,3 +1,8 @@
+/**
+ * Sets up the interface for the timer
+ * @file timer.h
+ */
+
 #ifndef TIMER_H_
 #define TIMER_H_ BOBOBOB
 

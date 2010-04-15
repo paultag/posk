@@ -1,5 +1,5 @@
 /**
- * Basic string routine 
+ * Basic string routines
  * @file string.h
  */
 

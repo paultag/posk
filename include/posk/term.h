@@ -1,7 +1,7 @@
 /**
-   * Terminal I/O Header declarations 
-   * @file term.h
-   */
+ * Terminal I/O Header declarations 
+ * @file term.h
+ */
 
   #ifndef TERM_H_
   #define TERM_H_ FOO
