@@ -5,7 +5,7 @@ BIN=../bin/
 
 SOURCES=boot_s.o gdt_s.o idt_s.o posk.o common.o gdt.o idt.o monitor.o panic.o vsprintf.o timer.o pmm.o vmm.o slab.o task.o sched.o
 
-CFLAGS=-O2 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -I$(INC) -I/usr/lib/gcc/i486-linux-gnu/4.4/include/
+CFLAGS=-O2 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -I$(INC)
 LDFLAGS=-Tlink.ld
 ASFLAGS=-felf
 
