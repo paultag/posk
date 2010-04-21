@@ -2,6 +2,7 @@ import CherryTree.CherryTreeGlobals
 import CherryTree.PoskBridge
 
 import os
+import sys
 
 class CherryTree:
 
@@ -16,6 +17,6 @@ class CherryTree:
 					global RESOURCE
 					PoskBridge.createProcess( data['time'], rMask, data['priority'] )
 				except KeyError as e:
-					print "\n** Critical Error **\nMalformed config file. Check `" + active + "`"
-					exit
+					sys.stderr.write( "\n** Critical Error **\nMalformed config file. Check `" + active + "`\n\n" )
+					sys.exit(-1)
 

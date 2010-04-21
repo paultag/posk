@@ -38,7 +38,8 @@ parser.add_option(
 
 if options.version:
 	print CherryTree.CherryTreeGlobals.CHERRYTREE_STRING
-	exit
+	sys.exit(0)
+
 
 if options.debug:
 	print "// Enable debugging mode. It's on."
@@ -48,4 +49,5 @@ if options.debug:
 
 cc = CherryTree.CherryTree()
 cc.compileProcesses( "./processes" )
+
 
