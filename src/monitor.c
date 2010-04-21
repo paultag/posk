@@ -12,6 +12,14 @@ uint16_t *video_memory = (uint16_t *)0xB8000;
 uint8_t cursor_x = 0;
 uint8_t cursor_y = 0;
 
+
+/** 
+ * Enable debugging
+ */
+void debugging_mode() {
+  debug = 1;
+}
+
 /** 
  * update the cursor
  */
@@ -208,10 +216,11 @@ void monitor_write_dec(uint32_t n) {
 }
 
 /** 
- * Print a string to the screen, kernel style
+ * Print a string to the screen, kernel style, when not debugging
  * @param fmt format 
  */
 void printk (const char * fmt, ...) {
+  if ( debug == 0 ) {
     static char buf [1024];
     va_list args;
     int i;
@@ -223,4 +232,25 @@ void printk (const char * fmt, ...) {
     buf[i] = '\0';
     
     monitor_write(buf);
+  }
+}
+
+/** 
+ * Print a string to the screen, kernel style, when debugging
+ * @param fmt format 
+ */
+void d_printk (const char * fmt, ...) {
+  if ( debug == 1 ) {
+    static char buf [1024];
+    va_list args;
+    int i;
+    
+    va_start(args, fmt);
+    i = vsprintf(buf, fmt, args);
+    va_end(args);
+    
+    buf[i] = '\0';
+    
+    monitor_write(buf);
+  }
 }

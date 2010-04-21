@@ -53,8 +53,10 @@ void init_processes() {
  * @vorsicht
  */
 int main(multiboot_t *mboot_ptr) {
-    
     monitor_clear();
+    
+    debug = 0; // turn off debugging by default
+    
     init_gdt();
     init_idt();
     init_timer(50);

@@ -9,6 +9,9 @@
 
 #include <posk/common.h>
 
+
+uint8_t debug;
+
 // Write a single character out to the screen.
 void monitor_put(char c);
 
@@ -20,5 +23,6 @@ void monitor_write(char *c);
 
 void printk (const char *fmt, ...);
 
+void debugging_mode();
 
 #endif // MONITOR_H
