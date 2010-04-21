@@ -15,7 +15,10 @@ typedef struct {
     uint32_t esi;        /**< CPU State, G.P. Register */  
     uint32_t edi;        /**< CPU State, G.P. Register */  
     uint32_t tid;        /**< Task ID */  
-    uint8_t  prior;      /**< Priority */  
+    uint8_t  prior;      /**< Priority */
 } task_t;
+
+task_t * create_dumb_task(int32_t time, uint32_t pnumber, uint32_t * stack);
+
 
 #endif

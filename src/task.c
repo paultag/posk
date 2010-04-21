@@ -4,6 +4,7 @@ task_t * current_task;
 uint32_t next_tid = 0;
 
 static void task_exit();
+static void sleep_exit();
 
 task_t * init_threading() {
   task_t * task = (task_t*)kmalloc( sizeof(task_t) );
@@ -15,7 +16,6 @@ task_t * init_threading() {
 }
 
 int dummy_func(uint32_t iter, uint32_t tid) {
-  printk("in dummy_func\n");
   while(iter > 0) {
 	printk("exec tid %d\n", tid);
 	iter--;
@@ -23,16 +23,38 @@ int dummy_func(uint32_t iter, uint32_t tid) {
     return 0;
 }
 
+int ksleep_func(uint32_t time) {
+    while(time > 0) {
+	printk("sleeping\n");
+	time--;
+    }
+    return 0;
+}
 
-task_t * create_dumb_task(uint32_t time, uint32_t * stack) {
+task_t * create_dumb_task(int32_t time, uint32_t pnumber, uint32_t * stack) {
    task_t * task = (task_t*)kmalloc( sizeof(task_t) );
    memset(task, 0, sizeof(task_t));
    task->tid = next_tid++;
    
-   *--stack = task->tid;
+   *--stack = pnumber;
    *--stack = time;
    *--stack = (uint32_t)&task_exit;
    *--stack = (uint32_t)&dummy_func;
+   *--stack = 0;
+   task->ebp = (uint32_t)stack;
+   task->esp = (uint32_t)stack;
+   
+   return task;
+}
+
+task_t * ksleep(int32_t time, uint32_t * stack) {
+   task_t * task = (task_t*)kmalloc( sizeof(task_t) );
+   memset(task, 0, sizeof(task_t));
+   task->tid = next_tid++;
+   
+   *--stack = time;
+   *--stack = (uint32_t)&sleep_exit;
+   *--stack = (uint32_t)&ksleep_func;
    *--stack = 0;
    task->ebp = (uint32_t)stack;
    task->esp = (uint32_t)stack;
@@ -57,9 +79,14 @@ void switch_task(task_t * next) {
   asm volatile ("mov %0, %%ebp" : : "r" (next->ebp));
 }
 
-void task_exit () {
+void task_exit() {
     register uint32_t val asm ("eax");
-    
     printk("thread exited with value %d\n", val);
+    for(;;);
+}
+
+void sleep_exit() {
+    register uint32_t val asm ("eax");
+    printk("done sleeping\n");
     for(;;);
 }
