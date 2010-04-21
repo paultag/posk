@@ -3,6 +3,7 @@
 	"priority"  : 5,
     "resources" : {
         "ssd"   : "Yes",
-		"nic"   : "Yes"
+		"nic"   : "Yes",
+		"re3"   : "No"
     }
 }
