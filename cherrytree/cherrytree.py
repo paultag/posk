@@ -7,8 +7,13 @@ try:
 except:
 	import simplejson as json
 
-def createProcess( name, time ):
-	print "newTask( " + time + " );"
+current_pid = 0;
+
+def createProcess( time, resources, priority ):
+	global current_pid
+	current_pid += 1
+	# Pid, Time, Resources, Priority
+	print "newTask( " + str(current_pid) + ", " + str(time) + ", " + str(resources) + ", " + str(priority) + " );"
 
 def readConfig( path ):
 	try:
@@ -26,7 +31,8 @@ for f in os.listdir(dirname):
 		try:
 			data = readConfig( active )
 			resources = data['resources']
-			createProcess( "Process", data['time'] )
+			rMask = 0 # ToDo: Fixme
+			createProcess( data['time'], rMask, data['priority'] )
 		except KeyError as e:
 			print "Malformed config file. Check " + active
 
