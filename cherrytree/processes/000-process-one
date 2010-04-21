@@ -1,4 +1,7 @@
 {
-    "name"  : "Process One",
-    "time"  : "200"
+    "time"      : "200",
+    "resources" : {
+        "ssd"   : "Yes",
+		"nic"   : "Yes"
+    }
 }

@@ -23,5 +23,10 @@ dirname = "./processes"
 for f in os.listdir(dirname):
 	active = dirname + "/" + f
 	if os.path.isfile( active ):
-		data = readConfig( active )
-		createProcess( data['name'], data['time'] )
+		try:
+			data = readConfig( active )
+			resources = data['resources']
+			createProcess( "Process", data['time'] )
+		except KeyError as e:
+			print "Malformed config file. Check " + active
+
