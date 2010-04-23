@@ -13,8 +13,11 @@ CHERRYTREE_COPYRIGHT_DATE  = "2010"
 CHERRYTREE_STRING = CHERRYTREE + " v" + CHERRYTREE_VERSION + " ( " + CHERRYTREE_NAME + " ) Copyright " + CHERRYTREE_COPYRIGHT_DATE + " (c) GPLv3.\n\nWritten by: " + CHERRYTREE_COPYRIGHT_NAME + ".\nAdvised by: " + CHERRYTREE_COPYRIGHT_PROF + " ( " + CHERRYTREE_COPYRIGHT_ORG + " )."
 
 
-DEBUGGING = 0;
+SOURCE_CODE_INIT  = "init.posk"
+SOURCE_CODE_KILL  = "finish.posk"
+SOURCE_CODE_PANIC = "panic.posk"
 
+DEBUGGING = 0;
 
 def readConfig( path ):
 	try:

@@ -42,7 +42,8 @@
 
 
 void init_processes() {
-    #include "../cherrytree/posk-c-process-init.c"
+    // CHERRY_TREE FLAG
+    #include "../cherrytree/src/posk-c-process-init.c"
 }
 
 

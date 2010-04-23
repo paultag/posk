@@ -1,5 +1,5 @@
 all:
 	@echo "[33mCreating process file ([31mCHERYTREE[33m)[0m"
-	@./cherrytree.py -d > posk-c-process-init.c
+	@./cherrytree.py -d > src/posk-c-process-init.c
 clean:
-	@rm -f posk-c-process-init.c
+	@rm -f src/posk-c-process-init.c

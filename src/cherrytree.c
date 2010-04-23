@@ -21,9 +21,9 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   } else {
       ct_task_t * iter = task_ll_head;
       while(iter->next) {
-	 iter = iter->next;
+		iter = ( ct_task_t * ) iter->next;
       }
-      iter->next = task;
+      iter->next = ( void * ) task;
   }
   
 }
@@ -31,7 +31,7 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
 void runTaskFor(uint32_t pnumber, int32_t timeunits) {
     ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
-      iter = iter->next;
+      iter = ( ct_task_t * ) iter->next;
     }
     if(iter->remaining_timeunits < timeunits && iter->remaining_timeunits > 0) {
 	newKTask(iter->remaining_timeunits, pnumber);
@@ -45,7 +45,7 @@ void runTaskFor(uint32_t pnumber, int32_t timeunits) {
 void runTaskTillEnd(uint32_t pnumber) {
     ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
-      iter = iter->next;
+      iter = ( ct_task_t * ) iter->next;
     }
     if(iter->remaining_timeunits > 0) {
       newKTask(iter->remaining_timeunits, pnumber);

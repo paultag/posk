@@ -34,6 +34,17 @@ parser.add_option(
         help    = "Version of CherryTree"
 )
 
+parser.add_option(
+	"-p",
+	"--process-dir",
+	action    = "store",
+	type      = "string",
+	default   = "./processes/",
+	dest      = "process_path",
+        help      = "Use this folder for the JSON process defaults"
+)
+
+
 (options, args) = parser.parse_args()
 
 if options.version:
@@ -48,6 +59,6 @@ if options.debug:
 
 
 cc = CherryTree.CherryTree()
-cc.compileProcesses( "./processes" )
+cc.compileProcesses( options.process_path )
 
 
