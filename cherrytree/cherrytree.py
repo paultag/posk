@@ -53,7 +53,6 @@ if options.version:
 
 
 if options.debug:
-	print "// Enable debugging mode. It's on."
 	print "debugging_mode();";
 	CherryTree.CherryTreeGlobals.DEBUGGING = 1
 
