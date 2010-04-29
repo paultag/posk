@@ -90,8 +90,7 @@ int main(multiboot_t *mboot_ptr) {
     init_scheduler(init_threading());
     init_processes();
 
-
-    panic("Let's not start the kernel just yet.");
+    #include "../cherrytree/src/kinit.posk"
 
     /*
      * uint32_t * stack1 = kmalloc (0x100) + 0xF0;
