@@ -54,18 +54,18 @@ void init_processes() {
  * @vorsicht
  */
 int main(multiboot_t *mboot_ptr) {
-    monitor_clear();
+  monitor_clear();
     
-    debug = 0; // turn off debugging by default
-    
-    init_gdt();
-    init_idt();
-    init_timer(50);
-    init_pmm(mboot_ptr->mem_upper);
-    init_vmm();
-    init_heap();
-    
-      // Find all the usable areas of memory and inform the physical memory manager about them.
+  debug = 0; // turn off debugging by default
+
+  init_gdt();
+  init_idt();
+  init_timer(50);
+  init_pmm(mboot_ptr->mem_upper);
+  init_vmm();
+  init_heap();
+
+   // Find all the usable areas of memory and inform the physical memory manager about them.
   uint32_t i = mboot_ptr->mmap_addr;
   while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length) {
     mmap_entry_t *me = (mmap_entry_t*) i;
@@ -100,5 +100,6 @@ int main(multiboot_t *mboot_ptr) {
 
     for(;;);
     
-    return 0xBADD00D;
+    return 0xDEADBEEF;
 }
+
