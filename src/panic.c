@@ -14,8 +14,6 @@ extern tick;
  */
 void panic (const char *msg) {
   asm volatile("cli"); //<-- this fucking broke everything
-  printk("*** SYSTEM PANIC ***\n");
-  printk("Error: %s\n", msg);
-  printk("Ticks: %d\n", tick );
+  #include "../cherrytree/src/panic.posk"
   for( ;; );
 }

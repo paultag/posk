@@ -3,7 +3,7 @@ all:
 	@cd src && make clean
 	@cd src && make
 	@cd boot && make
-
+	@make clean
 docs:
 	@doxygen doc/DocumentCode
 

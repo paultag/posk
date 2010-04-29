@@ -60,20 +60,6 @@ void task_not_ready (task_t *t)
 
 void schedule ()
 {
-  if (!ready_queue) return;
-
-  // Iterate through the ready queue to the end.
-  task_list_t *iterator = ready_queue;
-  while (iterator->next)
-    iterator = iterator->next;
-
-  // Add the old task to the end of the queue, and remove it from the start.
-  iterator->next = current_task;
-  current_task = ready_queue;
-
-  ready_queue = ready_queue->next;
-
-  // Switch to the new task.
-  switch_task (current_task->task);
+  #include "../cherrytree/src/sched.posk"
 }
 
