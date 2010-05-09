@@ -61,7 +61,17 @@ class TutorialTextEditor:
         resources["reC"] = resourceC.get_active()
 
 
-        print json.dumps(output, sort_keys=True, indent=4)
+        file_output = json.dumps(output, sort_keys=True, indent=4)
+
+        file_write  = self.builder.get_object("InterfaceFile")
+        file_target = file_write.get_text()
+
+        if file_target != "" :
+             f = open( './processes/' + file_target, 'w')
+             f.write( file_output )
+             print "Wrote to: " + file_target 
+        else:
+            print "Not writing a file! Nothing in the process bar!"
 
     def __init__(self):
         self.builder = gtk.Builder()

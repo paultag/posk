@@ -111,6 +111,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="invisible_char">&#x2022;</property>
+                    <property name="text" translatable="yes">default-process</property>
                     <property name="primary_icon_stock">gtk-file</property>
                   </object>
                   <packing>
