@@ -16,5 +16,6 @@ typedef struct {
 } ct_task_t;
 
 ct_task_t * current_task_ll_head();
+void doNothing(uint32_t timeunits, uint32_t pnumber);
 
 #endif
