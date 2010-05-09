@@ -1,8 +1,8 @@
 {
-    "time"      : "100",
+	"time"      : "100",
 	"priority"  : 5,
-    "resources" : {
-        "ssd"   : "Yes",
+	"resources" : {
+		"ssd"   : "Yes",
 		"nic"   : "Yes"
-    }
+	}
 }

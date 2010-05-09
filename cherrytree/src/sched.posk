@@ -1,6 +1,7 @@
 if (!ready_queue) return;
 
 // Iterate through the ready queue to the end.
+
 task_list_t *iterator = ready_queue;
 while (iterator->next)
   iterator = iterator->next;
