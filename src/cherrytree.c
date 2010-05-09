@@ -5,11 +5,9 @@
 
 ct_task_t * task_ll_head = 0;
 ct_task_t * valid_task_ll_head = 0;
-static void newKTask(uint32_t time, uint32_t pnumber);
 static uint32_t counter = 0;
 
 void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority, uint32_t start_time) {  
-  printk("newTask: making pnumber %d\n", pnumber);
   ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t));
   
   task->pnumber = pnumber;
@@ -18,6 +16,7 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   task->resources = resources;
   task->priority = priority;
   task->start_time = start_time;
+  task->end_time = -1;
   task->next = 0;
   
   if(task_ll_head == 0) {
@@ -29,14 +28,15 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
       }
       iter->next = task;
   }
-  
-  printk("newTask: done making pnumber %d\n", pnumber);
-  
-  
+
 }
 
 void runTaskFor(uint32_t pnumber, int32_t timeunits) {
-    ct_task_t * iter = task_ll_head;
+  if(pnumber == 0) {
+    counter++;
+    return;
+    }  
+  ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
       iter = ( ct_task_t * ) iter->next;
     }
@@ -50,6 +50,10 @@ void runTaskFor(uint32_t pnumber, int32_t timeunits) {
 }
 
 void runTaskTillEnd(uint32_t pnumber) {
+    if(pnumber == 0) {
+    counter++;
+    return;
+    }
     ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
       iter = ( ct_task_t * ) iter->next;
@@ -63,6 +67,7 @@ void runTaskTillEnd(uint32_t pnumber) {
 void doNothing(uint32_t timeunits, uint32_t pnumber) {
     while(timeunits > 0) {
 	printk("executing pnumber %d\n", pnumber);
+	counter++;
 	timeunits--;
     }
 }
@@ -81,6 +86,7 @@ void set_valid_tasks() {
 	    task->resources = iter->resources;
 	    task->priority = iter->priority;
 	    task->start_time = iter->start_time;
+	    task->end_time = -1;
 	    task->next = 0;
 	    
 	    if(valid_task_ll_head == 0) {
@@ -105,7 +111,6 @@ void ct_scheduler() {
     ct_task_t * iter = valid_task_ll_head;
 
     while(iter) {
-        
 	if(shortest_seen == 0 || shortest_seen > iter->remaining_timeunits) {
 	    shortest_seen = iter->remaining_timeunits;
 	    pnumber_to_run = iter->pnumber;
@@ -113,12 +118,5 @@ void ct_scheduler() {
 	iter = iter->next;
     }
     
-    if(pnumber_to_run != 0) {
-        runTaskFor(pnumber_to_run, 4);
-	counter += 4;
-	//printk("   %d\n", counter);
-    } else {
-	counter++;
-    }
-    
+    runTaskFor(pnumber_to_run, 4);
 }
