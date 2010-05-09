@@ -24,9 +24,9 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   } else {
       ct_task_t * iter = task_ll_head;
       while(iter->next != 0) {
-	  iter = iter->next;
+	  iter = (ct_task_t *) iter->next;
       }
-      iter->next = task;
+      iter->next = (void *) task;
   }
 
 }
@@ -70,6 +70,7 @@ void doNothing(uint32_t timeunits, uint32_t pnumber) {
 	counter++;
 	timeunits--;
     }
+    return;
 }
 
 void set_valid_tasks() {
@@ -93,12 +94,12 @@ void set_valid_tasks() {
 		valid_task_ll_head = task;
 	    } else {
 		ct_task_t * v_iter = valid_task_ll_head;
-		while(v_iter->next) v_iter = v_iter->next;
-		v_iter->next = task;
+		while(v_iter->next) v_iter = (ct_task_t *) v_iter->next;
+		v_iter->next = (void *)task;
 	    }
 	}
       
-	iter = iter->next;
+	iter = (ct_task_t *)iter->next;
     }
 }
 
@@ -115,7 +116,7 @@ void ct_scheduler() {
 	    shortest_seen = iter->remaining_timeunits;
 	    pnumber_to_run = iter->pnumber;
 	}
-	iter = iter->next;
+	iter = (ct_task_t *)iter->next;
     }
     
     runTaskFor(pnumber_to_run, 4);
