@@ -1,15 +1,15 @@
-    uint32_t shortest_seen = 0;
-    uint32_t pnumber_to_run = 0;
-    
-    ct_task_t * iter = (ct_task_t * )valid_task_ll_head;
+uint32_t shortest_seen = 0;
+uint32_t pnumber_to_run = 0;
 
-    while(iter) {
+ct_task_t * iter = (ct_task_t * ) valid_task_ll_head;
+
+while(iter) {
 	if(shortest_seen == 0 || shortest_seen > iter->remaining_timeunits) {
-	    shortest_seen = iter->remaining_timeunits;
-	    pnumber_to_run = iter->pnumber;
+	shortest_seen = iter->remaining_timeunits;
+	pnumber_to_run = iter->pnumber;
 	}
 	iter = (ct_task_t *)iter->next;
-    }
-    
-    runTaskFor(pnumber_to_run, 4);
+}
+
+runTaskFor(pnumber_to_run, 4);
 

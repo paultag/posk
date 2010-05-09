@@ -17,13 +17,10 @@ void task_is_ready (task_t *t) {
   item->task = t;
   item->next = 0;
 
-  if (!ready_queue)
-  {
+  if (!ready_queue) {
     // Special case if the ready queue is empty.
     ready_queue = item;
-  }
-  else
-  {
+  } else {
     // Iterate through the ready queue to the end.
     task_list_t *iterator = ready_queue;
     while (iterator->next)
@@ -34,8 +31,7 @@ void task_is_ready (task_t *t) {
   }
 }
 
-void task_not_ready (task_t *t)
-{
+void task_not_ready (task_t *t) {
   // Attempt to find the task in the ready queue.
   task_list_t *iterator = ready_queue;
 
@@ -59,8 +55,7 @@ void task_not_ready (task_t *t)
   }
 }
 
-void schedule ()
-{
+void schedule () {
   set_valid_tasks();
   extern valid_task_ll_head;
 
