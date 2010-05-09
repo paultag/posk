@@ -8,7 +8,7 @@ typedef struct {
     int32_t total_timeunits; // signed integer used to eventually support time travel
     int32_t remaining_timeunits;
     uint16_t resources;
-    uint16_t priority;
+    int16_t priority;
     
     struct ct_task_t * next;
 } ct_task_t;

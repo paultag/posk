@@ -39,11 +39,13 @@
 #include <posk/vmm.h>
 #include <posk/slab.h>
 #include <posk/task.h>
+#include <posk/cherrytree.h>
 
 
 void init_processes() {
-    // CHERRY_TREE FLAG
+ /*   // CHERRY_TREE FLAG
     #include "../cherrytree/src/posk-c-process-init.c"
+    */
 }
 
 
@@ -90,13 +92,23 @@ int main(multiboot_t *mboot_ptr) {
     init_scheduler(init_threading());
     init_processes();
 
+    /*
     #include "../cherrytree/src/kinit.posk"
+    */
 
     /*
      * uint32_t * stack1 = kmalloc (0x100) + 0xF0;
      * task_t * t1 = create_dumb_task(8, stack1);
      * task_is_ready(t1);
      */
+    
+    newTask(1, 2, 0x0, 2);
+    newTask(2, 4, 0x0, 2);
+    newTask(3, 6, 0x0, 2);
+    printk("\n\n");
+    runTaskTillEnd(1);
+    runTaskTillEnd(2);
+    runTaskTillEnd(3);
 
     for(;;);
     

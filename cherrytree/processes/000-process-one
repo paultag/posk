@@ -2,7 +2,7 @@
     "time"      : "100",
 	"priority"  : 5,
     "resources" : {
-        "ssd"   : "Yes",
+		"ssd"   : "Yes",
 		"nic"   : "Yes",
 		"re3"   : "No"
     }

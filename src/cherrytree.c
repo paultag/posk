@@ -6,8 +6,9 @@
 ct_task_t * task_ll_head = 0;
 static void newKTask(uint32_t time, uint32_t pnumber);
 
-void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority) {
-  ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t *));
+void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority) {  
+  printk("newTask: making pnumber %d\n", pnumber);
+  ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t));
   
   task->pnumber = pnumber;
   task->total_timeunits = total_timeunits;
@@ -16,15 +17,18 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   task->priority = priority;
   task->next = 0;
   
-  if(!task_ll_head) {
+  if(task_ll_head == 0) {
       task_ll_head = task;
   } else {
       ct_task_t * iter = task_ll_head;
-      while(iter->next) {
-		iter = ( ct_task_t * ) iter->next;
+      while(iter->next != 0) {
+	  iter = iter->next;
       }
-      iter->next = ( void * ) task;
+      iter->next = task;
   }
+  
+  printk("newTask: done making pnumber %d\n", pnumber);
+  
   
 }
 
@@ -60,7 +64,7 @@ void sleep(uint32_t timeunits) {
 }
 
 void newKTask(uint32_t time, uint32_t pnumber) {
-    //printk("Creating new process for %d length\n", time );
+    printk("KTASK: Creating new process %d for length %d\n", pnumber, time );
     uint32_t * stack = (uint32_t*) kmalloc (0x100) + 0xF0;
     task_t * t = (task_t *)create_dumb_task(time, pnumber, stack);
     task_is_ready(t);
