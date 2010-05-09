@@ -42,12 +42,6 @@
 #include <posk/cherrytree.h>
 
 
-void init_processes() {
- /*   // CHERRY_TREE FLAG
-    #include "../cherrytree/src/posk-c-process-init.c"
-    */
-}
-
 
 /**
  * Main method of the kernel, totally sweet.
@@ -90,25 +84,10 @@ int main(multiboot_t *mboot_ptr) {
     asm volatile("sti");
     
     init_scheduler(init_threading());
-    init_processes();
-
-    /*
-    #include "../cherrytree/src/kinit.posk"
-    */
-
-    /*
-     * uint32_t * stack1 = kmalloc (0x100) + 0xF0;
-     * task_t * t1 = create_dumb_task(8, stack1);
-     * task_is_ready(t1);
-     */
     
-    newTask(1, 30, 0x0, 2, 0);
-    newTask(2, 6, 0x0, 2, 2);
-    newTask(3, 3, 0x0, 2, 5);
-    newTask(4, 12, 0x0, 2, 5);
-    newTask(5, 1, 0x0, 2, 10);
-    newTask(6, 10, 0x0, 2, 30);
-    
+    #include "../cherrytree/src/kinit.posk"   
+    #include "../cherrytree/src/posk-c-process-init.c"
+
 
     for(;;);
     
