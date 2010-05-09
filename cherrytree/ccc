@@ -39,7 +39,7 @@ parser.add_option(
 	"--process-dir",
 	action    = "store",
 	type      = "string",
-	default   = "./processes/",
+	default   = "./processes",
 	dest      = "process_path",
         help      = "Use this folder for the JSON process defaults"
 )
