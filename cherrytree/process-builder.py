@@ -14,20 +14,21 @@ class TutorialTextEditor:
         self.about.show()
     def on_About_close( self, widget, data=None ):
         self.about.close()
+    def on_ProcessRuntime_value_changed( self, widget, data=None ):
+        print "Kickass"
     def on_Write_activate( self, widget, data=None ):
-        runtime  = self.builder.get_object("ProcessRuntime")
-        priority = self.builder.get_object("ProcessPriority")
-        start    = self.builder.get_object("ProcessStart")
-
-        print runtime.get_value()
-        print priority.get_value()
-        print start.get_value()
+        print self.runtime.get_value()
+        print self.priority.get_value()
+        print self.start.get_value()
 
     def __init__(self):
         self.builder = gtk.Builder()
         self.builder.add_from_file("./resources/Interface.glade") 
         
         self.window = self.builder.get_object("Interface")
+        self.start    = self.builder.get_object("ProcessStart")
+        self.priority = self.builder.get_object("ProcessPriority")
+        self.runtime  = self.builder.get_object("ProcessRuntime")
         self.builder.connect_signals(self)       
 
 if __name__ == "__main__":
