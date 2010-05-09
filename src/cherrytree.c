@@ -4,9 +4,11 @@
 #include <posk/sched.h>
 
 ct_task_t * task_ll_head = 0;
+ct_task_t * valid_task_ll_head = 0;
 static void newKTask(uint32_t time, uint32_t pnumber);
+static uint32_t counter = 0;
 
-void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority) {  
+void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority, uint32_t start_time) {  
   printk("newTask: making pnumber %d\n", pnumber);
   ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t));
   
@@ -15,6 +17,7 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   task->remaining_timeunits = total_timeunits;
   task->resources = resources;
   task->priority = priority;
+  task->start_time = start_time;
   task->next = 0;
   
   if(task_ll_head == 0) {
@@ -38,10 +41,10 @@ void runTaskFor(uint32_t pnumber, int32_t timeunits) {
       iter = ( ct_task_t * ) iter->next;
     }
     if(iter->remaining_timeunits < timeunits && iter->remaining_timeunits > 0) {
-	newKTask(iter->remaining_timeunits, pnumber);
+	doNothing(iter->remaining_timeunits, pnumber);
 	iter->remaining_timeunits = 0;
     } else {
-	newKTask(timeunits, pnumber);
+	doNothing(timeunits, pnumber);
 	iter->remaining_timeunits -= timeunits;
     }
 }
@@ -52,20 +55,70 @@ void runTaskTillEnd(uint32_t pnumber) {
       iter = ( ct_task_t * ) iter->next;
     }
     if(iter->remaining_timeunits > 0) {
-      newKTask(iter->remaining_timeunits, pnumber);
+      doNothing(iter->remaining_timeunits, pnumber);
       iter->remaining_timeunits = 0;
     }
 }
 
-void sleep(uint32_t timeunits) {
-  uint32_t * stack = (uint32_t*) kmalloc (0x100) + 0xF0;
-  task_t * t = (task_t *)ksleep(timeunits, stack);
-  task_is_ready(t);
+void doNothing(uint32_t timeunits, uint32_t pnumber) {
+    while(timeunits > 0) {
+	printk("executing pnumber %d\n", pnumber);
+	timeunits--;
+    }
 }
 
-void newKTask(uint32_t time, uint32_t pnumber) {
-    printk("KTASK: Creating new process %d for length %d\n", pnumber, time );
-    uint32_t * stack = (uint32_t*) kmalloc (0x100) + 0xF0;
-    task_t * t = (task_t *)create_dumb_task(time, pnumber, stack);
-    task_is_ready(t);
+void set_valid_tasks() {
+    valid_task_ll_head = 0;
+    ct_task_t * iter = task_ll_head;
+    
+    while(iter) {
+	if(iter->remaining_timeunits > 0 && iter->start_time <= counter) {
+	    ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t));
+  
+	    task->pnumber = iter->pnumber;
+	    task->total_timeunits = iter->total_timeunits;
+	    task->remaining_timeunits = iter->remaining_timeunits;
+	    task->resources = iter->resources;
+	    task->priority = iter->priority;
+	    task->start_time = iter->start_time;
+	    task->next = 0;
+	    
+	    if(valid_task_ll_head == 0) {
+		valid_task_ll_head = task;
+	    } else {
+		ct_task_t * v_iter = valid_task_ll_head;
+		while(v_iter->next) v_iter = v_iter->next;
+		v_iter->next = task;
+	    }
+	}
+      
+	iter = iter->next;
+    }
+}
+
+void ct_scheduler() {
+  set_valid_tasks();
+  
+    uint32_t shortest_seen = 0;
+    uint32_t pnumber_to_run = 0;
+    
+    ct_task_t * iter = valid_task_ll_head;
+
+    while(iter) {
+        
+	if(shortest_seen == 0 || shortest_seen > iter->remaining_timeunits) {
+	    shortest_seen = iter->remaining_timeunits;
+	    pnumber_to_run = iter->pnumber;
+	}
+	iter = iter->next;
+    }
+    
+    if(pnumber_to_run != 0) {
+        runTaskFor(pnumber_to_run, 4);
+	counter += 4;
+	printk("   %d\n", counter);
+    } else {
+	counter++;
+    }
+    
 }

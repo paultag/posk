@@ -102,13 +102,10 @@ int main(multiboot_t *mboot_ptr) {
      * task_is_ready(t1);
      */
     
-    newTask(1, 2, 0x0, 2);
-    newTask(2, 4, 0x0, 2);
-    newTask(3, 6, 0x0, 2);
-    printk("\n\n");
-    runTaskTillEnd(1);
-    runTaskTillEnd(2);
-    runTaskTillEnd(3);
+    newTask(1, 10, 0x0, 2, 0);
+    newTask(2, 6, 0x0, 2, 5);
+    newTask(3, 3, 0x0, 2, 20);
+    
 
     for(;;);
     

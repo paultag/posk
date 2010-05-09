@@ -15,7 +15,7 @@ static void timer_callback(registers_t * regs) {
     /*
     #include "../cherrytree/src/tick.posk"
     */
-    schedule();
+    ct_scheduler();
 }
 
 void init_timer(uint32_t freq) {
