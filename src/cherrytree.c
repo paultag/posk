@@ -116,7 +116,7 @@ void ct_scheduler() {
     if(pnumber_to_run != 0) {
         runTaskFor(pnumber_to_run, 4);
 	counter += 4;
-	printk("   %d\n", counter);
+	//printk("   %d\n", counter);
     } else {
 	counter++;
     }

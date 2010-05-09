@@ -103,8 +103,8 @@ int main(multiboot_t *mboot_ptr) {
      */
     
     newTask(1, 10, 0x0, 2, 0);
-    newTask(2, 6, 0x0, 2, 5);
-    newTask(3, 3, 0x0, 2, 20);
+    newTask(2, 6, 0x0, 2, 2);
+    newTask(3, 3, 0x0, 2, 5);
     
 
     for(;;);
