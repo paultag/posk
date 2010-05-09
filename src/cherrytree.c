@@ -42,6 +42,7 @@ void runTaskFor(uint32_t pnumber, int32_t timeunits) {
     }
     if(iter->remaining_timeunits < timeunits && iter->remaining_timeunits > 0) {
 	doNothing(iter->remaining_timeunits, pnumber);
+	iter->end_time = counter;
 	iter->remaining_timeunits = 0;
     } else {
 	doNothing(timeunits, pnumber);
@@ -60,6 +61,7 @@ void runTaskTillEnd(uint32_t pnumber) {
     }
     if(iter->remaining_timeunits > 0) {
       doNothing(iter->remaining_timeunits, pnumber);
+      iter->end_time = counter;
       iter->remaining_timeunits = 0;
     }
 }
