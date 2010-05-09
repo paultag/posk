@@ -104,22 +104,3 @@ void set_valid_tasks() {
 	iter = (ct_task_t *)iter->next;
     }
 }
-
-void ct_scheduler() {
-  set_valid_tasks();
-  
-    uint32_t shortest_seen = 0;
-    uint32_t pnumber_to_run = 0;
-    
-    ct_task_t * iter = valid_task_ll_head;
-
-    while(iter) {
-	if(shortest_seen == 0 || shortest_seen > iter->remaining_timeunits) {
-	    shortest_seen = iter->remaining_timeunits;
-	    pnumber_to_run = iter->pnumber;
-	}
-	iter = (ct_task_t *)iter->next;
-    }
-    
-    runTaskFor(pnumber_to_run, 4);
-}
