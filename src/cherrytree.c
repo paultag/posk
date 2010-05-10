@@ -8,6 +8,7 @@ ct_task_t * valid_task_ll_head = 0;
 static uint32_t counter = 0;
 
 void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority, uint32_t start_time) {  
+  
   ct_task_t * task = (ct_task_t *) kmalloc (sizeof (ct_task_t));
   
   task->pnumber = pnumber;

@@ -26,8 +26,91 @@
    * See http://www.jcu.edu/ for more information on John Carroll
    * univeristy. Contact <dpalmer@jcu.edu> or <kirsch@jcu.edu> for
    * more information on the John Carroll Computer Science Department.
+   *
+   * A large part of this kernel is based on the excellent resources
+   * compiled by James Molloy, available from http://www.jamesmolloy.co.uk/,
+   * as well as the resources available on http://osdev.org/
+   *
+   * Also, thanks to the OS gurus on Freenode's #osdev IRC channel.
    *  
    */
+
+// Now that you've read all that official legal mumbo-jumbo above,
+// here's the real story:
+
+// OK, this is quite possibly the worst example of a functional
+// OS ever (other than Windows ME), but it serves its purpose,
+// is easily extendable, makes clever use of acronymns, has a
+// nifty build system, and votes democrat.  No animals were harmed
+// in the making of this kernel, though that was due to the intelligence
+// and speed of the animals, despite attempts made by the programmers.
+// Dry erase markers, on the other hand, typically being a more stationary
+// target than cats, suffered great losses.
+
+// This has only been run on real hardware once.  "Real hardware" is a bit
+// of an exageration, as the only PC with a floppy drive was some old
+// POS that someone left in the CS lab and forgot about.  It made scary
+// screeching noises when we booted it.  It is fitting, though, that
+// a POS machine was the first and only machine to run the POS kernel.
+
+// Yes, we spent more time writing these comments than we did on any
+// actual code.  Even if you don't consider the volumes of "code"
+// we wrote that we never got to actually compile.
+
+// Be forewarned that this kernel contains no keyboard. PC noisemaker,
+// ramdisk, hard disk, network or random number routines. Those routines were
+// left out to leave them up to you as an exersise. Get to it.
+
+// It should not be that hard. Really. 
+
+// A word to future developers:
+// Chances are, if you see a creative solution to something that is in this code
+// there will be two outcomes. 
+//  A. It will work better then before.
+//  B. You will trash something in a monumental way that still
+//     compiles. We have no idea why this happes. 
+//     There is no inbetween.
+//
+// And, if you think you are being crafty. You're not. You're being a pain in the ass
+// stop trying to impress people. You'll just get points taken off anyway. Want to be
+// an Uber hacker? Go play with the ASM routines, asshole.
+
+// Whatever, its now your kernel, so all sins are forgiveable.  Unless you
+// violate the One True Curly Brace Placement Style.  Then we'll have to kill
+// you.  Regardless of how good your code works. 
+
+// Oh, and whatever you do. *DO NOT PLAY WITH THE GDT, IDT or LDT NUMBERS*
+// Dr. Palmer might just say "Pick a number". Don't. That little mistake cost
+// us damn near 0x2A hours of work over three weeks in room D-E223. 
+
+// Palmer's other advice tends to be pretty good, though.  He recently asked
+// us to implement a kernel in Linden Scripting Language, and we're currently
+// researching the possibility. Someone joked too loud. 
+
+// Dr. Seiter might not have too much advice on the kernel. I have a feeling
+// that she really hates the idea of writing an operating system more then
+// any other programmer to have ever lived. We did use the Visitor Pattern, though.
+// Ten POSK points if you can find where it is!  According to Dr. Seiter,
+// the fact that this kernel does not support a keyboard is actually a
+// feature, as the copy-and-paste operation is now impossible.
+
+// Some of the numbers in the .h files are big enigmas. Abotut 1% of them you can
+// find on the internet. About 50% are numbers Dr. Kirsch came up with in his head 
+// doing calculus in base-16. The other 49% are the points he took off from our
+// homework assignments over the years. Seems to work.
+
+// So, yes, even though this kernel is now near 90% comment and 10% code,
+// you still won't find it to be very self-documenting.  Too bad.  It was
+// hard to write the first time, its gonna be hard to read.
+
+// You can get help on our IRC channel, #windows.
+
+// So. Godspeed, future programmer! If you have any issues, don't be afraid
+// to not email us about it. We won't get back to you anyway. We're true
+// Open Source developers about that sorta thing.
+
+// With Love,
+// Pat and Paul
 
 #include <posk/multiboot.h>
 #include <posk/common.h>
@@ -80,14 +163,16 @@ int main(multiboot_t *mboot_ptr) {
     i += me->size + sizeof (uint32_t);
   }
 
+    panic("FUUUUU");
+    for(;;);
+
     
     asm volatile("sti");
-    
+
     init_scheduler(init_threading());
     
     #include "../cherrytree/src/kinit.posk"   
     #include "../cherrytree/src/posk-c-process-init.c"
-
 
     for(;;);
     

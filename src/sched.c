@@ -56,9 +56,18 @@ void task_not_ready (task_t *t) {
 }
 
 void schedule () {
+  // Yes, this is horibbly, rediculously inefficient
+  // But we're trying to prove a point
+  // So don't yell at us for doing this
+  //
+  // P.S. - I know its not "real" multitasking
+  // but this actually made more sense6
+  
   set_valid_tasks();
   extern valid_task_ll_head;
 
+  
+  // Load PITS code...
   #include "../cherrytree/src/sched.posk"
   
 }
