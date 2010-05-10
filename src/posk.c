@@ -162,10 +162,6 @@ int main(multiboot_t *mboot_ptr) {
     // so we must add sizeof (uint32_t).
     i += me->size + sizeof (uint32_t);
   }
-
-    panic("FUUUUU");
-    for(;;);
-
     
     asm volatile("sti");
 
