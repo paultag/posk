@@ -4,6 +4,8 @@
 task_list_t *ready_queue = 0;
 task_list_t *current_task = 0;
 
+static uint32_t stats_printed = 0;
+
 void init_scheduler (task_t *initial_task) {
   current_task = (task_list_t*) kmalloc (sizeof (task_list_t*));
   current_task->task = initial_task;
@@ -61,14 +63,23 @@ void schedule () {
   // So don't yell at us for doing this
   //
   // P.S. - I know its not "real" multitasking
-  // but this actually made more sense6
+  // but this actually made more sense to me.
+  // So it probably won't make sense to anyone else.
+  // I'm OK with that. -- Pat
   
   set_valid_tasks();
   extern valid_task_ll_head;
-
+  uint8_t more = moreTasks();
   
   // Load PITS code...
-  #include "../cherrytree/src/sched.posk"
+  if(more) {
+    #include "../cherrytree/src/sched.posk"
+  } else {
+      if(!stats_printed) {
+	print_sched_stats();
+	stats_printed = 1;
+      }
+  }
   
 }
 

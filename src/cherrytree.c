@@ -76,6 +76,25 @@ void doNothing(uint32_t timeunits, uint32_t pnumber) {
     return;
 }
 
+uint8_t moreTasks() {
+  ct_task_t * iter = task_ll_head;
+  while(iter) {
+      if(iter->end_time == -1) {
+	  return 1;
+      }
+      iter = (ct_task_t *)iter->next;
+  }
+  return 0;
+}
+
+void print_sched_stats() {
+  ct_task_t * iter = task_ll_head;
+  while(iter) {
+    printk("pnumber: %d, submitted: %d, finished: %d, turnaround: %d\n", iter->pnumber, iter->start_time, iter->end_time, iter->end_time - iter->start_time);
+    iter = (ct_task_t *)iter->next;
+  }
+}
+
 void set_valid_tasks() {
     valid_task_ll_head = 0;
     ct_task_t * iter = task_ll_head;

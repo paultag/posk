@@ -144,6 +144,8 @@ int main(multiboot_t *mboot_ptr) {
   init_vmm();
   init_heap();
 
+  
+  // This just works.  Leave it alone.
    // Find all the usable areas of memory and inform the physical memory manager about them.
   uint32_t i = mboot_ptr->mmap_addr;
   while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length) {
@@ -162,10 +164,10 @@ int main(multiboot_t *mboot_ptr) {
     // so we must add sizeof (uint32_t).
     i += me->size + sizeof (uint32_t);
   }
-    
-    asm volatile("sti");
 
     init_scheduler(init_threading());
+    
+    asm volatile("sti"); // don't touch please
     
     #include "../cherrytree/src/kinit.posk"   
     #include "../cherrytree/src/posk-c-process-init.c"
