@@ -11,6 +11,7 @@ typedef struct {
     uint16_t priority;
     uint32_t start_time;
     int32_t end_time;
+    uint8_t shown;
     
     struct ct_task_t * next;
 } ct_task_t;

@@ -18,6 +18,7 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
   task->priority = priority;
   task->start_time = start_time;
   task->end_time = -1;
+  task->shown = 0;
   task->next = 0;
   
   if(task_ll_head == 0) {
@@ -90,7 +91,10 @@ uint8_t moreTasks() {
 void print_sched_stats() {
   ct_task_t * iter = task_ll_head;
   while(iter) {
-    printk("pnumber: %d, submitted: %d, finished: %d, turnaround: %d\n", iter->pnumber, iter->start_time, iter->end_time, iter->end_time - iter->start_time);
+    if(iter->shown == 0) {
+      printk("pnumber: %d, submitted: %d, finished: %d, turnaround: %d\n", iter->pnumber, iter->start_time, iter->end_time, iter->end_time - iter->start_time);
+      iter->shown = 1;
+    }
     iter = (ct_task_t *)iter->next;
   }
 }
@@ -110,6 +114,7 @@ void set_valid_tasks() {
 	    task->priority = iter->priority;
 	    task->start_time = iter->start_time;
 	    task->end_time = -1;
+	    task->shown = 0;
 	    task->next = 0;
 	    
 	    if(valid_task_ll_head == 0) {
