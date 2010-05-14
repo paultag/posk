@@ -1,5 +1,6 @@
 /**
  * Virtual Memory Management
+ * Based heavily on JamesM kernel tutorials
  * @file vmm.c
  */
 

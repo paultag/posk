@@ -79,7 +79,7 @@
 // violate the One True Curly Brace Placement Style.  Then we'll have to kill
 // you.  Regardless of how good your code works. 
 
-// Oh, and whatever you do. *DO NOT PLAY WITH THE GDT, IDT or LDT NUMBERS*
+// Oh, and whatever you do. *DO NOT PLAY WITH THE GDT or LDT NUMBERS*
 // Dr. Palmer might just say "Pick a number". Don't. That little mistake cost
 // us damn near 0x2A hours of work over three weeks in room D-E223. 
 
