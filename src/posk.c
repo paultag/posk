@@ -42,7 +42,7 @@
 // OS ever (other than Windows ME), but it serves its purpose,
 // is easily extendable, makes clever use of acronymns, has a
 // nifty build system, and votes democrat.  No animals were harmed
-// in the making of this kernel, though that was due to the intelligence
+// in the making of this kernel, though that was more a result of the intelligence
 // and speed of the animals, despite attempts made by the programmers.
 // Dry erase markers, on the other hand, typically being a more stationary
 // target than cats, suffered great losses.
@@ -54,10 +54,10 @@
 // a POS machine was the first and only machine to run the POS kernel.
 
 // Yes, we spent more time writing these comments than we did on any
-// actual code.  Even if you don't consider the volumes of "code"
+// actual code.  Even if you consider the volumes of "code"
 // we wrote that we never got to actually compile.
 
-// Be forewarned that this kernel contains no keyboard. PC noisemaker,
+// Be forewarned that this kernel contains no keyboard, PC noisemaker,
 // ramdisk, hard disk, network or random number routines. All of these
 // features are supported, though their implementation is left as an
 // exercise for future programmers.  So get to it.
@@ -76,22 +76,20 @@
 // stop trying to impress people. You'll just get points taken off anyway. Want to be
 // an Uber hacker? Go play with the ASM routines, asshole.
 
-// Composition! Glenn Beck! Can we push that test back?
+// "Composition! Glenn Beck! Can we push that test back?"
 //  -- Steve
 
-// I want to take that idea, make it alive, and then kill it!
+// "I want to take that idea, make it alive, and then kill it!"
 // -- Dr. Palmer
 
-// You know what else you need to stick in there?
+// "You know what else you need to stick in there?"
 //  -- Ben
-// That's what SHE said
-//  -- Paul
 
 // Whatever, its now your kernel, so all sins are forgiveable.  Unless you
 // violate the One True Curly Brace Placement Style.  Then we'll have to kill
 // you.  Regardless of how good your code works. 
 
-// Any technology distinguishable from magic is insufficiently advanced.
+// "Any technology distinguishable from magic is insufficiently advanced."
 //    - Corollary to Clarke's Third Law
 
 // POSK is therefore not magic. 
@@ -105,11 +103,11 @@
 // researching the possibility. Someone joked too loud. 
 
 // Dr. Seiter might not have too much advice on the kernel. I have a feeling
-// that she really hates the idea of writing an operating system more then
+// that she really hates the idea of writing an operating system more than
 // any other programmer to have ever lived. We did use the Visitor Pattern, though.
 // Ten POSK points if you can find where it is!  According to Dr. Seiter,
 // the fact that this kernel does not support a keyboard is actually a
-// feature, as the copy-and-paste operation is now impossible.
+// feature, as the copy-and-paste operation is rendered completely impossible.
 
 // Some of the numbers in the .h files are big enigmas. About 1% of them you can
 // find on the internet. About 50% are numbers Dr. Kirsch came up with in his head 
@@ -120,7 +118,7 @@
 // you still won't find it to be very self-documenting.  Too bad.  It was
 // hard to write the first time, its gonna be hard to read.
 
-// There is the easy way, then there is Paul's way
+// "There is the easy way, then there is Paul's way"
 //   -- Ben
 
 // You can get help on our IRC channel, #windows.
