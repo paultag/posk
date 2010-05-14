@@ -13,3 +13,4 @@ run:
 clean:
 	@cd src && make clean
 	@cd cherrytree && make clean
+
