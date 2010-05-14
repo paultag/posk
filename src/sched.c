@@ -67,10 +67,12 @@ void schedule () {
   
   set_valid_tasks();
   extern valid_task_ll_head;
+  ct_task_t * task = (ct_task_t * ) valid_task_ll_head;
   uint8_t more = moreTasks();
   
   // Load PITS code...
   if(more) {
+    context_switch();
     #include "../cherrytree/src/sched.posk"
   } else {
       print_sched_stats();

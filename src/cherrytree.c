@@ -6,6 +6,9 @@
 ct_task_t * task_ll_head = 0;
 ct_task_t * valid_task_ll_head = 0;
 static uint32_t counter = 0;
+static uint32_t cs_total = 0;
+
+#include "../cherrytree/src/cs.posk"
 
 void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority, uint32_t start_time) {  
   
@@ -35,10 +38,10 @@ void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint
 
 void runTaskFor(uint32_t pnumber, int32_t timeunits) {
   if(pnumber == 0) {
-    counter++;
-    return;
+      counter++;
+      return;
     }  
-  ct_task_t * iter = task_ll_head;
+    ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
       iter = ( ct_task_t * ) iter->next;
     }
@@ -54,8 +57,8 @@ void runTaskFor(uint32_t pnumber, int32_t timeunits) {
 
 void runTaskTillEnd(uint32_t pnumber) {
     if(pnumber == 0) {
-    counter++;
-    return;
+      counter++;
+      return;
     }
     ct_task_t * iter = task_ll_head;
     while(iter->pnumber != pnumber) {
@@ -66,6 +69,11 @@ void runTaskTillEnd(uint32_t pnumber) {
       iter->end_time = counter;
       iter->remaining_timeunits = 0;
     }
+}
+
+void context_switch() {
+    cs_total += cs_overhead;
+    counter += cs_overhead;
 }
 
 void doNothing(uint32_t timeunits, uint32_t pnumber) {
