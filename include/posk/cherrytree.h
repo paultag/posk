@@ -1,3 +1,8 @@
+/**
+ * Cherrytree defs for the high level API
+ * @file cherrytree.h
+ */
+
 #ifndef CHERRYTREE_H_
 #define CHERRYTREE_H_ KIRSCH
 

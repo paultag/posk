@@ -1,2 +1,2 @@
-int8_t cs_overhead = 0; // 8-bit signed int specifying time units for context
+int8_t cs_overhead = 3; // 8-bit signed int specifying time units for context
 		      // switch overhead

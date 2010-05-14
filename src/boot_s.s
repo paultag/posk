@@ -37,7 +37,6 @@ mboot:
 start:
     ; Load multiboot information:
     push    ebx
-
     mov ebp, 0
 
     ; Execute the kernel:

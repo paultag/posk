@@ -1,3 +1,8 @@
+/**
+ * Slab stuff
+ * @file slab.c
+ */
+
 #include <posk/slab.h>
 #include <posk/pmm.h>
 #include <posk/vmm.h>

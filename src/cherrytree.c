@@ -1,3 +1,8 @@
+/**
+ * Cherrytree C code stuff
+ * @file cherrytree.c
+ */
+
 #include <posk/cherrytree.h>
 #include <posk/task.h>
 #include <posk/slab.h>

@@ -1,3 +1,8 @@
+/**
+ * Schedule stuff
+ * @file sched.h
+ */
+
 #include <posk/sched.h>
 #include <posk/cherrytree.h>
 

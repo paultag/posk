@@ -1,3 +1,8 @@
+/**
+ * Task stuff. Loads of structs and all that jazz
+ * @file task.h
+ */
+
 #ifndef TASK_H_
 #define TASK_H_ YUP
 
