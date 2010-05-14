@@ -494,7 +494,7 @@
     <property name="license" translatable="yes">GPLv3</property>
     <property name="authors">Paul Tagliamonte
 Pat McDonnell</property>
-    <property name="logo_icon_name">dialog-information</property>
+    <property name="logo">palmster.bmp</property>
     <signal name="close" handler="on_About_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
