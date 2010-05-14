@@ -1,6 +1,6 @@
 /**
  * Schedule stuff
- * @file sched.h
+ * @file sched.c
  */
 
 #include <posk/sched.h>
