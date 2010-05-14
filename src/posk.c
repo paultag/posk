@@ -59,7 +59,7 @@
 
 // Be forewarned that this kernel contains no keyboard. PC noisemaker,
 // ramdisk, hard disk, network or random number routines. Those routines were
-// left out to leave them up to you as an exersise. Get to it.
+// left out to leave them up to you as an exercise. Get to it.
 
 // It should not be that hard. Really. 
 
@@ -78,9 +78,19 @@
 // Composition! Glenn Beck! Can we push that test back?
 //  -- Steve
 
+// You know what else you need to stick in there?
+//  -- Ben
+// That's what SHE said
+//  -- Paul
+
 // Whatever, its now your kernel, so all sins are forgiveable.  Unless you
 // violate the One True Curly Brace Placement Style.  Then we'll have to kill
 // you.  Regardless of how good your code works. 
+
+// Any technology distinguishable from magic is insufficiently advanced.
+//    - Corollary to Clarke's Third Law
+
+// POSK is therefore not magic. 
 
 // Oh, and whatever you do. *DO NOT PLAY WITH THE GDT or LDT NUMBERS*
 // Dr. Palmer might just say "Pick a number". Don't. That little mistake cost
@@ -97,7 +107,7 @@
 // the fact that this kernel does not support a keyboard is actually a
 // feature, as the copy-and-paste operation is now impossible.
 
-// Some of the numbers in the .h files are big enigmas. Abotut 1% of them you can
+// Some of the numbers in the .h files are big enigmas. About 1% of them you can
 // find on the internet. About 50% are numbers Dr. Kirsch came up with in his head 
 // doing calculus in base-16. The other 49% are the points he took off from our
 // homework assignments over the years. Seems to work.
@@ -106,14 +116,17 @@
 // you still won't find it to be very self-documenting.  Too bad.  It was
 // hard to write the first time, its gonna be hard to read.
 
+// There is the easy way, then there is Paul's way
+//   -- Ben
+
 // You can get help on our IRC channel, #windows.
 
 // So. Godspeed, future programmer! If you have any issues, don't be afraid
 // to not email us about it. We won't get back to you anyway. We're true
 // Open Source developers about that sorta thing.
 
-// With Love,
-// Pat and Paul
+// Viva la vida segunda!
+// -- Pat and Paul
 
 #include <posk/multiboot.h>
 #include <posk/common.h>
