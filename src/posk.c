@@ -58,8 +58,9 @@
 // we wrote that we never got to actually compile.
 
 // Be forewarned that this kernel contains no keyboard. PC noisemaker,
-// ramdisk, hard disk, network or random number routines. Those routines were
-// left out to leave them up to you as an exercise. Get to it.
+// ramdisk, hard disk, network or random number routines. All of these
+// features are supported, though their implementation is left as an
+// exercise for future programmers.  So get to it.
 
 // It should not be that hard. Really. 
 
@@ -77,6 +78,9 @@
 
 // Composition! Glenn Beck! Can we push that test back?
 //  -- Steve
+
+// I want to take that idea, make it alive, and then kill it!
+// -- Dr. Palmer
 
 // You know what else you need to stick in there?
 //  -- Ben
@@ -96,8 +100,8 @@
 // Dr. Palmer might just say "Pick a number". Don't. That little mistake cost
 // us damn near 0x2A hours of work over three weeks in room D-E223. 
 
-// Palmer's other advice tends to be pretty good, though.  He recently asked
-// us to implement a kernel in Linden Scripting Language, and we're currently
+// Dr. Palmer's other advice tends to be pretty good, though.  He recently asked
+// us to implement a swarm-based kernel in Linden Scripting Language, and we're currently
 // researching the possibility. Someone joked too loud. 
 
 // Dr. Seiter might not have too much advice on the kernel. I have a feeling
