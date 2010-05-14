@@ -75,6 +75,9 @@
 // stop trying to impress people. You'll just get points taken off anyway. Want to be
 // an Uber hacker? Go play with the ASM routines, asshole.
 
+// Composition! Glenn Beck! Can we push that test back?
+//  -- Steve
+
 // Whatever, its now your kernel, so all sins are forgiveable.  Unless you
 // violate the One True Curly Brace Placement Style.  Then we'll have to kill
 // you.  Regardless of how good your code works. 
@@ -123,8 +126,6 @@
 #include <posk/slab.h>
 #include <posk/task.h>
 #include <posk/cherrytree.h>
-
-
 
 /**
  * Main method of the kernel, totally sweet.
