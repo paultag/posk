@@ -1,2 +1,0 @@
-printk ( "Panic!!\n" );
-printk ( "AAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH\n" );

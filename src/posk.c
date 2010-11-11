@@ -184,9 +184,7 @@ int main(multiboot_t *mboot_ptr) {
     init_scheduler(init_threading());
     
     asm volatile("sti"); // don't touch please
-    
-    #include "../cherrytree/src/kinit.posk"   
-    #include "../cherrytree/src/posk-c-process-init.c"
+
 
     for(;;);
     

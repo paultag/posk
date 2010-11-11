@@ -78,7 +78,21 @@ void schedule () {
   // Load PITS code...
   if(more) {
     context_switch();
-    #include "../cherrytree/src/sched.posk"
+
+uint32_t shortest_seen = 0;
+uint32_t pnumber_to_run = 0;
+
+while(task) {
+        if(shortest_seen == 0 || shortest_seen > task->remaining_timeunits) {
+          shortest_seen = task->remaining_timeunits;
+          pnumber_to_run = task->pnumber;
+        }
+        task = (ct_task_t *)task->next;
+}
+
+runTaskFor(pnumber_to_run, 4);
+
+
   } else {
       print_sched_stats();
   }

@@ -13,7 +13,8 @@ ct_task_t * valid_task_ll_head = 0;
 static uint32_t counter = 0;
 static uint32_t cs_total = 0;
 
-#include "../cherrytree/src/cs.posk"
+int8_t cs_overhead = 3; // 8-bit signed int specifying time units for context
+                      // switch overhead
 
 void newTask(uint32_t pnumber, int32_t total_timeunits, uint16_t resources, uint16_t priority, uint32_t start_time) {  
   
