@@ -12,3 +12,5 @@ run:
 clean:
 	@cd src && make clean
 
+gitclean:
+	@git clean -f
