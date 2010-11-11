@@ -1,29 +1,0 @@
-map f :%!fmt
-" formats the whole page
-map ,s :%!gpg --clearsign --no-use-agent
-" GPG clearsign the current document
-map q :wq
-" save quit shortkut
-map c mx0i// `x
-" prefix a line with //, good for a quick comment
-
-map t :set hlsearch/ToDo:/
-map T :set nohlsearch
-
-ab _mail MYEMAIL
-" my email, normal human format
-ab _email <MYEMAIL>
-" my email, RFC 2822
-ab _name MYNAME
-" my name
-
-map ? mxA   //ToDo: WTF is this? (MYSHORTNAME)`x
-map ! mxA   //ToDo: Fix This (MYSHORTNAME)`x
-
-map s o// _name _email - :r! datekJ
-map S o# _name _email - :r! datekJ 
-" timestamp
-
-ab _chead /* *  :r! echo %kJo *  Copyright (c) MYNAME, GPLv2, :r! date "+\%Y"kJo */int main ( int argc, char ** argv ) {}kki
-" Kickass _chead macro
-
