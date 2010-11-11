@@ -12,7 +12,8 @@ ASFLAGS=-felf
 all: $(SOURCES) link
 
 clean:
-	@-rm *.o $(BIN)posk.bin
+	@rm -f *.o
+	@if [ -e $(BIN)posk.bin ]; then rm $(BIN)posk.bin; fi
 
 link:
 	@echo "[33mLinking to posk.bin[0m"
