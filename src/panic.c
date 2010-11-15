@@ -13,8 +13,8 @@ extern tick;
  * @param message to panic to the user
  */
 void panic (const char *msg) {
-  asm volatile("cli"); //<-- this fucking broke everything
-  printk ( "Panic!!\n" );
-  printk ( "AAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH\n" );
-  for( ;; );
+	asm volatile("cli"); //<-- this fucking broke everything
+	printk ( "Panic!!\n" );
+	printk ( "AAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH\n" );
+	for( ;; );
 }

@@ -140,7 +140,6 @@
 #include <posk/vmm.h>
 #include <posk/slab.h>
 #include <posk/task.h>
-#include <posk/cherrytree.h>
 
 /**
  * Main method of the kernel, totally sweet.
@@ -149,45 +148,39 @@
  * @vorsicht
  */
 int main(multiboot_t *mboot_ptr) {
-  monitor_clear();
+	monitor_clear();
     
-  debug = 0; // turn off debugging by default
+	debug = 0; // turn off debugging by default
 
-  init_gdt();
-  init_idt();
-  init_timer(50);
-  init_pmm(mboot_ptr->mem_upper);
-  init_vmm();
-  init_heap();
+	init_gdt();
+	init_idt();
+	init_timer(50);
+	init_pmm(mboot_ptr->mem_upper);
+	init_vmm();
+	init_heap();
 
   
-  // This just works.  Leave it alone.
-   // Find all the usable areas of memory and inform the physical memory manager about them.
-  uint32_t i = mboot_ptr->mmap_addr;
-  while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length) {
-    mmap_entry_t *me = (mmap_entry_t*) i;
+	// This just works.  Leave it alone.
+	// Find all the usable areas of memory and inform the physical memory manager about them.
+	uint32_t i = mboot_ptr->mmap_addr;
+	while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length) {
+		mmap_entry_t *me = (mmap_entry_t*) i;
+		// Does this entry specify usable RAM?
+		if (me->type == 1) {
+			uint32_t j;
+			// For every page in this entry, add to the free page stack.
+			for (j = me->base_addr_low; j < me->base_addr_low+me->length_low; j += 0x1000) {
+				pmm_free_page (j);
+			}
+		}
+		// The multiboot specification is strange in this respect - the size member does not include "size" itself in its calculations,
+		// so we must add sizeof (uint32_t).
+		i += me->size + sizeof (uint32_t);
+	}
+	asm volatile("sti"); // don't touch please
 
-    // Does this entry specify usable RAM?
-    if (me->type == 1) {
-      uint32_t j;
-      // For every page in this entry, add to the free page stack.
-      for (j = me->base_addr_low; j < me->base_addr_low+me->length_low; j += 0x1000) {
-        pmm_free_page (j);
-      }
-    }
-
-    // The multiboot specification is strange in this respect - the size member does not include "size" itself in its calculations,
-    // so we must add sizeof (uint32_t).
-    i += me->size + sizeof (uint32_t);
-  }
-
-    init_scheduler(init_threading());
+	for(;;);
     
-    asm volatile("sti"); // don't touch please
-
-
-    for(;;);
-    
-    return 0xDEADBEEF;
+	return 0xDEADBEEF;
 }
 

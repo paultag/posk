@@ -11,7 +11,7 @@
  * @param value the value to write to the port
  */
 void outb(uint16_t port, uint8_t value) {
-    asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
+	asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
 }
 
 /**
@@ -19,9 +19,9 @@ void outb(uint16_t port, uint8_t value) {
  * @param port Port to read 
  */
 uint8_t inb(uint16_t port) {
-    uint8_t ret;
-    asm volatile("inb %1, %0" : "=a" (ret) : "dN" (port));
-    return ret;
+	uint8_t ret;
+	asm volatile("inb %1, %0" : "=a" (ret) : "dN" (port));
+	return ret;
 }
 
 /**
@@ -29,12 +29,11 @@ uint8_t inb(uint16_t port) {
  * @param port port to read from
  */
 uint16_t inw(uint16_t port) {
-    uint16_t ret;
-    asm volatile ("inw %1, %0" : "=a" (ret) : "dN" (port));
-    return ret;
+	uint16_t ret;
+	asm volatile ("inw %1, %0" : "=a" (ret) : "dN" (port));
+	return ret;
 }
 
-// Copy len bytes from src to dest.
 /**
  * Copy bytes from src to dest
  * @param dest where to copy data to
@@ -42,12 +41,11 @@ uint16_t inw(uint16_t port) {
  * @param len  length of data to copy
  */
 void memcpy(uint8_t *dest, const uint8_t *src, uint32_t len) {
-    const uint8_t *sp = (const uint8_t *)src;
-    uint8_t *dp = (uint8_t *)dest;
-    for(; len != 0; len--) *dp++ = *sp++;
+	const uint8_t *sp = (const uint8_t *)src;
+	uint8_t *dp = (uint8_t *)dest;
+	for(; len != 0; len--) *dp++ = *sp++;
 }
 
-// Write len copies of val into dest.
 /**
  * Write copies of val into dest of len length
  * @param dest where to write to
@@ -55,8 +53,8 @@ void memcpy(uint8_t *dest, const uint8_t *src, uint32_t len) {
  * @param len length to write
  */
 void memset(uint8_t *dest, uint8_t val, uint32_t len) {
-    uint8_t *temp = (uint8_t *)dest;
-    for ( ; len != 0; len--) *temp++ = val;
+	uint8_t *temp = (uint8_t *)dest;
+	for ( ; len != 0; len--) *temp++ = val;
 }
 
 
@@ -67,19 +65,19 @@ void memset(uint8_t *dest, uint8_t val, uint32_t len) {
  * @ret str1 < str2, 0 if they are equal or 1 otherwise.
  */
 int strcmp(char *str1, char *str2) {
-      int i = 0;
-      int failed = 0;
-      while ( str1[i] != '\0' && str2[i] != '\0' ) {
-          if ( str1[i] != str2[i] ) {
-              failed = 1;
-              break;
-          }
-          i++;
-      }
-      if( (str1[i] == '\0' && str2[i] != '\0') || (str1[i] != '\0' && str2[i] == '\0') )
-          failed = 1;
+	int i = 0;
+	int failed = 0;
+	while ( str1[i] != '\0' && str2[i] != '\0' ) {
+		if ( str1[i] != str2[i] ) {
+			failed = 1;
+			break;
+		}
+		i++;
+	}
+	if( (str1[i] == '\0' && str2[i] != '\0') || (str1[i] != '\0' && str2[i] == '\0') )
+		failed = 1;
 
-      return failed;
+	return failed;
 }
 
 /**
@@ -89,9 +87,9 @@ int strcmp(char *str1, char *str2) {
  * @ret dest
  */
 char * strcpy ( char *dest, const char *src ) {
-    do {
-      *dest++ = *src++;
-    } while (*src != 0);
+	do {
+		*dest++ = *src++;
+	} while (*src != 0);
 }
 
 /**
@@ -101,15 +99,15 @@ char * strcpy ( char *dest, const char *src ) {
  * @ret dest
  */
 char * strcat ( char *dest, const char *src ) {
-    while (*dest != 0) {
-        *dest   = *dest++;
-    }
+	while (*dest != 0) {
+		*dest   = *dest++;
+	}
 
-    do {
-        *dest++ = *src++;
-    } while (*src != 0);
+	do {
+		*dest++ = *src++;
+	} while (*src != 0);
 
-    return dest;
+	return dest;
 }
 
 /**
@@ -118,8 +116,10 @@ char * strcat ( char *dest, const char *src ) {
  * @ret length of the string
  */
 int strlen ( char *src ) {
-  int i = 0;
-  while (*src++)
-    i++;
-  return i;
+	int i = 0;
+
+	while (*src++)
+		i++;
+
+	return i;
 }
