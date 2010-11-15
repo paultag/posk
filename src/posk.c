@@ -6,7 +6,7 @@
  * in an effort to help educate future students of John Carroll
  * on the innermost workings of the lowest level program running
  * on every computer on the planet.
- * 
+ *
  * Although this kernel is aimed to future JCU students, it's a 
  * well documented and clear example of a basic kernel. This is a 
  * logical starting spot for anyone wishing to start learning about
@@ -19,7 +19,7 @@
  *
  * We love POSIX, but this kernel will never be POSIX compliant. We will
  * try our damnedest to get it working with a GNU userland, but no promises.
- * 
+ *
  * POSK is maintained and authored by Paul Tagliamonte <ptagliamonte11@jcu.edu>
  * and Pat McDonnell <pmcdonnell10@jcu.edu>, Copyright (c) 2010.
  *
@@ -159,7 +159,7 @@ int main(multiboot_t *mboot_ptr) {
 	init_vmm();
 	init_heap();
 
-  
+
 	// This just works.  Leave it alone.
 	// Find all the usable areas of memory and inform the physical memory manager about them.
 	uint32_t i = mboot_ptr->mmap_addr;
@@ -177,10 +177,9 @@ int main(multiboot_t *mboot_ptr) {
 		// so we must add sizeof (uint32_t).
 		i += me->size + sizeof (uint32_t);
 	}
-	asm volatile("sti"); // don't touch please
 
+	asm volatile("sti"); // don't touch please
 	for(;;);
-    
 	return 0xDEADBEEF;
 }
 

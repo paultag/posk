@@ -8,14 +8,14 @@
 #include <posk/pmm.h>
 #include <posk/idt.h>
 
-uint32_t *page_directory = (uint32_t *)PAGE_DIR_VIRTUAL_ADDR;
-uint32_t *page_tables = (uint32_t *)PAGE_TABLE_VIRTUAL_ADDR;
+uint32_t * page_directory = (uint32_t *) PAGE_DIR_VIRTUAL_ADDR;
+uint32_t * page_tables    = (uint32_t *) PAGE_TABLE_VIRTUAL_ADDR;
 
-page_directory_t *current_directory;
+page_directory_t * current_directory;
 
 extern char pmm_paging_active;
 
-void page_fault (registers_t *regs);
+void page_fault( registers_t * regs );
 
 void init_vmm () {
 	int i;
@@ -113,8 +113,8 @@ char get_mapping (uint32_t va, uint32_t *pa) {
 void page_fault (registers_t *regs) {
 	uint32_t cr2;
 	asm volatile ("mov %%cr2, %0" : "=r" (cr2));
-	printk ("Page fault at 0x%x, faulting address 0x%x\n", regs->eip, cr2);
-	printk ("Error code: %x\n", regs->err_code);
-	panic ("Page Fault! We don't know how to handle this yet.");
-	for (;;) ;
+	printk("Page fault at 0x%x, faulting address 0x%x\n", regs->eip, cr2);
+	printk("Error code: %x\n", regs->err_code);
+	panic("Page Fault! We don't know how to handle this yet.");
+	for (;;);
 }
