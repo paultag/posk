@@ -13,8 +13,8 @@
  * The task linked list object.
  */
 typedef struct task_list {
-  task_t *task;             /**< Composed Bie-otch process. */
-  struct task_list *next;   /**< The next goddamn task. Google "Linked List" */
+	task_t *task;             /**< Composed Bie-otch process. */
+	struct task_list *next;   /**< The next goddamn task. Google "Linked List" */
 } task_list_t;
 
 void init_scheduler (task_t *initial_task);

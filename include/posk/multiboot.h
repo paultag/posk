@@ -31,42 +31,42 @@
  * Multiboot struct that gets pushed to the kernel as one big happy glob
  */
 typedef struct {
-  uint32_t flags;         /**< RTFM */
-  uint32_t mem_lower;     /**< RTFM */
-  uint32_t mem_upper;     /**< RTFM */
-  uint32_t boot_device;   /**< RTFM */
-  uint32_t cmdline;       /**< RTFM */
-  uint32_t mods_count;    /**< RTFM */
-  uint32_t mods_addr;     /**< RTFM */
-  uint32_t num;           /**< RTFM */
-  uint32_t size;          /**< RTFM */
-  uint32_t addr;          /**< RTFM */
-  uint32_t shndx;         /**< RTFM */
-  uint32_t mmap_length;   /**< RTFM */
-  uint32_t mmap_addr;     /**< RTFM */
-  uint32_t drives_length; /**< RTFM */
-  uint32_t drives_addr;   /**< RTFM */
-  uint32_t config_table;  /**< RTFM */
-  uint32_t boot_loader_name; /**< RTFM */
-  uint32_t apm_table;     /**< RTFM */
-  uint32_t vbe_control_info; /**< RTFM */
-  uint32_t vbe_mode_info; /**< RTFM */
-  uint32_t vbe_mode;      /**< RTFM */
-  uint32_t vbe_interface_seg; /**< RTFM */
-  uint32_t vbe_interface_off; /**< RTFM */
-  uint32_t vbe_interface_len; /**< RTFM */
+	uint32_t flags;         /**< RTFM */
+	uint32_t mem_lower;     /**< RTFM */
+	uint32_t mem_upper;     /**< RTFM */
+	uint32_t boot_device;   /**< RTFM */
+	uint32_t cmdline;       /**< RTFM */
+	uint32_t mods_count;    /**< RTFM */
+	uint32_t mods_addr;     /**< RTFM */
+	uint32_t num;           /**< RTFM */
+	uint32_t size;          /**< RTFM */
+	uint32_t addr;          /**< RTFM */
+	uint32_t shndx;         /**< RTFM */
+	uint32_t mmap_length;   /**< RTFM */
+	uint32_t mmap_addr;     /**< RTFM */
+	uint32_t drives_length; /**< RTFM */
+	uint32_t drives_addr;   /**< RTFM */
+	uint32_t config_table;  /**< RTFM */
+	uint32_t boot_loader_name; /**< RTFM */
+	uint32_t apm_table;     /**< RTFM */
+	uint32_t vbe_control_info; /**< RTFM */
+	uint32_t vbe_mode_info; /**< RTFM */
+	uint32_t vbe_mode;      /**< RTFM */
+	uint32_t vbe_interface_seg; /**< RTFM */
+	uint32_t vbe_interface_off; /**< RTFM */
+	uint32_t vbe_interface_len; /**< RTFM */
 } __attribute__((packed)) multiboot_t;
 
 /**
  * The memory map that gets shoved down our kernel's throat.
  */
 typedef struct {
-  uint32_t size;           /**< RTFM */
-  uint32_t base_addr_low;  /**< RTFM */
-  uint32_t base_addr_high; /**< RTFM */
-  uint32_t length_low;     /**< RTFM */
-  uint32_t length_high;    /**< RTFM */
-  uint32_t type;           /**< RTFM */
+	uint32_t size;           /**< RTFM */
+	uint32_t base_addr_low;  /**< RTFM */
+	uint32_t base_addr_high; /**< RTFM */
+	uint32_t length_low;     /**< RTFM */
+	uint32_t length_high;    /**< RTFM */
+	uint32_t type;           /**< RTFM */
 } __attribute__((packed)) mmap_entry_t;
 
 #endif
