@@ -3,7 +3,7 @@
  * @file vsprintf.c
  */
 
-#include <stdarg.h>
+#include <posk/stdarg.h>
 
 /* we use this so that we can do without the ctype library */
 #define is_digit(c)	((c) >= '0' && (c) <= '9')

@@ -4,7 +4,7 @@
  */
 
 #include <posk/monitor.h>
-#include <stdarg.h>
+#include <posk/stdarg.h>
 
 // The VGA framebuffer starts at 0xB8000.
 uint16_t *video_memory = (uint16_t *)0xB8000;
