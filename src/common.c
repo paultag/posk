@@ -105,7 +105,7 @@ char * strcat ( char *dest, const char *src ) {
 
 	do {
 		*dest++ = *src++;
-	} while (*src != 0);
+	} while ( *src != 0 );
 
 	return dest;
 }
@@ -118,7 +118,7 @@ char * strcat ( char *dest, const char *src ) {
 int strlen ( char *src ) {
 	int i = 0;
 
-	while (*src++)
+	while ( *src++ )
 		i++;
 
 	return i;
