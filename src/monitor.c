@@ -17,7 +17,7 @@ uint8_t cursor_y = 0;
  * Enable debugging
  */
 void debugging_mode() {
-  debug = 1;
+	debug = 1;
 }
 
 /** 
