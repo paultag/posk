@@ -1,8 +1,3 @@
-/**
- * Common kernel code, global fuctions etc.
- * @file common.c
- */
-
 #include <asm.h>
 
 /**
