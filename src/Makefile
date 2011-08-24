@@ -3,13 +3,15 @@ ASM=nasm
 INC=../include/
 BIN=../bin/
 
-SOURCES=boot_s.o gdt_s.o idt_s.o posk.o common.o gdt.o idt.o monitor.o panic.o vsprintf.o timer.o pmm.o vmm.o slab.o task.o sched.o
+SOURCES=$(shell  ls *.c | sed s/.c$$/.o/g)
+SOURCES+=$(shell ls *.s | sed s/.s$$/.o/g)
 
 CFLAGS=-O2 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -I$(INC)
 LDFLAGS=-Tlink.ld
 ASFLAGS=-felf
 
 all: $(SOURCES) link
+	echo $(SOURCES)
 
 clean:
 	@rm -f *.o
